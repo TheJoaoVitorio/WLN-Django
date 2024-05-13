@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+    <title>WLNutrion - Minha Conta</title>
+</head>
+<body>
+    <nav class="container-navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <a href=" {% url 'home' %} ">
+                    <img src="{% static 'img/logo.png'%}">
+                </a>
+            </div>
+            <div class="logo user-navbar">
+                <a href="user.html">
+                    <img src="{% static 'img/user.png'%}">
+                </a>
+            </div>
+    </nav>  
+
+    <div class="container-pai-de-todos">
+        <div class="container-principal flex">
+            <div class="nav-left">
+                <div class="nav-items-lateral">
+                    <div class="item-lateral">
+                        <a href=" {% url 'home' %} ">
+                            <img id="image-sidebar" src="{% static 'img/home.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="receitas.html">
+                            <img id="image-sidebar" src="{% static 'img/receita.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="ingredientes.html">
+                            <img id="image-sidebar" src="{% static 'img/ingredientes.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="contate-nos.html">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-headset.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral active">
+                        <a href="user.html">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-user-active.png'%}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="content">
+                <div class="container-content">
+                    <div class="container-telaUser">
+                        <div class="caixa1">
+                            <div class="caixa-info">
+                                <div class="logoUser">
+                                    <img width="80px" src="{% static 'img/user.png'%}">
+                                </div>
+                                <div class="nameUser">
+                                    <h1> {{request.user}} </h1>
+                                </div>
+                                <div class="emailUser">
+                                    <p> {{request.user.email}} </p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="caixa2" href="{% url 'gerenciar-conta' %}">
+                            <div>
+                                <img width="25px" src="{% static 'img/icon-configuration.png'%}">
+                            </div>
+                            <div>
+                                Gerenciar Conta
+                            </div>
+                        </a>
+                        
+                        <a class="caixa2" href="{% url 'logout' %}">
+                            <div>
+                                <img width="25px" src="{% static 'img/icon-exit.png'%}">
+                            </div>
+                            <div>
+                             Sair
+                            </div>
+                        </a>
+                        
+                    </div>
+                
+                </div>
+            </div>
+    
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/popUP.js'%}"></script>
+</body>
+</html>
