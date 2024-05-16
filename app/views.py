@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse , HttpResponseRedirect
 from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -6,6 +6,7 @@ from django.contrib.messages import constants
 from django.contrib import messages
 
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import BadHeaderError,send_mail
 
 # Create your views here.
 @login_required(login_url='/usuarios/login/')
@@ -14,11 +15,12 @@ def home(request):
         return render (request,'principal.html')
 
 
-@login_required
+@login_required(login_url='/usuarios/login/')
 def MinhaConta(request):
     return render(request,'user.html')
 
-@login_required
+
+@login_required(login_url='/usuarios/login/')
 def GerenciarConta(request):
     if request.method == 'POST':
         old_password = request.POST.get('old_password')
@@ -48,3 +50,28 @@ def GerenciarConta(request):
             return redirect('/app/gerenciarconta/')
     else:
         return render (request, 'info_usuarios.html')
+    
+
+@login_required(login_url='/usuarios/login/')
+def ContateNos(request):
+    if request.method == 'POST':
+        assunto = request.POST.get('assunto-contate-nos')
+        mensagem = request.POST.get('mensagem-contate-nos')
+        #from_email = request.POST.get('email-wlnutrion')
+
+        UserEmail = request.user.email
+
+        if assunto and mensagem:
+            try:
+                send_mail(assunto,mensagem,UserEmail,[UserEmail])
+                messages.add_message(request,constants.SUCCESS,'Email enviado com sucesso!')
+                return redirect('/app/home/')
+            except BadHeaderError:
+                messages.add_message(request,constants.ERROR,'Email não enviado!')
+                return redirect ('/app/gerenciarconta/')
+        else:
+            messages.add_message(request, constants.ERROR, 'Verifique os campos!')
+            return ('/app/gerenciarconta/')
+    
+    else:
+        return render (request, 'contate-nos.html')

@@ -23,6 +23,7 @@
                     <img src="{% static 'img/user.png'%}">
                 </a>
             </div>
+        </div>
     </nav>  
 
     <div class="container-pai-de-todos">
@@ -48,13 +49,13 @@
                     </div>
     
                     <div class="item-lateral">
-                        <a href="contate-nos.html">
+                        <a href="{% url 'contate-nos' %}">
                             <img id="image-sidebar" src="{% static 'img/fi-rr-headset.png'%}">
                         </a>
                     </div>
     
                     <div class="item-lateral active">
-                        <a href="user.html">
+                        <a href=" {% url 'minha-conta' %} ">
                             <img id="image-sidebar" src="{% static 'img/fi-rr-user-active.png'%}">
                         </a>
                     </div>
