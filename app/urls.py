@@ -6,4 +6,5 @@ urlpatterns = [
     path('minhaconta/', views.MinhaConta, name='minha-conta'),
     path('gerenciarconta/', views.GerenciarConta, name='gerenciar-conta'),
     path('contatenos/', views.ContateNos, name='contate-nos'),
+    path('criaringrediente/', views.CriarIngrediente , name='criar-ingrediente'),
 ]

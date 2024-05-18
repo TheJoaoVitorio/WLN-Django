@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+    <title>WLNutrion - Criar ingrediente</title>
+</head>
+<body>
+    <nav class="container-navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png'%}">
+                </a>
+            </div>
+            <div class="logo user-navbar">
+                <a href="{% url 'minha-conta' %}">
+                    <img src="{% static 'img/user.png'%}">
+                </a>
+            </div>
+    </nav>  
+
+    <div class="container-pai-de-todos">
+        <div class="container-principal flex">
+            <div class="nav-left">
+                <div class="nav-items-lateral">
+                    <div class="item-lateral">
+                        <a href="{% url 'home' %}">
+                            <img id="image-sidebar" src="{% static 'img/home.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="receitas.html">
+                            <img id="image-sidebar" src="{% static 'img/receita.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral active">
+                        <a href="{% url 'criar-ingrediente' %}">
+                            <img id="image-sidebar" src="{% static 'img/ingredientes-active.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'contate-nos' %}">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-headset.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'minha-conta' %}">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-user.png'%}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="content">
+                <div class="container-content">
+                    <div class="content-title">
+                        <h1>Criar Ingrediente</h1>
+                    </div>
+                    
+                   
+                        <div class="content-title"> 
+                            <h3 id="titulo-insira-valores">Insira os valores</h3>
+                        </div>
+
+                        <div class="containerForm flex">
+
+                            <form method="POST" id="formularioCriarIngrediente" action="{% url 'criar-ingrediente' %}">
+                                {% csrf_token %}
+                                <div class="inputs-ingredientes">
+                                    <div class="input-ingrediente">
+                                        <label for="">Ingrediente</label>
+                                        <input name="nome-ingrediente" class="inputForm" type="text" placeholder="Ex: Frango" required>
+                                    </div>
+        
+                                    <div class="input-ingrediente">
+                                        <label for="">Valor Energetico(kcal)</label>
+                                        <input name="valor-energetico" id="valEnergetico" class="inputForm" type="text" placeholder="0,00" required>
+                                    </div>
+        
+                                    <div class="input-ingrediente">
+                                        <label for="">Carboidratos (g)</label>
+                                        <input name="carboidratos" id="carboidratos" class="inputForm"  type="text" placeholder="0,00"required>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Açucar Total(g)</label>
+                                        <input name="acucarTotal" id="acucarTotal" class="inputForm"  type="text" placeholder="0,00" value=0>
+                                    </div>
+        
+                                    <div class="input-ingrediente">
+                                        <label for="">Açucar Adicionado(g)</label>
+                                        <input name="acucarAdicionado" id="acucarAdicionado" class="inputForm" type="text" placeholder="0,00" value=0>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Proteinas(g)</label>
+                                        <input name="proteinas" id="proteinas" class="inputForm"type="text" placeholder="0,00" value=0>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Gorduras Totais(g)</label>
+                                        <input name="gordTotais" id="gordTotais" class="inputForm" type="text" placeholder="0,00" value=0>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Gorduras Saturadas(g)</label>
+                                        <input name="gordSaturadas" id="gordSaturadas" class="inputForm" type="text" placeholder="0,00" value=0>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Gorduras Trans(g)</label>
+                                        <input name="gordTrans" id="gordTrans" class="inputForm" type="text" placeholder="0,00" value=0>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Fibra Alimentar(g)</label>
+                                        <input name="fibraAlimentar" id="fibraAlimentar" class="inputForm" type="text" placeholder="0,00" value=0>
+                                    </div>
+                                    <div class="input-ingrediente">
+                                        <label for="">Sódio(mg)</label>
+                                        <input name="sodio" id="sodio" class="inputForm" type="text" placeholder="0,00" value=0 >
+                                    </div>
+
+                                   <div class="input-button flex">
+                                        <a href="">
+                                            <button type="submit" class="btn-verde btnCriandoIngrediente">Salvar</button>
+                                        </a>
+                                   </div>
+        
+                                </div>
+    
+                            </form>
+                        </div>
+                    
+                   </div>
+                </div>
+            </div>
+    
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/maskIngrediente.js' %}"></script>
+</body>
+</html>

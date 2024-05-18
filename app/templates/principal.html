@@ -52,7 +52,7 @@
                     </div>
     
                     <div class="item-lateral">
-                        <a href="ingredientes.html">
+                        <a href="{% url 'criar-ingrediente' %}">
                             <img id="image-sidebar" src="{% static 'img/ingredientes.png'%}">
                         </a>
                     </div>
@@ -97,7 +97,11 @@
     
                             <div class="dashboard-item flex">
                                 <div class="dashboard-text">
-                                    <h1 id="qtdMeusIngredientes">0</h1>
+                                    {% if MeusIngredientes.count == 0 %}
+                                        <h1 id="qtdMeusIngredientes"> 0 </h1>
+                                    {% else %}
+                                        <h1 id="qtdMeusIngredientes"> {{ MeusIngredientes.count }} </h1>
+                                    {% endif %}
                                     <p>Meus ingredientes</p>
                                 </div>
                                 <div class="dashboard-img">
