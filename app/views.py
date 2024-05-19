@@ -7,8 +7,10 @@ from django.contrib import messages
 
 from django.contrib.auth import update_session_auth_hash
 from django.core.mail import BadHeaderError,send_mail
+from django.core.paginator import Paginator
 
-from .models import Ingrediente , MeusIngredientes 
+from .models import Ingrediente , MeusIngredientes
+
 
 # Create your views here.
 @login_required(login_url='/usuarios/login/')
@@ -16,6 +18,17 @@ def home(request):
     if request.method == 'GET':
         meusIngredientes = MeusIngredientes.objects.filter(user=request.user)
         return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes})
+
+
+@login_required(login_url='/usuarios/login/')
+def userIngredientes(request):
+    if request.method == 'GET':
+        meusIngredientesList = MeusIngredientes.objects.filter(user=request.user)
+        paginator = Paginator(meusIngredientesList , 3)
+        page = request.GET.get('page')
+
+        meusIngredientes = paginator.get_page(page)
+        return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes})
 
 
 @login_required(login_url='/usuarios/login/')
@@ -50,9 +63,7 @@ def CriarIngrediente(request):
             user = request.user
         )
         CriandoIngrediente.save()
-        messages.add_message(request, constants.SUCCESS, 'Ingrediente criado com sucesso! ')
-
-        return redirect('/app/home/')
+        return redirect('/app/meusingredientes/')
     else:
 
         return render (request,'criando-ingredientes.html')

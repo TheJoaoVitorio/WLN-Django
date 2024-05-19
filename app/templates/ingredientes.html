@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>WLNutrion - Meus ingredientes</title>
+</head>
+<body>
+    <nav class="container-navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png'%}">
+                </a>
+            </div>
+            <div class="logo user-navbar">
+                <a href="{% url 'minha-conta' %}">
+                    <img src="{% static 'img/user.png'%}">
+                </a>
+            </div>
+        </div>
+    </nav>  
+
+    <div class="container-pai-de-todos">
+        <div class="container-principal flex">
+            <div class="nav-left">
+                <div class="nav-items-lateral">
+                    <div class="item-lateral">
+                        <a href="{% url 'home' %}">
+                            <img id="image-sidebar" src="{% static 'img/home.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="receitas.html">
+                            <img id="image-sidebar" src="{% static 'img/receita.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral active">
+                        <a href="{% url 'meus-ingredientes' %}">
+                            <img id="image-sidebar" src="{% static 'img/ingredientes-active.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'contate-nos' %}">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-headset.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'minha-conta' %}">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-user.png'%}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="content">
+                <div class="container-content">
+                    <div class="content-title titleMeusIngredientes">
+                        <h1>Meus ingredientes</h1>
+                    </div>
+                </div>
+                <div class="container-ingredientes">
+
+                    <div class="pesquisar-receitas">
+                        <form method="GET" id="search-form">
+                            <input type="text" placeholder="Buscar">
+                            <img id="search-icon" src="{% static 'img/pesquisar.png'%}">
+                        </form>
+                    </div>
+    
+                    <div class="box-2">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>INGREDIENTE</th>
+                                    <th>ENERGIA</th>
+                                    <th>CARBOIDRATOS</th>
+                                    <th>AÇÚCARES TOTAIS</th>
+                                    <th>AÇÚCARES ADICIONAIS</th>
+                                    <th>PROTEÍNAS</th>
+                                    <th>GORDURAS TOTAIS</th>
+                                    <th>GORDURAS SATURADAS</th>
+                                    <th>GORDURAS TRANS</th>
+                                    <th>FIBRA</th>
+                                    <th>SÓDIO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ingrediente in MeusIngredientes%}
+                                    <tr>
+                                        <th> {{ingrediente.nomeIngrediente}} </th>
+                                        <th> {{ingrediente.valorEnergetico }} kcal</th>
+                                        <th> {{ingrediente.carboidratos}}g</th>
+                                        <th> {{ingrediente.acuTotais}} g</th>
+                                        <th> {{ingrediente.acuAdicionais}} g</th>
+                                        <th> {{ingrediente.proteinas}} g</th>
+                                        <th> {{ingrediente.gordTotais}} g</th>
+                                        <th> {{ingrediente.gordSaturadas}} g</th>
+                                        <th> {{ingrediente.gordTrans}} g</th>
+                                        <th> {{ingrediente.fibra}} g</th>
+                                        <th> {{ingrediente.sodio}} mg</th>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                    <div class="box-3">
+                        {% if MeusIngredientes.has_previous %}
+                            <a href="?page={{ MeusIngredientes.previous_page_number }}">
+                                <button id="anteriorIngredientes">
+                                    <img src="{% static 'img/fi-bs-angle-left.png'%}" alt="esquerda">
+                                </button>
+                            </a>
+                        {% endif %}  
+                        <div>
+                            <input type="text" readonly value="{{MeusIngredientes.number}}">
+                        </div>
+                        {% if MeusIngredientes.has_next %}
+                            <a href="?page={{ MeusIngredientes.next_page_number}}">
+                                <button id="ProximoIngredientes">
+                                    <img src="{% static 'img/fi-bs-angle-right.png'%}" alt="direita">
+                                </button>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="box-4">
+                        <a href="{% url 'criar-ingrediente' %}">
+                            <button class="btn-verde btnCriarIngrediente">Criar Ingrediente</button>
+                        </a>
+                    </div>
+                
+
+                </div>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/searchIngrediente.js'%}"></script>
+</body>
+</html>

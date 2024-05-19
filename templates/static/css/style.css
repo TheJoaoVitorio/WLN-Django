@@ -652,6 +652,8 @@ img.email{
 }
 #search-icon{
     width: 16px;
+    top: 12px;
+    cursor : pointer;
     left: 10px;
     position: absolute;
 }
