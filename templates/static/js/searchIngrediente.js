@@ -3,7 +3,6 @@ $(document).ready(function(){
     var searchForm = $('#search-form');
 
     $(searchBtn).on('click', function(){
-        console.log('passei aqui.');
         searchForm.submit();
     })
 })

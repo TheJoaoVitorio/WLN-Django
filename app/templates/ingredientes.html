@@ -74,7 +74,7 @@
 
                     <div class="pesquisar-receitas">
                         <form method="GET" id="search-form">
-                            <input type="text" placeholder="Buscar">
+                            <input type="text" name="search" placeholder="Buscar" value="{{ request.GET.search }}">
                             <img id="search-icon" src="{% static 'img/pesquisar.png'%}">
                         </form>
                     </div>

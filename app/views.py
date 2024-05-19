@@ -23,11 +23,17 @@ def home(request):
 @login_required(login_url='/usuarios/login/')
 def userIngredientes(request):
     if request.method == 'GET':
-        meusIngredientesList = MeusIngredientes.objects.filter(user=request.user)
-        paginator = Paginator(meusIngredientesList , 3)
-        page = request.GET.get('page')
+        search = request.GET.get('search')
+        
+        if search:
+            meusIngredientes = MeusIngredientes.objects.filter(nomeIngrediente__icontains=search)
+        else:
 
-        meusIngredientes = paginator.get_page(page)
+            meusIngredientesList = MeusIngredientes.objects.filter(user=request.user)
+            paginator = Paginator(meusIngredientesList , 3)
+            page = request.GET.get('page')
+
+            meusIngredientes = paginator.get_page(page)
         return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes})
 
 
