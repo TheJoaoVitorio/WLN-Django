@@ -40,38 +40,47 @@ def userIngredientes(request):
 @login_required(login_url='/usuarios/login/')
 def CriarIngrediente(request):
     if request.method == 'POST':
-        NomeIngrediente = request.POST.get('nome-ingrediente')
-        ValorEnergetico = request.POST.get('valor-energetico').replace(',' , '.')
-        Carboidratos = request.POST.get('carboidratos').replace(',' , '.')
-        AcuTotais = request.POST.get('acucarTotal').replace(',' , '.')
-        AcuAdicionais = request.POST.get('acucarAdicionado').replace(',' , '.')
-        Proteinas = request.POST.get('proteinas').replace(',' , '.')
-        GordTotais = request.POST.get('gordTotais').replace(',' , '.')
-        GordSaturadas = request.POST.get('gordSaturadas').replace(',' , '.')
-        GordTrans = request.POST.get('gordTrans').replace(',' , '.')
-        Fibra = request.POST.get('fibraAlimentar').replace(',' , '.')
-        Sodio = request.POST.get('sodio').replace(',' , '.')
+        try:
+            NomeIngrediente = request.POST.get('nome-ingrediente')
+            ValorEnergetico = request.POST.get('valor-energetico').replace(',' , '.')
+            Carboidratos = request.POST.get('carboidratos').replace(',' , '.')
+            AcuTotais = request.POST.get('acucarTotal').replace(',' , '.')
+            AcuAdicionais = request.POST.get('acucarAdicionado').replace(',' , '.')
+            Proteinas = request.POST.get('proteinas').replace(',' , '.')
+            GordTotais = request.POST.get('gordTotais').replace(',' , '.')
+            GordSaturadas = request.POST.get('gordSaturadas').replace(',' , '.')
+            GordTrans = request.POST.get('gordTrans').replace(',' , '.')
+            Fibra = request.POST.get('fibraAlimentar').replace(',' , '.')
+            Sodio = request.POST.get('sodio').replace(',' , '.')
 
-        CriandoIngrediente = MeusIngredientes(
-            #fields da class | fields da request
-            nomeIngrediente = NomeIngrediente,
-            valorEnergetico = ValorEnergetico,
-            carboidratos = Carboidratos,
-            acuTotais = AcuTotais,
-            acuAdicionais = AcuAdicionais,
-            proteinas = Proteinas,
-            gordTotais = GordTotais,
-            gordSaturadas = GordSaturadas,
-            gordTrans = GordTrans,
-            fibra = Fibra,
-            sodio = Sodio,
+            CriandoIngrediente = MeusIngredientes(
+                #fields da class | fields da request
+                nomeIngrediente = NomeIngrediente,
+                valorEnergetico = ValorEnergetico,
+                carboidratos = Carboidratos,
+                acuTotais = AcuTotais,
+                acuAdicionais = AcuAdicionais,
+                proteinas = Proteinas,
+                gordTotais = GordTotais,
+                gordSaturadas = GordSaturadas,
+                gordTrans = GordTrans,
+                fibra = Fibra,
+                sodio = Sodio,
 
-            user = request.user
-        )
-        CriandoIngrediente.save()
-        return redirect('/app/meusingredientes/')
+                user = request.user
+            )
+            CriandoIngrediente.save()
+            messages.add_message(request, constants.SUCCESS, 'Ingrediente criado !')
+            return redirect('/app/meusingredientes/')
+        except ValueError:
+            messages.add_message(request, constants.WARNING, 'Por favor, insira valores numéricos válidos para os campos!')
+            return redirect ('/app/criaringrediente/')
+        
+        except Exception as e:
+            messages.add_message(request, constants.ERROR, 'Não foi possivel criar o ingrediente! ')
+            return redirect('/app/meusingredientes/')
+        
     else:
-
         return render (request,'criando-ingredientes.html')
 
 
