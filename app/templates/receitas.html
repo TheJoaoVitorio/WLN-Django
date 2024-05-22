@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+    <title>WLNutrion - Minhas Receitas</title>
+</head>
+<body>
+    <nav class="container-navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <a href=" {% url 'home' %} ">
+                    <img src="{% static 'img/logo.png'%}">
+                </a>
+            </div>
+            <div class="logo user-navbar">
+                <a href="{% url 'minha-conta'%}">
+                    <img src="{% static 'img/user.png'%}">
+                </a>
+            </div>
+        </div>
+    </nav>  
+
+    <div class="container-pai-de-todos">
+        <div class="container-principal flex">
+            <div class="nav-left">
+                <div class="nav-items-lateral">
+                    <div class="item-lateral">
+                        <a href=" {% url 'home' %} ">
+                            <img id="image-sidebar" src="{% static 'img/home.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral active">
+                        <a href="{% url 'receitas' %}">
+                            <img id="image-sidebar" src="{% static 'img/receita-active.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'meus-ingredientes' %}">
+                            <img id="image-sidebar" src="{% static 'img/ingredientes.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'contate-nos' %}">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-headset.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href=" {% url 'minha-conta' %} ">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-user.png'%}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="content">
+                <div class="container-content">
+                    <div class="content-title">
+                        <h1 id="minhas-receitas">Minhas Receitas</h1>
+                    </div>
+
+                    <div class="content-minhas-receitas">
+                        <div class="pesquisar-receitas">
+                            <input id="inputReceitas" type="text" placeholder="Buscar">
+                            <img id="search-icon" src="{% static 'img/pesquisar.png'%}">
+                        </div>
+
+                        <div class="receitas">
+                            <table class="table-receitas">
+                                <thead>
+                                    <tr>
+                                        <th>Receitas</th>
+                                        <th>Data de criação</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            Nome-da-receita
+                                        </th>
+                                        <th>
+                                            00/00/0000
+                                        </th>
+                                        <th id="actionReceita">
+                                            <abbr title="Ver Receita">
+                                                <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
+                                            </abbr>
+                                            <abbr title="Excluir Receita">
+                                                <button id="excluirReceita" ><img width="30px" src="{% static 'img/apagar-receita.png' %}" alt=""></button>
+                                            </abbr>
+                                        </th>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="menu-paginacao">
+                            <button id="anteriorReceitas">
+                                <img src="{% static 'img/fi-bs-angle-left.png'%}">
+                            </button>
+                            <input id="InputPaginacaoReceita" type="text" id="" placeholder="1">
+                            <button id="proximoReceitas">
+                                <img src="{% static 'img/fi-bs-angle-right.png'%}">
+                            </button>
+                        </div>
+                        <div id="divBtnReceita">
+                            <a href="criando-receita.html">
+                                <button class="btn-verde btnCriarReceita">Criar Receita</button>
+                            </a>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+            </div>
+    
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/5.5.1/jquery.min.js"></script>
+    <script src="activePage.js"></script>
+</body>
+</html>

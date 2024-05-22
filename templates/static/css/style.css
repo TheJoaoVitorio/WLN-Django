@@ -1143,6 +1143,7 @@ img.email{
 
 .box-2 table {
     width: 100%;
+    text-align: center;
 }
 .box-2 thead{
     gap: 50px;
@@ -1412,9 +1413,13 @@ textarea:focus{
         align-items: center;
         border: none;
         background: none;
-        font-size: 9px;
+        font-size: 22px;
+        font-weight: 600;
         cursor: pointer;
         color: #838383;
+    }
+    a{
+        text-decoration : none;
     }
     .btnAtualizar{
         width: 100px;

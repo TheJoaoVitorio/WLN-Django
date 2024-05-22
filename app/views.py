@@ -18,6 +18,13 @@ def home(request):
     if request.method == 'GET':
         meusIngredientes = MeusIngredientes.objects.filter(user=request.user)
         return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes})
+    
+@login_required(login_url='/usuarios/login/')
+def Receitas(request):
+    if request.method == 'POST':
+        return
+    else:
+        return render (request, 'receitas.html')
 
 
 @login_required(login_url='/usuarios/login/')

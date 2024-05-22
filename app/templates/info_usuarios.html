@@ -43,7 +43,7 @@
                     </div>
     
                     <div class="item-lateral">
-                        <a href="receitas.html">
+                        <a href="{% url 'receitas' %}">
                             <img id="image-sidebar" src="{% static 'img/receita.png'%}">
                         </a>
                     </div>
@@ -70,10 +70,7 @@
     
             <div class="content">
                 <div class="container-content">
-                    <div class="content-title">
-                        <h1>Gerenciar Conta</h1>
-                    </div>
-                    <div class="containerFormUser flex-column flex">
+                    <div class="content-title flex-column d-flex justify-content-center align-items-center">
                         {% if messages %}
                             {% for message in messages %}
                                 <section class="w-25 alert {{message.tags}}">
@@ -81,7 +78,10 @@
                                 </section>
                             {% endfor %}
                         {% endif %}
-
+                        <h1>Gerenciar Conta</h1>
+                    </div>
+                    <div class="containerFormUser flex-column flex">
+                        
                         <form id="form-info-user" action=" {% url 'gerenciar-conta' %} " method="POST">
                             {% csrf_token %}
                            <div class="divInputUser" >
@@ -103,7 +103,7 @@
     
                             <div class="buttons-info-user">
                                 <a class="" href="{% url 'minha-conta' %}">
-                                    <button id="btnVoltaInfoUser" type="button" ><img src="{% static 'img/fi-sr-arrow-small-right.png'%}"> <h1>Voltar</h1> </button>
+                                    <button id="btnVoltaInfoUser" type="button" ><img src="{% static 'img/fi-sr-arrow-small-right.png'%}">Voltar</button>
                                 </a>
                                 <button class="btn-quadrado btnAtualizar" onclick="" valuer="alterar" type="submit">Atualizar</button>
                             </div>
