@@ -40,13 +40,13 @@ class Receita(models.Model):
     GLUTENS = [('zero gluten','Não Contém Glúten'),
                ('com gluten','Contém Glúten') ]
     
-    LACTOSES = [('zero lactose','Zero Lactose'),
+    LACTOSES = [('zerolactose','Zero Lactose'),
                 ('baixa lactose','Baixo Teor de Lactose'),
-                ('contem lactose','Contém Lactose') ]
+                ('contemlactose','Contém Lactose') ]
     
     TIPODEPORCAO = [('inteira','Porção Inteira'),
                     ('quebrada','Porção Quebrada'),
-                    ('sem porcao','Sem Porção') ]
+                    ('SemPorcao','Sem Porção') ]
 
     nomeReceita = models.CharField(max_length = 40)
     medida = models.CharField(max_length=11, choices=MEDIDAS)

@@ -94,12 +94,13 @@
                                     </li>
                                 </ul>
                             </div>
-                            <form action="" method="" >
+                            <form action="" method="POST">
+                                {% csrf_token %}
                                 <div class="form-one form-step ativo">
                                     <div class="container-form-one flex">
                                         <div class="tituloReceita flex">
                                             <label for="tituloReceita">Título</label>
-                                            <input id="tituloReceita" class="inputForm2" type="text" placeholder="Nome da Receita">
+                                            <input name='TituloDaReceita' id="tituloReceita" class="inputForm2" type="text" placeholder="Nome da Receita">
                                         </div>
                                         <div class="medidaReceita flex">
                                             <label for="select">Medida</label>
@@ -109,7 +110,6 @@
                                                     <option class="op" value="gramas">Gramas(g)</option>
                                                     <option value="mililitros">Mililitros(ml)</option>
                                                 </div>
-                                                
                                             </select>
                                             <div class="arrow">
                                                 <i class='bx bxs-down-arrow'></i>
@@ -119,8 +119,8 @@
                                             <label for="">Glúten</label>
                                             <select class="inputForm2" name="glutenReceita" id="selectOption">
                                                 <option value=''disabled >Selecione</option>
-                                                <option value="naoContemGluten">Não Contém Glúten</option>
-                                                <option value="contemGluten">Contém Glúten</option>
+                                                <option value="NaoContemGluten">Não Contém Glúten</option>
+                                                <option value="ContemGluten">Contém Glúten</option>
                                             </select>
                                             <div class="arrow">
                                                 <i class='bx bxs-down-arrow'></i>
@@ -130,10 +130,9 @@
                                             <label for="">Lactose</label>
                                             <select class="inputForm2" name="lactoseReceita" id="selectOption">
                                                 <option value=''disabled >Selecione</option>
-                                                <option value="zeroLactose">Zero Lactose</option>
-                                                <option value="baixoTeorDeLactose">Baixo Teor de Lactose</option>
-                                                <option value="contemLactose">Contém Lactose</option>
-                                               
+                                                <option value="zerolactose">Zero Lactose</option>
+                                                <option value="BaixoTeorDeLactose">Baixo Teor de Lactose</option>
+                                                <option value="contemlactose">Contém Lactose</option>
                                             </select>
                                             <div class="arrow">
                                                 <i class='bx bxs-down-arrow'></i>
@@ -141,12 +140,11 @@
                                         </div>
                                         <div class="tipoPorcaoReceita flex">
                                             <label for="">Tipo de Porção</label>
-                                            <select class="inputForm2" name="lactoseReceita" id="selectOption" required>
+                                            <select class="inputForm2" name="tipoDePorcaoReceita" id="selectOption" required>
                                                 <option  value=''disabled >Selecione</option>
-                                                <option value="porcaoInteira">Porção Inteira</option>
-                                                <option value="porcaoQuebrada">Porção Quebrada</option>
-                                                <option value="semPorcao">Sem Porção</option>
-                                               
+                                                <option value="inteira">Porção Inteira</option>
+                                                <option value="quebrada">Porção Quebrada</option>
+                                                <option value="SemPorcao">Sem Porção</option>
                                             </select>
                                             <div class="arrow">
                                                 <i class='bx bxs-down-arrow'></i>
@@ -154,19 +152,19 @@
                                         </div>
                                         <div class="porcoesEmbaladasReceita flex">
                                             <label for="porcoesEmbaladas">Porções Embaladas</label>
-                                            <input id="porcoesEmbaladas" class="inputForm2" type="number" placeholder="00" required>
+                                            <input name="porcoesEmbaladas" id="porcoesEmbaladas" class="inputForm2" type="number" placeholder="00" required>
                                         </div>
                                         <div class="pesoFinalReceita flex">
                                             <label for="pesoFinal">Peso Final(g/ml)</label>
-                                            <input id="pesoFinal" class="inputForm2" type="number" placeholder="0" required>
+                                            <input name="pesoFinal" id="pesoFinal" class="inputForm2" type="number" placeholder="0" required>
                                         </div>
                                         <div class="porcaoReceita flex">
                                             <label for="porcao">Porção(g/ml)</label>
-                                            <input id="porcao" class="inputForm2" type="number" placeholder="00" required>
+                                            <input name="porcao" id="porcao" class="inputForm2" type="number" placeholder="00" required>
                                         </div>
                                         <div class="medidaCaseiraReceita flex">
                                             <label for="medidaCaseira">Medida Caseira</label>
-                                            <input id="medidaCaseira" class="inputForm2" type="txt" placeholder="Ex: 1 colher de sopa" required>
+                                            <input name="medidaCaseira" id="medidaCaseira" class="inputForm2" type="txt" placeholder="Ex: 1 colher de sopa" required>
                                         </div>
                                     </div>
 
@@ -185,19 +183,11 @@
                                                     <input type="checkbox" name="" id="MeusIngredientesCheck">
                                                     <label for="MeusIngredientesCheck">Meus ingredientes</label>
                                                 </div>
-                                                <ul class="optionsIngredientes">
+                                                <ul id="optionsIngredientes" class="optionsIngredientes">
                                                     <li>Abacate</li>
                                                     <li>Abacate</li>
                                                     <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
-                                                    <li>Abacate</li>
+                                                
                                                 </ul>
                                             </div>
                                         </div>
@@ -282,6 +272,7 @@
 
     
     <script src="{% static 'js/c_receitaScript.js'%}" ></script>
+    <script src="{% static 'js/get_meusingredientes.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

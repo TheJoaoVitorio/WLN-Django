@@ -1,4 +1,4 @@
-from django.http import HttpResponse , HttpResponseRedirect
+from django.http import HttpResponse , HttpResponseRedirect , JsonResponse
 from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -31,6 +31,16 @@ def Receitas(request):
 @login_required(login_url='/usuarios/login/')
 def CriandoReceita(request):
     if request.method == 'POST':
+        TituloDaReceita = request.POST.get('TituloDaReceita')
+        MedidaReceita = request.POST.get('medidaReceita')
+        GlutenReceita = request.POST.get('glutenReceita')
+        LactoseReceita = request.POST.get('lactoseReceita')
+        TipoDePorcaoReceita = request.POST.get('tipoDePorcaoReceita')
+        PorcoesEmbReceita = request.POST.get('porcoesEmbaladas')
+        PesoFinalReceita = request.POST.get('pesoFinal')
+        PorcaoReceita = request.POST.get('porcao')    
+        MedidaCaseira = request.POST.get('medidaCaseira')
+
         return
     else:
         return render (request, 'criando-receita.html')
@@ -99,6 +109,14 @@ def CriarIngrediente(request):
     else:
         return render (request,'criando-ingredientes.html')
 
+@login_required(login_url='/usuarios/login/')
+def GetMeusIngredientes(request):
+    if request.user.is_authenticated:
+        M_ingredientes = MeusIngredientes.objects.filter(user=request.user)
+        ListMeusIngredientes = list(M_ingredientes.values('id', 'nomeIngrediente'))
+        return JsonResponse({'MeusIngredientesList':ListMeusIngredientes})
+    else:
+        return JsonResponse({'Error' : 'User not authenticated'}, status=401)
 
 @login_required(login_url='/usuarios/login/')
 def MinhaConta(request):
