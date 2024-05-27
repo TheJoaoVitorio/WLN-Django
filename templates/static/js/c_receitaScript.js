@@ -74,5 +74,3 @@ function dropDownReceita(){
     document.addEventListener('DOMContentLoaded' , () =>{
         dropDownReceita();
     });
-
-// CHECKBOX - GET MEUS INGREDIENTES
