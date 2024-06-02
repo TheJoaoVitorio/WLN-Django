@@ -3,6 +3,7 @@ const prevButton = document.querySelector('.btn-voltar');
 const steps = document.querySelectorAll('.step');
 const formSteps = document.querySelectorAll('.form-step');
 const lines = document.querySelectorAll('.line');
+const stepTitle = document.querySelector('#TituloCriandoReceita');
 
 let active = 1;
 
@@ -50,6 +51,8 @@ const updateProgress = () => {
         }
     });
 
+    updateTitle();
+
     if (active === 1) {
         prevButton.disabled = true;
     } else if (active === steps.length) {
@@ -59,6 +62,16 @@ const updateProgress = () => {
         nextButton.disabled = false;
     }
 };
+
+const updateTitle = () => {
+    const titles = [
+        'Insira as informações da receita',
+        'Insira os ingredientes da receita',
+        'Insira os alergênicos da receita',
+        'Selecione o modelo do rótulo'
+    ];
+    stepTitle.textContent = titles[active - 1];
+}
 
 function dropDownReceita() {
     //form two
