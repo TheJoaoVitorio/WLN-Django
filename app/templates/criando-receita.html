@@ -192,16 +192,7 @@
                                         <div class="table-ingredientes-da-receita">
                                             <table>
                                                 <tbody>
-                                                    <tr>
-                                                        <th>Abacate</th>
-                                                        <th class="qtdIngredienteInput flex">
-                                                            <label for="qtdDoIngredienteReceita">Qtd(g/ml)</label>
-                                                            <input id="qtdDoIngredienteReceita" type="text" required>
-                                                        </th>
-                                                        <th>
-                                                            <button id="btnApagarIng"> <img width="35px" src="{% static 'img/apagar-receita.png'%}"></button>
-                                                        </th>
-                                                    </tr>
+                                                    <!-- INGREDIENTES DA RECEITA SÃO ADD AQUI-->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -218,7 +209,7 @@
                                             <div class="search-alergenico">
                                                 <input type="text" class="search-alergenico-input" id="search-alergenico-input" placeholder="Buscar Alergenico">
                                             
-                                                <ul class="optionsAlergenicos">
+                                                <ul id="optionsAlergenicos" class="optionsAlergenicos">
                                                     <li>Contém Amendoá</li>
                                                     <li>Contém Amendoim</li>
                                                     <li>Contém Aveia</li>
@@ -227,14 +218,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="table-ingredientes-da-receita">
+                                        <div class="table-ingredientes-da-receita table-alergenicos">
                                             <table>
                                                 <tbody>
                                                     <tr>
                                                         <th>Contém Amendoim</th>
                                                 
                                                         <th>
-                                                            <button id="btnApagarIng"> <img width="35px" src="{% static 'img/apagar-receita.png'%}"></button>
+                                                            <button class="btnApagarAlergenico" id="btnApagarIng"> <img width="35px" src="{% static 'img/apagar-receita.png'%}"></button>
                                                         </th>
                                                     </tr>
                                                 </tbody>
@@ -271,6 +262,10 @@
     <script src="{% static 'js/c_receitaScript.js'%}" ></script>
     <script src="{% static 'js/get_meusingredientes.js' %}"></script>
     <script src="{% static 'js/addAndRemoveIngrediente.js' %}"></script>
+    <script src="{% static 'js/addAlergenicosReceita.js' %}"></script>
+    <script>
+        const apagarReceitaImgUrl = "{% static 'img/apagar-receita.png' %}";
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

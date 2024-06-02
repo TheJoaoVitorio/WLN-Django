@@ -18,8 +18,11 @@ document.addEventListener('DOMContentLoaded', function(){
         const DeleteIng = NovaLinha.insertCell(2);
 
         NomeIng.textContent = nome;
-        QtdIng.innerHTML = '<input type="text" id="qtdDoIngredienteReceita" required>';
-        DeleteIng.innerHTML = '<button class="btnApagarIng"> <img width="35px" src="{% static \'img/apagar-receita.png\'%}"></button>';
+        QtdIng.innerHTML = `<div class="qtdIngredienteInput flex">
+                                <label for="qtdDoIngredienteReceita">Qtd(g/ml)</label>
+                                <input id="qtdDoIngredienteReceita" type="text">
+                            </div>`;
+        DeleteIng.innerHTML = `<button id="btnApagarIng" class="btnApagarIng" > <img width="35px" src="${apagarReceitaImgUrl}"></button>`;
 
         const RemoverIng = DeleteIng.querySelector('.btnApagarIng');
         RemoverIng.addEventListener('click', function(){

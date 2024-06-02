@@ -1020,7 +1020,6 @@ img.email{
     }
     .table-ingredientes-da-receita tbody tr {
         display: flex;
-        gap:50px;
         align-items: center;
         border-bottom: 2px solid #DEDEDE;
         padding:4px;
@@ -1045,6 +1044,7 @@ img.email{
         cursor:pointer;
         border:none;
     }
+
     /* */
 
     /* FORM THREE */
@@ -1065,10 +1065,8 @@ img.email{
 
 /**/
 .container-btn-group{
-    border:2px solid cyan;
     display: flex;
     justify-content: center;
-    
 }
 
 /* FIM RECEITAS */
