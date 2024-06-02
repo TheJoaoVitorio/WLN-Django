@@ -95,4 +95,22 @@ function dropDownReceita() {
 document.addEventListener('DOMContentLoaded', () => {
     dropDownReceita();
     updateProgress();
+
+    const selects = document.querySelectorAll('select');
+    selects.forEach(select => {
+        select.addEventListener('focus', () => {
+            const arrow = select.nextElementSibling.querySelector('i');
+            arrow.classList.add('rotation-icon');
+        });
+
+        select.addEventListener('blur', () => {
+            const arrow = select.nextElementSibling.querySelector('i');
+            arrow.classList.remove('rotation-icon');
+        });
+
+        select.addEventListener('change', () => {
+            const arrow = select.nextElementSibling.querySelector('i');
+            arrow.classList.remove('rotation-icon');
+        });
+    });
 });
