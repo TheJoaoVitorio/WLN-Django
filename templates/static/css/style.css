@@ -561,6 +561,7 @@ img.email{
 .content{
     width: 100%;
     height: 84vh;
+    overflow-y: auto;
 }
 /* FIM CONTAINER PRINCIPAL*/
 
@@ -902,6 +903,7 @@ img.email{
         display:none;
         background: #F0F0F0;
         margin-top: 10px;
+        width: 320px;
     }
 
     .activeDrop{
@@ -1067,9 +1069,98 @@ img.email{
     .optionsAlergenicos{
         padding: 8px;
     }
+    /* FORM FOUR */
     .form-four{
         display: none;
     }
+    .optionsModelosRotulos{
+        height: 105px;
+        list-style: none;
+        overflow-y: auto;
+    }
+    .optionsModelosRotulos li{
+        padding: 5px;
+    }
+    .optionsModelosRotulos li:hover{
+        background: #838383;
+    }
+
+    .selectModelosRotulos{
+        display: flex;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tabela-nutricional {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+    }
+
+    #linhaGrossaTabelaNutricional{
+        border: 3px solid;
+    }
+
+    #linhaFinaTabelaNutricional{
+        border : 2px solid;
+    }
+    
+    .tabela-nutricional h2 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .tabela-nutricional p {
+        font-size: 0.9em;
+        text-align: left;
+        margin: 5px 0;
+    }
+    
+    .tabela-nutricional table {
+        width: 100%;
+    } 
+    
+    .tabela-nutricional table th tr{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    
+    .tabela-nutricional thead th {
+        text-align: left;
+        padding: 10px;
+    }
+
+    .tabela-nutricional tbody{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    
+    .tabela-nutricional tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    .tabela-nutricional tbody tr:nth-child(odd) {
+        background-color: #fff;
+    }
+    
+    .tabela-nutricional tbody td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .tabela-nutricional tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .tabela-nutricional tbody td:nth-child(13){
+        margin-left: 10px;
+    }
+    /**/
 
 /**/
 .container-btn-group{
@@ -1314,9 +1405,6 @@ img.email{
 #id_new_password2:focus{
     border: 2px solid var(--cor-laranja); 
 }
-
-
-
 
 textarea{
     border: 2px solid var(--cor-cinza-light);
