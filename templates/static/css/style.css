@@ -86,6 +86,7 @@
     border: none;
     padding: 3px;
     border-radius: 6px;
+    cursor: pointer;
 }
 .btn-verde:hover{
     background-color: #20903F;
@@ -799,7 +800,7 @@ img.email{
     align-items: center;
     justify-content: space-between;
 }
-.btn-voltar{
+.btn-voltar, .btn-voltar2{
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -811,7 +812,7 @@ img.email{
 }
     /*Form-ONE*/
     .container-form-one{
-        width: 800px;
+        /*width: 800px;*/
         flex-direction:row;
         flex-wrap: wrap;
         gap:10px;
@@ -821,7 +822,8 @@ img.email{
 
     .form-one{
         border:2px solid rgb(255, 81, 0);
-        width:800px;
+        /*width:800px;*/
+        max-width: 800px;
         display:none;
         flex-direction: row;
         flex-wrap: wrap;
@@ -1082,7 +1084,7 @@ img.email{
         padding: 5px;
     }
     .optionsModelosRotulos li:hover{
-        background: #838383;
+        background: #d4d4d4;
     }
 
     .selectModelosRotulos{
@@ -1091,6 +1093,7 @@ img.email{
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 20px;
     }
 
     .tabela-nutricional {
@@ -1163,9 +1166,29 @@ img.email{
     /**/
 
 /**/
+.btn-submit-receita{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn-submit-receita button{
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    gap: 5px;
+}
+
 .container-btn-group{
     display: flex;
     justify-content: center;
+}
+
+.hidden{
+    display: none;
 }
 
 

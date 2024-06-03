@@ -1,9 +1,11 @@
 const nextButton = document.querySelector('.btn-proximo');
 const prevButton = document.querySelector('.btn-voltar');
+const prevButtonFinal = document.querySelector('.btn-voltar2');
 const steps = document.querySelectorAll('.step');
 const formSteps = document.querySelectorAll('.form-step');
 const lines = document.querySelectorAll('.line');
 const stepTitle = document.querySelector('#TituloCriandoReceita');
+const btnGroupReceita = document.querySelector('.container-btn-group');
 
 let active = 1;
 
@@ -22,6 +24,14 @@ prevButton.addEventListener('click', () => {
     }
     updateProgress();
 });
+
+prevButtonFinal.addEventListener('click', ()=>{
+    active--;
+    if (active < 1){
+        active = 1;
+    }
+    updateProgress();
+})
 
 const updateProgress = () => {
     console.log('steps.length =>' + steps.length);
@@ -60,6 +70,12 @@ const updateProgress = () => {
     } else {
         prevButton.disabled = false;
         nextButton.disabled = false;
+    }
+
+    if (active === steps.length){
+        btnGroupReceita.classList.add('hidden');
+    } else{
+        btnGroupReceita.classList.remove('hidden');
     }
 };
 
