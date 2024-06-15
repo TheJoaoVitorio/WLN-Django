@@ -22,9 +22,7 @@ def home(request):
 
 @login_required(login_url='/usuarios/login/')
 def Receitas(request):
-    if request.method == 'POST':
-        return
-    else:
+    if request.method == 'GET':
         return render (request, 'receitas.html')
     
 
@@ -39,9 +37,8 @@ def CriandoReceita(request):
         PorcoesEmbReceita = request.POST.get('porcoesEmbaladas')
         PesoFinalReceita = request.POST.get('pesoFinal')
         PorcaoReceita = request.POST.get('porcao')    
-        MedidaCaseira = request.POST.get('medidaCaseira')
+        MedidaCaseira = request.POST.get('medidaCaseira') 
 
-        return
     else:
         return render (request, 'criando-receita.html')
 

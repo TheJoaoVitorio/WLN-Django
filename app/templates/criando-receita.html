@@ -94,7 +94,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <form action="" method="POST">
+                            <form action="{% url 'criando-receita'%}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-one form-step ativo">
                                     <div class="container-form-one flex">
@@ -106,7 +106,7 @@
                                             <label for="select">Medida</label>
                                             <select class="inputForm2" name="medidaReceita" id="selectOption">
                                                 <div class="options">
-                                                    <option class="op" value="" disabled>Selecione</option>
+                                                    <option class="op" disabled>Selecione</option>
                                                     <option class="op" value="gramas">Gramas(g)</option>
                                                     <option value="mililitros">Mililitros(ml)</option>
                                                 </div>
@@ -178,20 +178,20 @@
 
                                         <div class="content-dropReceita">
                                             <div class="search-ingrediente">
-                                                <input type="text" class="search-alergenico-input" placeholder="Buscar ingrediente">
+                                                <input type="text" id="BuscaIngrediente" class="search-alergenico-input" placeholder="Buscar ingrediente">
                                                 <div class="contentCheckbox">
                                                     <input type="checkbox" name="" id="MeusIngredientesCheck">
                                                     <label for="MeusIngredientesCheck">Meus ingredientes</label>
                                                 </div>
                                                 <ul id="optionsIngredientes" class="optionsIngredientes">
-                                                    <li>Abacate</li>
+                                                <!--    <li>Abacate</li> -->
                                                 </ul>
                                             </div>
                                         </div>
                                 
                                         <div class="table-ingredientes-da-receita">
                                             <table>
-                                                <tbody>
+                                                <tbody id="ingredientes-tabela">
                                                     <!-- INGREDIENTES DA RECEITA SÃO ADD AQUI-->
                                                 </tbody>
                                             </table>
