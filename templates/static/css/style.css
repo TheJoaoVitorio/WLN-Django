@@ -1268,6 +1268,7 @@ img.email{
     padding: 12px;
     
     overflow-x: auto;
+    height: 168px;
 }
 
 .box-2 table {
@@ -1613,6 +1614,12 @@ textarea:focus{
 
 /* RESPONSIVIDADE */
 @media (max-width:840px){
+    .buscarMeusIngredientes input{
+        width: 190px;
+    }
+    .btnCriarIngrediente{
+        width: 100px;
+    }
     /*Pagina inicial -*/
     .section-info-image img{
         max-width: 200px;
@@ -1670,6 +1677,12 @@ textarea:focus{
 
 @media (max-width:605px){
     /* Pagina inicial*/
+    .recursos-item-image img{
+        width: 50px;
+    }
+    .recursos-item-content .recursos-item-title > h1{
+        font-size: 18px;
+    }
     .section-info-text-title h1{
         font-size: 16px;
     }

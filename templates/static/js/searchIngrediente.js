@@ -1,8 +1,3 @@
-$(document).ready(function(){
-    var searchBtn = $('#search-icon');
-    var searchForm = $('#search-form');
-
-    $(searchBtn).on('click', function(){
-        searchForm.submit();
-    })
-})
+document.getElementById('search-icon-meus-ingredientes').addEventListener('click', function() {
+document.getElementById('search-form').submit();
+});

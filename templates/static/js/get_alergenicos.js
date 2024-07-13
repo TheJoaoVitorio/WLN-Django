@@ -1,10 +1,4 @@
 document.getElementById('selectBtnAlergenicos').addEventListener('click', function(){
-    //event.preventDefault();
-
-    //const query = document.getElementById('searchAlergenicos').value;
-    //console.log(query)
-
-    //fetch(`getAlergenicos/?search=${query}`)
     fetch('getAlergenicos/')
     .then(response => response.json())
     .then(data => {
