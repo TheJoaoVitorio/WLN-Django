@@ -409,16 +409,16 @@ img.email{
   /* ############################################################################ */
   /* Estilizando os radio buttons dentro da div content-laranja */
 .content-laranja input[type="radio"] {
-  -webkit-appearance: none; /* Removendo a aparência padrão do navegador */
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px; /* Definindo a largura dos botões de rádio */
-  height: 20px; /* Definindo a altura dos botões de rádio */
-  border-radius: 50%; /*Fazendo os botões de rádio circular*/
-  border: 2px solid white; /* Definindo a cor da borda dos botões de rádio */
-  background-color:#EE7828; /* Definindo a cor de fundo dos botões de rádio */
-  outline: none; /* Removendo o contorno ao focar */
-  cursor: pointer; /* Mudando o cursor ao passar por cima */
+    -webkit-appearance: none; /* Removendo a aparência padrão do navegador */
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px; /* Definindo a largura dos botões de rádio */
+    height: 20px; /* Definindo a altura dos botões de rádio */
+    border-radius: 50%; /*Fazendo os botões de rádio circular*/
+    border: 2px solid white; /* Definindo a cor da borda dos botões de rádio */
+    background-color:#EE7828; /* Definindo a cor de fundo dos botões de rádio */
+    outline: none; /* Removendo o contorno ao focar */
+    cursor: pointer; /* Mudando o cursor ao passar por cima */
   /* margin-right: 10px; Adicionando um espaço entre os botões de rádio */
 }
 
@@ -652,9 +652,16 @@ img.email{
     padding: 10px;
     padding-left: 34px;
 }
-#search-icon{
+#search-icon-meus-ingredientes{
     width: 16px;
     top: 12px;
+    cursor : pointer;
+    left: 10px;
+    position: absolute;
+}
+
+#search-icon{
+    width: 16px;
     cursor : pointer;
     left: 10px;
     position: absolute;
@@ -1241,6 +1248,9 @@ img.email{
     background-color: #F0F0F0;
     font-size: 14px;
 }
+#btnPesquisarReceitaImg{
+    background: url("static/img/pesquisar.png");
+}
 /* FIM BOTÃO PESQUISAR*/
 
 
@@ -1314,10 +1324,17 @@ img.email{
 
 /* BOTÃO CRIAR INGREDIENTES*/
 .btnCriarIngrediente{
-    width: 300px;
-    height: 30px;
+    width: 100px;
+    padding: 6px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 12px;
+}
+
+.box-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -1364,6 +1381,7 @@ img.email{
         font-weight: 600;
         cursor: pointer;
     }
+    
     /* FIM CRIAR INGREDIENTES */
 
 /* FIM MEUS INGREDIENTES */
