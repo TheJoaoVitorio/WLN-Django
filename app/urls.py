@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from usuarios.views import GerenciarConta
 
 urlpatterns = [
     path('home/', views.home, name='home'),
@@ -12,7 +13,8 @@ urlpatterns = [
     path('criaringrediente/', views.CriarIngrediente , name='criar-ingrediente'),
     path('contatenos/', views.ContateNos, name='contate-nos'),
     path('minhaconta/', views.MinhaConta, name='minha-conta'),
-    path('gerenciarconta/', views.GerenciarConta, name='gerenciar-conta'),
+    
+    path('gerenciarconta/', GerenciarConta, name='gerenciar-conta'), #import do app usuarios
 
     path('admin/app/alergenico/add/', views.CriarAlergenico),
 ]
