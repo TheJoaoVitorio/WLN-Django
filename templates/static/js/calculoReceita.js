@@ -48,9 +48,6 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('porcaoTabela').textContent = porcao + 'g';
         document.getElementById('medidaCaseiraTabela').textContent = ' (' + MedidaCaseira + ')';
    
-        //console.log('Porção:',porcao);
-        //console.log('Porçoes embaladas: ',porcoesPorEmbalagem);
-        //console.log('Medida caseira: ', MedidaCaseira);
     }
 
     inputPorcao.addEventListener('input', atualizarTabelaComInformacoesDoUsuario);

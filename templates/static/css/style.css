@@ -87,6 +87,7 @@
     padding: 3px;
     border-radius: 6px;
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .btn-verde:hover{
     background-color: #20903F;
@@ -601,6 +602,7 @@ img.email{
     justify-content: space-between;
     align-items: center;
     background: var(--cor-cinza3);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .dashboard-menu-table{
     width: 400px;
@@ -611,7 +613,9 @@ img.email{
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    text-align: center
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
 }
 .title-table{
     font-weight: 600;
@@ -651,6 +655,7 @@ img.email{
     border-radius: 10px;
     padding: 10px;
     padding-left: 34px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 #search-icon-meus-ingredientes{
     width: 16px;
@@ -678,6 +683,7 @@ img.email{
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .receitas table th{
     font-weight: 400;
@@ -713,6 +719,7 @@ img.email{
     background: #F0F0F0;
     text-align: center;
     outline: none;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 #divBtnReceita{
     margin-top: 16px;
@@ -748,6 +755,7 @@ img.email{
     .iconStepActive{
         background-color: var(--cor-laranja);
         border-color: #EE7828;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
 
     .iconStepActive > i{
@@ -793,6 +801,7 @@ img.email{
         padding-left: 12px;
         outline: none;
         appearance: none;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     #selectOption option[disabled]{
         text-align:center;
@@ -903,6 +912,7 @@ img.email{
         background: #F0F0F0;
         margin-top: 10px;
         cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     .select-btn i{
         transition: transform 0.3s linear;
@@ -912,6 +922,8 @@ img.email{
         background: #F0F0F0;
         margin-top: 10px;
         width: 320px;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
 
     .activeDrop{
@@ -1026,6 +1038,7 @@ img.email{
         border-radius:5px;
         margin-top:10px;
         overflow-y: auto;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     .table-ingredientes-da-receita table{
         padding:12px;
@@ -1063,16 +1076,21 @@ img.email{
     /* */
 
     /* FORM THREE */
+    
     .form-three{
         display:none;
     }
     .search-alergenico-input{
-        width: 320px;
+        width: 300px;
         height: 35px;
         border-radius: 8px;
         padding: 10px;
-        border: 0.5px solid #545454;
+        
         outline: none;
+        margin: 10px;
+        background: whitesmoke;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     .optionsAlergenicos{
         padding: 8px;
@@ -1195,6 +1213,44 @@ img.email{
     display: none;
 }
 
+.containerListaItensTabela{
+    max-width: 100%;
+}
+
+.listaIngredientesTabela, .listaAlergenicosTabela{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.listaIngredientesTabela ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+.listaIngredientesTabela ,.listaAlergenicosTabela,   ul{
+    gap: 4px;
+    list-style: none;
+}
+.listaIngredientesTabela{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+.listaIngredientesTabela h3{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.listaAlergenicosTabela{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+.listaAlergenicosTabela h3{
+    font-weight: 300;
+    font-size: 14px;
+}
+
+
 
 
 /* FIM RECEITAS */
@@ -1269,6 +1325,7 @@ img.email{
     
     overflow-x: auto;
     height: 168px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .box-2 table {
@@ -1314,6 +1371,7 @@ img.email{
     border: none;
     background-color: #F0F0F0;
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .box-3 button{
     background: none;
@@ -1497,6 +1555,7 @@ textarea:focus{
     align-items: center;
     border-radius: 10px;
     background-color: rgb(223, 223, 223);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     
 }
 .caixa-info{
@@ -1521,6 +1580,7 @@ textarea:focus{
     border-radius: 10px;
     padding-bottom: 30px;
     background-color: rgb(223, 223, 223);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .container-telaUser a{
     font-size: 20px;
