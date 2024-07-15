@@ -1,4 +1,7 @@
+import json
+from django.core import serializers
 from django.http import HttpResponse , HttpResponseRedirect , JsonResponse
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -10,6 +13,7 @@ from django.core.mail import BadHeaderError,send_mail
 from django.core.paginator import Paginator
 
 from .models import Ingrediente , MeusIngredientes
+from .models import Alergenico
 
 
 # Create your views here.
@@ -17,7 +21,9 @@ from .models import Ingrediente , MeusIngredientes
 def home(request):
     if request.method == 'GET':
         meusIngredientes = MeusIngredientes.objects.filter(user=request.user)
-        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes})
+        baseIngredientes = Ingrediente.objects.all
+        
+        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes})
     
 
 @login_required(login_url='/usuarios/login/')
@@ -29,18 +35,74 @@ def Receitas(request):
 @login_required(login_url='/usuarios/login/')
 def CriandoReceita(request):
     if request.method == 'POST':
-        TituloDaReceita = request.POST.get('TituloDaReceita')
-        MedidaReceita = request.POST.get('medidaReceita')
-        GlutenReceita = request.POST.get('glutenReceita')
-        LactoseReceita = request.POST.get('lactoseReceita')
+        TituloDaReceita     = request.POST.get('TituloDaReceita')
+        MedidaReceita       = request.POST.get('medidaReceita')
+        GlutenReceita       = request.POST.get('glutenReceita')
+        LactoseReceita      = request.POST.get('lactoseReceita')
         TipoDePorcaoReceita = request.POST.get('tipoDePorcaoReceita')
-        PorcoesEmbReceita = request.POST.get('porcoesEmbaladas')
-        PesoFinalReceita = request.POST.get('pesoFinal')
-        PorcaoReceita = request.POST.get('porcao')    
-        MedidaCaseira = request.POST.get('medidaCaseira') 
+        PorcoesEmbReceita   = request.POST.get('porcoesEmbaladas')
+        PesoFinalReceita    = request.POST.get('pesoFinal')
+        PorcaoReceita       = request.POST.get('porcao')    
+        MedidaCaseira       = request.POST.get('medidaCaseira') 
 
+        data = json.loads(request.body)
+        ingredientes = data.get('ingredientes')
+
+        # Agora você pode iterar sobre os ingredientes e fazer o que precisar com eles
+        for ingrediente in ingredientes:
+            nome = ingrediente.get('nome')
+            quantidade = ingrediente.get('quantidade')
+            # Aqui você pode criar objetos no banco de dados ou outra lógica necessária
+
+        return JsonResponse({'success': True})
     else:
         return render (request, 'criando-receita.html')
+
+    
+@login_required(login_url='/usuarios/login/')
+@require_http_methods(["POST"])  # Garante que a view aceite apenas requisições POST
+def GetDadosIngredientes(request):
+    try:
+        # Carrega a lista de nomes de ingredientes do corpo da requisição
+        data = json.loads(request.body)
+        ingredientes_nomes = data.get('ingredientes', [])
+
+        # Verifica se a lista de ingredientes não está vazia
+        if not ingredientes_nomes:
+            return JsonResponse({'error': 'Nenhum ingrediente fornecido'}, status=400)
+
+        # Busca os dados de todos os ingredientes de uma vez
+        ingredientes = Ingrediente.objects.filter(nome__in=ingredientes_nomes)
+        dados_ingredientes = {}
+
+        # Adiciona os dados dos ingredientes ao dicionário
+        for ingrediente in ingredientes:
+            dados_ingredientes[ingrediente.nome] = {
+                'valorEnergetico': ingrediente.valorEnergetico,
+                'carboidratos'   : ingrediente.carboidratos,
+                'acuTotais'      : ingrediente.acuTotais,
+                'acuAdicionais'  : ingrediente.acuAdicionais,
+                'proteinas'      : ingrediente.proteinas,
+                'gordTotais'     : ingrediente.gordTotais,
+                'gordSaturadas'  : ingrediente.gordSaturadas,
+                'gordTrans'      : ingrediente.gordTrans,
+                'fibra'          : ingrediente.fibra,
+                'sodio'          : ingrediente.sodio,
+            }
+
+        # Verifica se todos os ingredientes foram encontrados
+        ingredientes_nao_encontrados = set(ingredientes_nomes) - set(dados_ingredientes.keys())
+        if ingredientes_nao_encontrados:
+            return JsonResponse({'error': f'Ingredientes não encontrados: {", ".join(ingredientes_nao_encontrados)}'}, status=404)
+
+        # Retorna os dados dos ingredientes em formato JSON
+        return JsonResponse(dados_ingredientes)
+
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Erro ao decodificar o JSON'}, status=400)
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 
 @login_required(login_url='/usuarios/login/')
@@ -106,6 +168,7 @@ def CriarIngrediente(request):
     else:
         return render (request,'criando-ingredientes.html')
 
+
 @login_required(login_url='/usuarios/login/')
 def GetMeusIngredientes(request):
     if request.user.is_authenticated:
@@ -115,42 +178,24 @@ def GetMeusIngredientes(request):
     else:
         return JsonResponse({'Error' : 'User not authenticated'}, status=401)
 
+
+@login_required(login_url='/usuarios/login')
+def GetAlergenicos(request):
+    if request.method == 'GET':
+        searchAlergenico = request.GET.get('searchAlergenico')
+        if searchAlergenico:
+            
+            alergenicos = Alergenico.objects.filter(nomeAlergenico__icontains=searchAlergenico)
+            
+        
+        alergenicos = Alergenico.objects.all().values("id", "nomeAlergenico")
+        return JsonResponse({'ListaAlergenicos': list(alergenicos)})
+
+
 @login_required(login_url='/usuarios/login/')
 def MinhaConta(request):
     return render(request,'user.html')
 
-
-@login_required(login_url='/usuarios/login/')
-def GerenciarConta(request):
-    if request.method == 'POST':
-        old_password = request.POST.get('old_password')
-        new_password = request.POST.get('new_password1')
-        confirmed_new_password = request.POST.get('new_password2')
-
-        if old_password and new_password and confirmed_new_password:
-            if request.user.is_authenticated:
-                user = User.objects.get(username = request.user.username)
-                if not user.check_password(old_password):
-                    messages.add_message(request,constants.ERROR,'Senha atual está incorreta!')
-                    return redirect ('/app/gerenciarconta/')
-                    #return HttpResponse('senha atual não esta correta') #passou
-                else:
-                    if new_password != confirmed_new_password:
-                        messages.add_message(request,constants.ERROR,'Nova senha e confirmar não conferem!')
-                        return redirect ('/app/gerenciarconta/')
-                        #return HttpResponse('nova senha e confirmar senha não conferem')#passou
-                    else:
-                        user.set_password(new_password)
-                        user.save()
-                        update_session_auth_hash(request, user)
-                        messages.add_message(request,constants.SUCCESS,'Senha trocada!')
-                        return redirect ('/app/home/')
-        else:
-            messages.add_message(request,constants.WARNING,'Campos inválidos!')
-            return redirect('/app/gerenciarconta/')
-    else:
-        return render (request, 'info_usuarios.html')
-    
 
 @login_required(login_url='/usuarios/login/')
 def ContateNos(request):
@@ -176,3 +221,20 @@ def ContateNos(request):
     
     else:
         return render (request, 'contate-nos.html')
+    
+    
+def CriarAlergenico(request):
+    if request.method == 'POST':
+        try:
+            NomeAlergenico = request.POST.get('nomeAlergenico')
+
+            CriandoAlergenico = Alergenico(
+                nomeAlergenico = NomeAlergenico
+
+            )
+            CriandoAlergenico.save()
+            
+        except ValueError:
+            return
+
+        return

@@ -94,7 +94,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <form action="{% url 'criando-receita'%}" method="POST">
+                            <form id="CriandoReceita" action="{% url 'criando-receita'%}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-one form-step ativo">
                                     <div class="container-form-one flex">
@@ -200,20 +200,18 @@
                                 </div>
                                 <div class="form-three form-step">
                                     <div class="wrapper flex">
-                                        <div class="select-btn select-btn-frm3" >
+                                        <div id="selectBtnAlergenicos" class="select-btn select-btn-frm3" >
                                             <span>Selecione</span>
                                             <i class='bx bxs-down-arrow'></i>
                                         </div>
 
                                         <div class="content-dropReceita contentAle">
                                             <div class="search-alergenico">
-                                                <input type="text" class="search-alergenico-input" id="search-alergenico-input" placeholder="Buscar Alergenico">
+                                                <input type="text" type="button" type="submit" name="searchAlergenico" value="{{ request.GET.searchAlergenico }}" class="search-alergenico-input" id="search-alergenico-input" placeholder="Buscar Alergenico">
                                             
                                                 <ul id="optionsAlergenicos" class="optionsAlergenicos">
-                                                    <li>Contém Amendoá</li>
-                                                    <li>Contém Amendoim</li>
-                                                    <li>Contém Aveia</li>
-                                                    <li>Contém Avelã</li>
+                                                   
+                                                   
                                                 </ul>
                                             </div>
                                         </div>
@@ -221,13 +219,7 @@
                                         <div class="table-ingredientes-da-receita table-alergenicos">
                                             <table>
                                                 <tbody>
-                                                    <tr>
-                                                        <th>Contém Amendoim</th>
-                                                
-                                                        <th>
-                                                            <button class="btnApagarAlergenico" id="btnApagarIng"> <img width="35px" src="{% static 'img/apagar-receita.png'%}"></button>
-                                                        </th>
-                                                    </tr>
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -251,7 +243,7 @@
                                     </div>
 
                                     <div class="btn-submit-receita">
-                                        <button type="submit" class="btn-verde">Gerar Tabela nutricional <img width="25px" src="{% static 'img/fi-rr-file.png'%}"> </button>
+                                        <button type="submit" class="btn-verde btn-gerar-pdf">Gerar Pdf <img width="25px" src="{% static 'img/fi-rr-file.png'%}"> </button>
                                         <button type="button" class="btn-voltar2">
                                             <img src="{% static 'img/fi-sr-arrow-small-right.png'%}">
                                             Voltar
@@ -261,14 +253,14 @@
                                     <div class="tabela-nutricional">
                                         <h2>INFORMAÇÃO NUTRICIONAL</h2>
                                         <hr>
-                                        <p>Porção por embalagem: 0 porções</p>
-                                        <p>Porção: 000g (medida caseira)</p>
+                                        <p>Porção por embalagem: <span id="porcoesEmbTabela"></span> porções</p>
+                                        <p>Porção: <span id="porcaoTabela"></span> <span id="medidaCaseiraTabela"></span> </p>
                                         <hr id="linhaGrossaTabelaNutricional">
                                         <table>
                                             <thead>
                                                 <tr>
                                                     <th></th>
-                                                    <th>100g</th>
+                                                    <th>100g</th> 
                                                     <th>000g</th>
                                                     <th>% VD*</th>
                                                 </tr>
@@ -276,61 +268,61 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Valor Energético (kcal)</td>
-                                                    <td></td>
+                                                    <td>g</td> <!-- kcal g -->
                                                     <td></td>
                                                     <td>12%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Carboidratos totais (g)</td>
-                                                    <td>30 g</td>
+                                                    <td>g</td> <!-- carboidratos  g -->
                                                     <td></td>
                                                     <td>10%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Açúcares totais (g)</td>
-                                                    <td>30 g</td>
+                                                    <td>g</td> <!-- acucar totais g -->
                                                     <td></td>
                                                     <td>10%</td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="acucaresAdicionados">Açúcares adicionados (g)</td>
-                                                    <td>30 g</td>
+                                                    <td >Açúcares adicionados (g)</td>
+                                                    <td>g</td> <!-- acucar adicionado g -->
                                                     <td></td>
                                                     <td>10%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Proteínas</td>
-                                                    <td>5 g</td>
+                                                    <td>g</td> <!-- proteinas g -->
                                                     <td></td>
                                                     <td>7%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gorduras Totais</td>
-                                                    <td>10 g</td>
+                                                    <td>g</td> <!-- gorduras totais g -->
                                                     <td></td>
                                                     <td>18%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gorduras Saturadas</td>
-                                                    <td>2 g</td>
+                                                    <td>g</td> <!-- gorduras saturadas g -->
                                                     <td></td>
                                                     <td>9%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gorduras Trans</td>
-                                                    <td>0 g</td>
+                                                    <td>g</td> <!-- gorduras trans g -->
                                                     <td></td>
                                                     <td>**</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Fibra Alimentar</td>
-                                                    <td>2 g</td>
+                                                    <td>g</td> <!-- fibra g -->
                                                     <td></td>
                                                     <td>8%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sódio</td>
-                                                    <td>300 mg</td>
+                                                    <td>mg</td> <!-- sodio mg -->
                                                     <td></td>
                                                     <td>12%</td>
                                                 </tr>
@@ -339,7 +331,38 @@
                                         <hr id="linhaFinaTabelaNutricional">
                                         <p>*Percentual de valores diários fornecidos pela porção.</p>
                                     </div>
-              
+                                    <div class="containerListaItensTabela">
+                                        <div class="listaIngredientesTabela flex">
+                                            <h2>INGREDIENTES:</h2>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                            <h3>Ovo</h3>
+                                        </div>
+                                        <div class="listaAlergenicosTabela flex ">
+                                            <h2>ALERGÊNICOS:</h2>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>
+                                            <h3>Contem Ovo</h3>        
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="container-btn-group">
@@ -361,11 +384,14 @@
 
     
 
-    
+    <script src="{% static 'js/calculoReceita.js'%}" ></script>
     <script src="{% static 'js/c_receitaScript.js'%}" ></script>
+    <script src="{% static 'js/coletaIngredientes.js' %}"></script>
     <script src="{% static 'js/get_meusingredientes.js' %}"></script>
     <script src="{% static 'js/addAndRemoveIngrediente.js' %}"></script>
     <script src="{% static 'js/addAlergenicosReceita.js' %}"></script>
+    <script src="{% static 'js/get_alergenicos.js' %}"></script>
+    
     <script>
         const apagarReceitaImgUrl = "{% static 'img/apagar-receita.png' %}";
     </script>

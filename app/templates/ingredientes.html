@@ -82,11 +82,20 @@
                 </div>
                 <div class="container-ingredientes">
 
-                    <div class="pesquisar-receitas">
+                    <div class="pesquisar-receitas buscarMeusIngredientes">
                         <form method="GET" id="search-form">
-                            <input type="text" name="search" placeholder="Buscar" value="{{ request.GET.search }}">
-                            <img id="search-icon" src="{% static 'img/pesquisar.png'%}">
+                           <!-- <input type="text" name="search" placeholder="Buscar" value="{{ request.GET.search }}"> -->
+                            
+                            <input class="btnPesquisarReceitaImg" type="text" type="button" name="search" type="submit" placeholder="Buscar" value="{{ request.GET.search }}" >
+                            <img type="button" id="search-icon-meus-ingredientes" src="{% static 'img/pesquisar.png'%}">
+                            
                         </form>
+
+                        <div class="box-4 ">
+                            <a href="{% url 'criar-ingrediente' %}">
+                                <button class="btn-verde btnCriarIngrediente">+ Ingrediente</button>
+                            </a>
+                        </div>
                     </div>
     
                     <div class="box-2">
@@ -148,11 +157,7 @@
                             </a>
                         {% endif %}
                     </div>
-                    <div class="box-4">
-                        <a href="{% url 'criar-ingrediente' %}">
-                            <button class="btn-verde btnCriarIngrediente">Criar Ingrediente</button>
-                        </a>
-                    </div>
+                    
                 
 
                 </div>

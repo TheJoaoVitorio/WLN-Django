@@ -87,6 +87,7 @@
     padding: 3px;
     border-radius: 6px;
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .btn-verde:hover{
     background-color: #20903F;
@@ -409,16 +410,16 @@ img.email{
   /* ############################################################################ */
   /* Estilizando os radio buttons dentro da div content-laranja */
 .content-laranja input[type="radio"] {
-  -webkit-appearance: none; /* Removendo a aparência padrão do navegador */
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px; /* Definindo a largura dos botões de rádio */
-  height: 20px; /* Definindo a altura dos botões de rádio */
-  border-radius: 50%; /*Fazendo os botões de rádio circular*/
-  border: 2px solid white; /* Definindo a cor da borda dos botões de rádio */
-  background-color:#EE7828; /* Definindo a cor de fundo dos botões de rádio */
-  outline: none; /* Removendo o contorno ao focar */
-  cursor: pointer; /* Mudando o cursor ao passar por cima */
+    -webkit-appearance: none; /* Removendo a aparência padrão do navegador */
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px; /* Definindo a largura dos botões de rádio */
+    height: 20px; /* Definindo a altura dos botões de rádio */
+    border-radius: 50%; /*Fazendo os botões de rádio circular*/
+    border: 2px solid white; /* Definindo a cor da borda dos botões de rádio */
+    background-color:#EE7828; /* Definindo a cor de fundo dos botões de rádio */
+    outline: none; /* Removendo o contorno ao focar */
+    cursor: pointer; /* Mudando o cursor ao passar por cima */
   /* margin-right: 10px; Adicionando um espaço entre os botões de rádio */
 }
 
@@ -601,6 +602,7 @@ img.email{
     justify-content: space-between;
     align-items: center;
     background: var(--cor-cinza3);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .dashboard-menu-table{
     width: 400px;
@@ -611,7 +613,9 @@ img.email{
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    text-align: center
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
 }
 .title-table{
     font-weight: 600;
@@ -651,10 +655,18 @@ img.email{
     border-radius: 10px;
     padding: 10px;
     padding-left: 34px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-#search-icon{
+#search-icon-meus-ingredientes{
     width: 16px;
     top: 12px;
+    cursor : pointer;
+    left: 10px;
+    position: absolute;
+}
+
+#search-icon{
+    width: 16px;
     cursor : pointer;
     left: 10px;
     position: absolute;
@@ -671,6 +683,7 @@ img.email{
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .receitas table th{
     font-weight: 400;
@@ -706,6 +719,7 @@ img.email{
     background: #F0F0F0;
     text-align: center;
     outline: none;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 #divBtnReceita{
     margin-top: 16px;
@@ -741,6 +755,7 @@ img.email{
     .iconStepActive{
         background-color: var(--cor-laranja);
         border-color: #EE7828;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
 
     .iconStepActive > i{
@@ -786,6 +801,7 @@ img.email{
         padding-left: 12px;
         outline: none;
         appearance: none;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     #selectOption option[disabled]{
         text-align:center;
@@ -896,6 +912,7 @@ img.email{
         background: #F0F0F0;
         margin-top: 10px;
         cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     .select-btn i{
         transition: transform 0.3s linear;
@@ -905,6 +922,8 @@ img.email{
         background: #F0F0F0;
         margin-top: 10px;
         width: 320px;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
 
     .activeDrop{
@@ -1019,6 +1038,7 @@ img.email{
         border-radius:5px;
         margin-top:10px;
         overflow-y: auto;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     .table-ingredientes-da-receita table{
         padding:12px;
@@ -1056,16 +1076,21 @@ img.email{
     /* */
 
     /* FORM THREE */
+    
     .form-three{
         display:none;
     }
     .search-alergenico-input{
-        width: 320px;
+        width: 300px;
         height: 35px;
         border-radius: 8px;
         padding: 10px;
-        border: 0.5px solid #545454;
+        
         outline: none;
+        margin: 10px;
+        background: whitesmoke;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
     .optionsAlergenicos{
         padding: 8px;
@@ -1188,6 +1213,44 @@ img.email{
     display: none;
 }
 
+.containerListaItensTabela{
+    max-width: 100%;
+}
+
+.listaIngredientesTabela, .listaAlergenicosTabela{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.listaIngredientesTabela ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+.listaIngredientesTabela ,.listaAlergenicosTabela,   ul{
+    gap: 4px;
+    list-style: none;
+}
+.listaIngredientesTabela{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+.listaIngredientesTabela h3{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.listaAlergenicosTabela{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+.listaAlergenicosTabela h3{
+    font-weight: 300;
+    font-size: 14px;
+}
+
+
 
 
 /* FIM RECEITAS */
@@ -1241,6 +1304,9 @@ img.email{
     background-color: #F0F0F0;
     font-size: 14px;
 }
+#btnPesquisarReceitaImg{
+    background: url("static/img/pesquisar.png");
+}
 /* FIM BOTÃO PESQUISAR*/
 
 
@@ -1258,6 +1324,8 @@ img.email{
     padding: 12px;
     
     overflow-x: auto;
+    height: 168px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .box-2 table {
@@ -1303,6 +1371,7 @@ img.email{
     border: none;
     background-color: #F0F0F0;
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .box-3 button{
     background: none;
@@ -1314,10 +1383,17 @@ img.email{
 
 /* BOTÃO CRIAR INGREDIENTES*/
 .btnCriarIngrediente{
-    width: 300px;
-    height: 30px;
+    width: 100px;
+    padding: 6px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 12px;
+}
+
+.box-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -1364,6 +1440,7 @@ img.email{
         font-weight: 600;
         cursor: pointer;
     }
+    
     /* FIM CRIAR INGREDIENTES */
 
 /* FIM MEUS INGREDIENTES */
@@ -1478,6 +1555,7 @@ textarea:focus{
     align-items: center;
     border-radius: 10px;
     background-color: rgb(223, 223, 223);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     
 }
 .caixa-info{
@@ -1502,6 +1580,7 @@ textarea:focus{
     border-radius: 10px;
     padding-bottom: 30px;
     background-color: rgb(223, 223, 223);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .container-telaUser a{
     font-size: 20px;
@@ -1595,6 +1674,12 @@ textarea:focus{
 
 /* RESPONSIVIDADE */
 @media (max-width:840px){
+    .buscarMeusIngredientes input{
+        width: 190px;
+    }
+    .btnCriarIngrediente{
+        width: 100px;
+    }
     /*Pagina inicial -*/
     .section-info-image img{
         max-width: 200px;
@@ -1652,6 +1737,12 @@ textarea:focus{
 
 @media (max-width:605px){
     /* Pagina inicial*/
+    .recursos-item-image img{
+        width: 50px;
+    }
+    .recursos-item-content .recursos-item-title > h1{
+        font-size: 18px;
+    }
     .section-info-text-title h1{
         font-size: 16px;
     }

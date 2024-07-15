@@ -111,7 +111,12 @@
     
                             <div class="dashboard-item flex">
                                 <div class="dashboard-text">
-                                    <h1 id="baseIngredientes">0</h1>
+                                    {% if BaseIngredientes.count == 0 %}
+                                        <h1 id="baseIngredientes"> 0 </h1>
+                                    {% else %}
+                                        <h1 id="baseIngredientes"> {{ BaseIngredientes.count }} </h1>
+                                    {% endif %}
+                                    
                                     <p>Base de ingredientes</p>
                                 </div>
                                 <div class="dashboard-img">

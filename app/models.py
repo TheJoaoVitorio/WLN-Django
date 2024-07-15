@@ -1,5 +1,5 @@
 from django.db import models
-from usuarios.models import Perfil
+#from usuarios.models import Perfil
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -28,8 +28,10 @@ class MeusIngredientes(Ingrediente):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Alergenico(models.Model):
-    nomeAlergenico = models.CharField(max_length=100)
+class IngredientesReceita(models.Model):
+    #id_receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
+    id_meus_ingredientes = models.ForeignKey(MeusIngredientes, on_delete=models.CASCADE, related_name='receitas_meus_ingredientes',blank=True)
+    id_ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE, related_name='receitas_ingredientes')
 
 
 class Receita(models.Model):
@@ -58,15 +60,27 @@ class Receita(models.Model):
     porcao = models.DecimalField(max_digits=10, decimal_places=2)
     medidaCaseira = models.CharField(max_length=40)
 
-    user = models.ForeignKey(Perfil, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
-    ingrediente = models.ManyToManyField(Ingrediente, related_name='receitas_com_ingrediente')
-    meus_ingredientes = models.ManyToManyField(MeusIngredientes, related_name='receitas_com_meus_ingredientes' )
-    alegenicos = models.ManyToManyField(Alergenico)
+    #ingrediente = models.ManyToManyField(Ingrediente, related_name='receitas_com_ingrediente')
+    #meus_ingredientes = models.ManyToManyField(MeusIngredientes, related_name='receitas_com_meus_ingredientes' )
+    
+    id_ingredientesReceitas = models.ForeignKey(IngredientesReceita, on_delete=models.PROTECT)
+    #alegenicos = models.ManyToManyField(Alergenico)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nomeReceita
-    
+
+class Alergenico(models.Model):
+    nomeAlergenico = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nomeAlergenico
+
+
+class AlergenicoReceita(models.Model):
+    id_alergenico = models.ForeignKey(Alergenico, on_delete=models.PROTECT)
+
