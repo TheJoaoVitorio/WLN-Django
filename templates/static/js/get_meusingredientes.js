@@ -4,9 +4,8 @@ document.getElementById('MeusIngredientesCheck').addEventListener('change', func
         .then(response => response.json())
         .then(data => {
             if (data.MeusIngredientesList){
-                const ListaIngredientes = document.getElementById('optionsIngredientes');
-                //const inputField = document.querySelector('.search-alergenico-input');
-                const inputField = document.getElementById('BuscaIngrediente')
+                const ListaIngredientes = document.getElementById('optionsIngredientes');//ul para add as li
+                const inputField = document.getElementById('BuscaIngrediente');//search 
 
                 inputField.addEventListener('input', function() {
                     const searchTerm = this.value.toLowerCase();
@@ -26,6 +25,7 @@ document.getElementById('MeusIngredientesCheck').addEventListener('change', func
                     const item = document.createElement('li');
                     item.textContent = ingrediente.nomeIngrediente;
                     ListaIngredientes.appendChild(item);
+                    console.log('passei aqui')
                 });
             } else if (data.erro){
                 alert(data.erro);
@@ -35,3 +35,7 @@ document.getElementById('MeusIngredientesCheck').addEventListener('change', func
         document.getElementById('optionsIngredientes').innerHTML = '';
     }
 });
+
+
+
+

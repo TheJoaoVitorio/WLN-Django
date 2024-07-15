@@ -58,6 +58,27 @@ def CriandoReceita(request):
     else:
         return render (request, 'criando-receita.html')
 
+
+def getValoresIngredientes(request,nome):
+    ingrediente = Ingrediente.objects.get(nomeIngrediente__icontains=nome)
+    
+    valores = {
+        'id' : ingrediente.id,
+        'Ingrediente' : ingrediente.nomeIngrediente,
+        'Carboidratos': ingrediente.carboidratos,
+        'Acucares Totais': ingrediente.acuTotais,
+        'Acucares Adicionais' : ingrediente.acuAdicionais,
+        'Proteinas': ingrediente.proteinas,
+        'Gorduras Totais': ingrediente.gordTotais,
+        'Gorduras Saturadas': ingrediente.gordSaturadas,
+        'Gorduras Trans': ingrediente.gordTrans,
+        'Fibra': ingrediente.fibra,
+        'Sodio': ingrediente.sodio
+    }
+    
+    return JsonResponse(valores)
+
+
     
 @login_required(login_url='/usuarios/login/')
 @require_http_methods(["POST"])  # Garante que a view aceite apenas requisições POST

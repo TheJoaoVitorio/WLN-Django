@@ -2,12 +2,15 @@
 document.addEventListener('DOMContentLoaded', function(){
     const ListaIngredientes = document.getElementById('optionsIngredientes');
     const IngredientesDaReceita = document.querySelector('.table-ingredientes-da-receita table tbody');
-
+    let ListIngrediente = [];
+    
     ListaIngredientes.addEventListener('click', function(event){
         const li = event.target;
         if (li.tagName === 'LI'){
             const NomeIngrediente = li.textContent;
             adicionarIngredienteReceita(NomeIngrediente);
+            getValoresIngredientes(NomeIngrediente);
+            console.log('PASSEI');
         }
     });
 
@@ -28,5 +31,21 @@ document.addEventListener('DOMContentLoaded', function(){
         RemoverIng.addEventListener('click', function(){
             NovaLinha.remove();
         });
-    }
+    };
+
+    function getValoresIngredientes(NomeIngrediente){
+        const Chamada = new XMLHttpRequest();
+        const url = `/getValoresIngrediente/$(NomeIngrediente)/`;
+        Chamada.open('POST',url,true);
+        Chamada.onload = function(){
+            if (Chamada.readyState === 4 && Chamada.status === 200){
+                    const valores = JSON.parse(Chamada.responseText);
+                    console.log(valores);
+                }else{
+                    console.log('erro')
+                }
+        };
+        
+        Chamada.send;
+    };
 });
