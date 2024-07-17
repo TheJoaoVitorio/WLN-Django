@@ -142,4 +142,5 @@ document.addEventListener('DOMContentLoaded', () => {
             arrow.classList.remove('rotation-icon');
         });
     });
+    
 });

@@ -66,12 +66,12 @@ def getValoresIngredientes(request,nome):
         'id' : ingrediente.id,
         'Ingrediente' : ingrediente.nomeIngrediente,
         'Carboidratos': ingrediente.carboidratos,
-        'Acucares Totais': ingrediente.acuTotais,
-        'Acucares Adicionais' : ingrediente.acuAdicionais,
+        'AcucaresTotais': ingrediente.acuTotais,
+        'AcucaresAdicionais' : ingrediente.acuAdicionais,
         'Proteinas': ingrediente.proteinas,
-        'Gorduras Totais': ingrediente.gordTotais,
-        'Gorduras Saturadas': ingrediente.gordSaturadas,
-        'Gorduras Trans': ingrediente.gordTrans,
+        'GordurasTotais': ingrediente.gordTotais,
+        'GordurasSaturadas': ingrediente.gordSaturadas,
+        'GordurasTrans': ingrediente.gordTrans,
         'Fibra': ingrediente.fibra,
         'Sodio': ingrediente.sodio
     }

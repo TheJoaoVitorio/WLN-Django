@@ -84,7 +84,7 @@
                                     </li>
 
                                     <div class="line line2"></div>
-                                    <li class="step step3">
+                                    <li id="stepAlergenico" class="step step3">
                                         <i class="bx bx-error"></i>
                                     </li>
 
@@ -374,7 +374,7 @@
                                             <img src="{% static 'img/fi-sr-arrow-small-right.png'%}">
                                             Voltar
                                         </button>
-                                        <button type="button"  class="btn-proximo btn-verde btnCriandoReceita">Proximo</button>
+                                        <button type="button" id="btnProx" class="btn-proximo btn-verde btnCriandoReceita">Proximo</button>
                                     </div>
                                 </div>
                             </form>
@@ -385,11 +385,10 @@
         </div>
     </div>
 
-    
 
+    <script src="{% static 'js/coletaIngredientes.js' %}"></script>
     <script src="{% static 'js/calculoReceita.js'%}" ></script>
     <script src="{% static 'js/c_receitaScript.js'%}" ></script>
-    <script src="{% static 'js/coletaIngredientes.js' %}"></script>
     <script src="{% static 'js/get_meusingredientes.js' %}"></script>
     <script src="{% static 'js/addAndRemoveIngrediente.js' %}"></script>
     <script src="{% static 'js/addAlergenicosReceita.js' %}"></script>
