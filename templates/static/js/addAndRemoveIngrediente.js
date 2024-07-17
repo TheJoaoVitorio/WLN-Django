@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ListaIngredientes = document.getElementById('optionsIngredientes');
     const IngredientesDaReceita = document.querySelector('.table-ingredientes-da-receita table tbody');
+    const ListaIngredientesTabela = document.querySelector('.listaIngredientesTabela');
     let valoresIngredientes = []; // array que armazena os ingredientes
     
     ListaIngredientes.addEventListener('click', function(event) {
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
 
                     adicionarIngredienteReceita(NomeIngrediente, idLinha); // Adicionar na tabela HTML
+                    adicionarNomeIngrediente(NomeIngrediente, idLinha); // Adicionar o nome do ingrediente ao HTML
                     
                     console.log(valoresIngredientes); // Exemplo de como você pode visualizar os valores armazenados
                 })
@@ -74,9 +76,30 @@ document.addEventListener('DOMContentLoaded', function() {
             const index = valoresIngredientes.findIndex(ingrediente => ingrediente.idLinha === idLinha);
             if (index !== -1) {
                 valoresIngredientes.splice(index, 1);
+                removerNomeIngrediente(idLinha); // Remover o nome do ingrediente do HTML
                 console.log(valoresIngredientes);
             }
         });
+    }
+
+    function adicionarNomeIngrediente(nome, idLinha) {
+        const h3 = document.createElement('h3');
+        const shouldAddComma = ListaIngredientesTabela.getElementsByTagName('h3').length > 0;
+        h3.textContent = shouldAddComma ? `, ${nome}` : nome;
+        h3.id = `nome-${idLinha}`;
+        ListaIngredientesTabela.appendChild(h3);
+    }
+
+    function removerNomeIngrediente(idLinha) {
+        const h3Remover = document.getElementById(`nome-${idLinha}`);
+        if (h3Remover) {
+            const prevSibling = h3Remover.previousSibling;
+            h3Remover.remove();
+            // Remover a vírgula do último elemento, se existir
+            if (prevSibling && prevSibling.tagName === 'H3' && prevSibling.textContent.startsWith(', ')) {
+                prevSibling.textContent = prevSibling.textContent.slice(2);
+            }
+        }
     }
 
     function getValoresIngredientes(NomeIngrediente) {
