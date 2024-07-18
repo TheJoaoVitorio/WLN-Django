@@ -70,27 +70,22 @@
                     </div>
 
                     <div class="inputs-contate-nos">
-                        <form method="POST" action="{% url 'contate-nos' %}" id="formularioContateNos">  
-                            {% csrf_token %}  
+                        <form method="POST" action="{% url 'contate-nos' %}" id="formularioContateNos">
+                            {% csrf_token %}
                             <div class="formContateNos">
                                 <label for="Email">Para</label>
                                 <input name="email-wlnutrion" class="inputForm" type="email" name="campo_fixo" value="wlnutrion@gmail.com" readonly>
-
                             </div>
                             <div class="formContateNos">
-                                <label for="">Assunto</label>
+                                <label for="assunto-contate-nos">Assunto</label>
                                 <input name="assunto-contate-nos" id="assunto-contate-nos" class="inputForm" type="text" required>
                             </div>
-                        
                             <div class="formContateNos">
-                                <label for="mensagem">Mensagem</label>        
+                                <label for="mensagemContate-nos">Mensagem</label>
                                 <textarea name="mensagem-contate-nos" class="mensagem-contate-nos" required id="mensagemContate-nos" cols="30" rows="8"></textarea>
-                                <!-- <input id="mensagem-contate-nos" class="inputForm" type="text"> -->
                             </div>
-
                             <div class="formContateNos formButton">
-                                <button type="submit" class="btn-verde">Enviar</button>
-                                
+                                <button id="btnContateNos" type="submit" class="btn-verde">Enviar</button>
                             </div>
                         </form>
                         
