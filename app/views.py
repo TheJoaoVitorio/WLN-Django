@@ -146,12 +146,10 @@ def CriarIngrediente(request):
 
 @login_required(login_url='/usuarios/login/')
 def GetMeusIngredientes(request):
-    if request.user.is_authenticated:
-        # meus_ingredientes = Ingrediente.objects.all().filter(id_user=request.user.id).values_list('id', 'nomeIngrediente')
-        
+    if request.user.is_authenticated: 
         filtraIngredientesUsuario = Ingrediente.objects.all().filter(id_user=request.user.id)
-        # meus_ingredientes = serializers.serialize('json',filtraIngredientesUsuario,fields=['id','nomeIngrediente'])
         meus_ingredientes = list(filtraIngredientesUsuario.values('id','nomeIngrediente'))
+        
         return JsonResponse({'MeusIngredientesList':meus_ingredientes})
     else:
         return JsonResponse({'Error' : 'User not authenticated'}, status=401)

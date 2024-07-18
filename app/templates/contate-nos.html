@@ -68,7 +68,7 @@
                     <div class="content-title title-contate-nos">
                         <h1>Contate-nos</h1>
                     </div>
-                    
+
                     <div class="inputs-contate-nos">
                         <form method="POST" action="{% url 'contate-nos' %}" id="formularioContateNos">  
                             {% csrf_token %}  
@@ -89,13 +89,8 @@
                             </div>
 
                             <div class="formContateNos formButton">
-                                <button type="submit" class="btn-verde" onclick="mostrarPopup()" >Enviar</button>
+                                <button type="submit" class="btn-verde">Enviar</button>
                                 
-                                <div class="popup" id="popup">
-                                    <img src="{% static 'img/fi-bs-check.png' %}" alt="">
-                                    <h2> Feedback Enviado!!!</h2>
-                                    <button type="button" onclick="fecharPopup()">Ok</button>
-                                </div>
                             </div>
                         </form>
                         
@@ -103,6 +98,13 @@
                         
                 </div>
             </div>
+
+            <div class="spinner-background">
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
+            </div>
+
         </div>
     
     </div>
