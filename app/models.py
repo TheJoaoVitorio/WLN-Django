@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Ingrediente(models.Model):
+    id_user = models.ForeignKey(User, on_delete=models.PROTECT)
+    
     nomeIngrediente = models.CharField(max_length=40)
     valorEnergetico = models.DecimalField(max_digits=10, decimal_places=2)
     carboidratos = models.DecimalField(max_digits=10, decimal_places=2)
@@ -19,20 +21,6 @@ class Ingrediente(models.Model):
     def __str__(self):
         return self.nomeIngrediente
     
-
-class MeusIngredientes(Ingrediente):
-
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
-class IngredientesReceita(models.Model):
-    #id_receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
-    id_meus_ingredientes = models.ForeignKey(MeusIngredientes, on_delete=models.CASCADE, related_name='receitas_meus_ingredientes',blank=True)
-    id_ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE, related_name='receitas_ingredientes')
-
 
 class Receita(models.Model):
     #CHOICES
@@ -62,17 +50,18 @@ class Receita(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
 
-    #ingrediente = models.ManyToManyField(Ingrediente, related_name='receitas_com_ingrediente')
-    #meus_ingredientes = models.ManyToManyField(MeusIngredientes, related_name='receitas_com_meus_ingredientes' )
-    
-    id_ingredientesReceitas = models.ForeignKey(IngredientesReceita, on_delete=models.PROTECT)
-    #alegenicos = models.ManyToManyField(Alergenico)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nomeReceita
+
+class IngredientesReceita(models.Model):
+    id_receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
+    id_ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE, related_name='receitas_ingredientes')
+
+
 
 class Alergenico(models.Model):
     nomeAlergenico = models.CharField(max_length=100)

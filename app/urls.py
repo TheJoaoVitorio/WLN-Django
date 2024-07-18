@@ -8,9 +8,9 @@ urlpatterns = [
     path('criandoreceita/', views.CriandoReceita, name='criando-receita'),
 
     path('criandoreceita/getValoresIngrediente/<str:nome>/', views.getValoresIngredientes, name='get-valores-ingrediente'),
-
-    path('criandoreceita/getAlergenicos/', views.GetAlergenicos, name='get-alergenicos'),
-    path('criandoreceita/getDadosIngredientes/', views.GetDadosIngredientes , name='get-dados-ingredientes'),
+    path('criandoreceita/getAlergenicos/', views.GetAlergenicos, name='get-alergenicos'),  
+    path('criandoreceita/getBaseIngredientes/', views.getBaseIngredientes, name='get-base-ingredientes'),
+    
     path('criandoreceita/getMeusIngredientes/', views.GetMeusIngredientes, name='get-meus-ingredientes'),
     path('meusingredientes/', views.userIngredientes, name='meus-ingredientes'),
     path('criaringrediente/', views.CriarIngrediente , name='criar-ingrediente'),

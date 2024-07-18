@@ -12,7 +12,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.mail import BadHeaderError,send_mail
 from django.core.paginator import Paginator
 
-from .models import Ingrediente , MeusIngredientes
+from .models import Ingrediente
 from .models import Alergenico
 
 
@@ -20,9 +20,9 @@ from .models import Alergenico
 @login_required(login_url='/usuarios/login/')
 def home(request):
     if request.method == 'GET':
-        meusIngredientes = MeusIngredientes.objects.filter(user=request.user)
-        baseIngredientes = Ingrediente.objects.all
-        
+        meusIngredientes = Ingrediente.objects.all().filter(id_user=request.user.id)
+        baseIngredientes = Ingrediente.objects.filter(id_user=None)
+      
         return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes})
     
 
@@ -79,52 +79,6 @@ def getValoresIngredientes(request,nome):
     return JsonResponse(valores)
 
 
-    
-@login_required(login_url='/usuarios/login/')
-@require_http_methods(["POST"])  # Garante que a view aceite apenas requisições POST
-def GetDadosIngredientes(request):
-    try:
-        # Carrega a lista de nomes de ingredientes do corpo da requisição
-        data = json.loads(request.body)
-        ingredientes_nomes = data.get('ingredientes', [])
-
-        # Verifica se a lista de ingredientes não está vazia
-        if not ingredientes_nomes:
-            return JsonResponse({'error': 'Nenhum ingrediente fornecido'}, status=400)
-
-        # Busca os dados de todos os ingredientes de uma vez
-        ingredientes = Ingrediente.objects.filter(nome__in=ingredientes_nomes)
-        dados_ingredientes = {}
-
-        # Adiciona os dados dos ingredientes ao dicionário
-        for ingrediente in ingredientes:
-            dados_ingredientes[ingrediente.nome] = {
-                'valorEnergetico': ingrediente.valorEnergetico,
-                'carboidratos'   : ingrediente.carboidratos,
-                'acuTotais'      : ingrediente.acuTotais,
-                'acuAdicionais'  : ingrediente.acuAdicionais,
-                'proteinas'      : ingrediente.proteinas,
-                'gordTotais'     : ingrediente.gordTotais,
-                'gordSaturadas'  : ingrediente.gordSaturadas,
-                'gordTrans'      : ingrediente.gordTrans,
-                'fibra'          : ingrediente.fibra,
-                'sodio'          : ingrediente.sodio,
-            }
-
-        # Verifica se todos os ingredientes foram encontrados
-        ingredientes_nao_encontrados = set(ingredientes_nomes) - set(dados_ingredientes.keys())
-        if ingredientes_nao_encontrados:
-            return JsonResponse({'error': f'Ingredientes não encontrados: {", ".join(ingredientes_nao_encontrados)}'}, status=404)
-
-        # Retorna os dados dos ingredientes em formato JSON
-        return JsonResponse(dados_ingredientes)
-
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Erro ao decodificar o JSON'}, status=400)
-
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
-
 
 @login_required(login_url='/usuarios/login/')
 def userIngredientes(request):
@@ -132,10 +86,9 @@ def userIngredientes(request):
         search = request.GET.get('search')
         
         if search:
-            meusIngredientes = MeusIngredientes.objects.filter(nomeIngrediente__icontains=search)
+            meusIngredientes = Ingrediente.objects.filter(nomeIngrediente__icontains=search)
         else:
-
-            meusIngredientesList = MeusIngredientes.objects.filter(user=request.user)
+            meusIngredientesList = Ingrediente.objects.all().filter(id_user=request.user.id)
             paginator = Paginator(meusIngredientesList , 3)
             page = request.GET.get('page')
 
@@ -158,8 +111,9 @@ def CriarIngrediente(request):
             GordTrans = request.POST.get('gordTrans').replace(',' , '.')
             Fibra = request.POST.get('fibraAlimentar').replace(',' , '.')
             Sodio = request.POST.get('sodio').replace(',' , '.')
-
-            CriandoIngrediente = MeusIngredientes(
+            user = request.user
+            
+            CriandoIngrediente = Ingrediente(
                 #fields da class | fields da request
                 nomeIngrediente = NomeIngrediente,
                 valorEnergetico = ValorEnergetico,
@@ -173,7 +127,7 @@ def CriarIngrediente(request):
                 fibra = Fibra,
                 sodio = Sodio,
 
-                user = request.user
+                id_user = user
             )
             CriandoIngrediente.save()
             messages.add_message(request, constants.SUCCESS, 'Ingrediente criado !')
@@ -193,11 +147,25 @@ def CriarIngrediente(request):
 @login_required(login_url='/usuarios/login/')
 def GetMeusIngredientes(request):
     if request.user.is_authenticated:
-        M_ingredientes = MeusIngredientes.objects.filter(user=request.user)
-        ListMeusIngredientes = list(M_ingredientes.values('id', 'nomeIngrediente'))
-        return JsonResponse({'MeusIngredientesList':ListMeusIngredientes})
+        # meus_ingredientes = Ingrediente.objects.all().filter(id_user=request.user.id).values_list('id', 'nomeIngrediente')
+        
+        filtraIngredientesUsuario = Ingrediente.objects.all().filter(id_user=request.user.id)
+        # meus_ingredientes = serializers.serialize('json',filtraIngredientesUsuario,fields=['id','nomeIngrediente'])
+        meus_ingredientes = list(filtraIngredientesUsuario.values('id','nomeIngrediente'))
+        return JsonResponse({'MeusIngredientesList':meus_ingredientes})
     else:
         return JsonResponse({'Error' : 'User not authenticated'}, status=401)
+
+
+@login_required(login_url='/usuarios/login/')
+def getBaseIngredientes(request):
+    if request.user.is_authenticated:
+        filtraBaseIngredientes = Ingrediente.objects.all().filter(id_user=None)
+        baseIngredientes = list(filtraBaseIngredientes.values('id','nomeIngrediente'))
+        
+        return JsonResponse({'baseIngredientesList' : baseIngredientes})
+    else:
+        return JsonResponse({'Error': 'User not authenticated'}, status=401 )
 
 
 @login_required(login_url='/usuarios/login')

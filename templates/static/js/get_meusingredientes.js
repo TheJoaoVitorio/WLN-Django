@@ -32,10 +32,6 @@ document.getElementById('MeusIngredientesCheck').addEventListener('change', func
             }
         });
     } else {
-        document.getElementById('optionsIngredientes').innerHTML = '';
+        getBaseIngredientes();
     }
 });
-
-
-
-
