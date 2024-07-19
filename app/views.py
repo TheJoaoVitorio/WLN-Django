@@ -62,11 +62,14 @@ def CriandoReceita(request):
 def getValoresIngredientes(request,nome):
     try:
         ingrediente = Ingrediente.objects.get(nomeIngrediente__icontains=nome)
+    
     except Ingrediente.MultipleObjectsReturned:
         ingredientes = Ingrediente.objects.filter(nomeIngrediente=nome)
         ingrediente = ingredientes.first()
+    
     except Ingrediente.DoesNotExist:
-        ingrediente = None
+        if ingrediente is None:
+            return JsonResponse({'error': 'Ingrediente não encontrado'}, status=404)
     
     valores = {
         'id' : ingrediente.id,
