@@ -60,7 +60,13 @@ def CriandoReceita(request):
 
 
 def getValoresIngredientes(request,nome):
-    ingrediente = Ingrediente.objects.get(nomeIngrediente__icontains=nome)
+    try:
+        ingrediente = Ingrediente.objects.get(nomeIngrediente__icontains=nome)
+    except Ingrediente.MultipleObjectsReturned:
+        ingredientes = Ingrediente.objects.filter(nomeIngrediente=nome)
+        ingrediente = ingredientes.first()
+    except Ingrediente.DoesNotExist:
+        ingrediente = None
     
     valores = {
         'id' : ingrediente.id,
