@@ -100,7 +100,7 @@
                                     <div class="container-form-one flex">
                                         <div class="tituloReceita flex">
                                             <label for="tituloReceita">Título</label>
-                                            <input name='TituloDaReceita' id="tituloReceita" class="inputForm2" type="text" placeholder="Nome da Receita">
+                                            <input name='TituloDaReceita' onkeypress="return ApenasLetras(event,this)" id="tituloReceita" class="inputForm2" type="text" placeholder="Nome da Receita">
                                         </div>
                                         <div class="medidaReceita flex">
                                             <label for="select">Medida</label>
@@ -152,7 +152,7 @@
                                         </div>
                                         <div class="porcoesEmbaladasReceita flex">
                                             <label for="porcoesEmbaladas">Porções Embaladas</label>
-                                            <input name="porcoesEmbaladas" id="porcoesEmbaladas" class="inputForm2" type="number" placeholder="00" required>
+                                            <input name="porcoesEmbaladas" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="porcoesEmbaladas" class="inputForm2" type="number" placeholder="00" required>
                                         </div>
                                         <div class="pesoFinalReceita flex">
                                             <label for="pesoFinal">Peso Final(g/ml)</label>
@@ -160,7 +160,7 @@
                                         </div>
                                         <div class="porcaoReceita flex">
                                             <label for="porcao">Porção(g/ml)</label>
-                                            <input name="porcao" id="porcao" class="inputForm2" type="number" placeholder="00" required>
+                                            <input name="porcao" id="porcao" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputForm2" type="number" placeholder="00" required>
                                         </div>
                                         <div class="medidaCaseiraReceita flex">
                                             <label for="medidaCaseira">Medida Caseira</label>
@@ -341,14 +341,8 @@
                                         </div>
                                         <div class="listaAlergenicosTabela flex ">
                                             <h2>ALERGÊNICOS:</h2>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>
-                                            <h3>Contem Ovo</h3>        
+                                            <!-- NOME DOS ALERGENICOS É ADICIONADO AQUI -->
+                                            <h3>Contem Ovo</h3>       
                                         </div>
                                     </div>
                                 </div>
@@ -370,7 +364,7 @@
         </div>
     </div>
 
-
+    <script src="{% static 'js/apenasLetras.js' %}" ></script>
     <script src="{% static 'js/get_baseingredientes.js' %}"></script>
     <script src="{% static 'js/calculoReceita.js'%}" ></script>
     <script src="{% static 'js/c_receitaScript.js'%}" ></script>
