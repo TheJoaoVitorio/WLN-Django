@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ListaIngredientes = document.getElementById('optionsIngredientes');
     const IngredientesDaReceita = document.querySelector('.table-ingredientes-da-receita table tbody');
-    const ListaIngredientesTabela = document.querySelector('.listaIngredientesTabela');
+    
+    const ListaIngredientesTabela = document.querySelector('.listaIngredientesTabela');//tabela do step4 
+    
     let valoresIngredientes = []; // array que armazena os ingredientes
     
     ListaIngredientes.addEventListener('click', function(event) {
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(error => {
                     console.error(`Erro ao obter valores para ${NomeIngrediente}: ${error}`);
                 });
-        }
+        };
     });
 
     function adicionarIngredienteReceita(nome, idLinha) {
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (index !== -1) {
                 valoresIngredientes[index].Quantidade = quantidade;
                 console.log(valoresIngredientes); // Verificar se a quantidade foi atualizada corretamente
-            }
+            };
         });
 
         const RemoverIng = DeleteIng.querySelector('.btnApagarIng');
@@ -78,33 +80,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 valoresIngredientes.splice(index, 1);
                 removerNomeIngrediente(idLinha); // Remover o nome do ingrediente do HTML
                 console.log(valoresIngredientes);
-            }
+            };
         });
-    }
+    };
 
     function adicionarNomeIngrediente(nome, idLinha) {
         const h3 = document.createElement('h3');
-        const shouldAddComma = ListaIngredientesTabela.getElementsByTagName('h3').length > 0;
-        h3.textContent = shouldAddComma ? `, ${nome}` : nome;
+        const ingredientesExistentes = ListaIngredientesTabela.getElementsByTagName('h3');
+
+        h3.textContent = nome;
         h3.id = `nome-${idLinha}`;
+
+        if (ingredientesExistentes.length > 0) {
+            ingredientesExistentes[ingredientesExistentes.length - 1].textContent += ',';
+        }
+
         ListaIngredientesTabela.appendChild(h3);
-    }
+    };
 
     function removerNomeIngrediente(idLinha) {
         const h3Remover = document.getElementById(`nome-${idLinha}`);
         if (h3Remover) {
-            const prevSibling = h3Remover.previousSibling;
+            const nextSibling = h3Remover.nextSibling;
             h3Remover.remove();
-            // Remover a vírgula do último elemento, se existir
-            if (prevSibling && prevSibling.tagName === 'H3' && prevSibling.textContent.startsWith(', ')) {
-                prevSibling.textContent = prevSibling.textContent.slice(2);
+            
+            // Remover a vírgula do último elemento, se for o caso
+            if (nextSibling && nextSibling.tagName === 'H3' && nextSibling.textContent.startsWith(', ')) {
+                nextSibling.textContent = nextSibling.textContent.slice(2);
+            } else {
+                const ingredientesRestantes = ListaIngredientesTabela.getElementsByTagName('h3');
+                if (ingredientesRestantes.length > 0) {
+                    ingredientesRestantes[ingredientesRestantes.length - 1].textContent = ingredientesRestantes[ingredientesRestantes.length - 1].textContent.replace(/, $/, '');
+                }
             }
         }
-    }
+    };
 
-    function getValoresIngredientes(NomeIngrediente) {
+    async function getValoresIngredientes(NomeIngrediente) {
         const url = `getValoresIngrediente/${encodeURIComponent(NomeIngrediente)}/`;
-        return fetch(url)
+        return await fetch(url)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
