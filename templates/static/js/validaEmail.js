@@ -28,7 +28,6 @@ formEmail.addEventListener("submit", function(event){
 });
 
 const validaEmail = (email) => {
-    // corrigida a regex para validação correta de email
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
