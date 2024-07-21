@@ -47,9 +47,12 @@
                     <input name="nome-usuario" class="inputsBranco" type="text" placeholder="Nome de úsuario" required>
                     <img class="usuario" width="24px" src="{% static 'img/fi-rr-user-active.png'%}" alt="usuario">
                 </div>
-                <div class="conteudoInputs">
-                    <input name="email" class="inputsBranco" type="email" placeholder="Email" required>
+                <div class="conteudoInputs contentInputEmailCriarConta">
+                    <input id="emailCriarConta" name="email" class="inputsBranco" id="inputEmailCConta" type="email" placeholder="Email" required>
                     <img class="email" src="{% static 'img/fi-rr-envelope.png'%}" alt="email">
+                    <div id="mensagemErroValidacao">
+                        
+                    </div>
                 </div>
                 <div class="conteudoInputs">
                     <input name="senha" class="inputsBranco" type="password" placeholder="Senha" id="senhaLoginForm" required>
@@ -91,11 +94,12 @@
     
     </div>
     
+    <script src="{% static 'js/validaEmail.js' %}"></script>
     <script src="{% static 'js/scriptSlideLogin.js' %}"></script>
     <script src="{% static 'js/validationForm.js' %}"></script>
+    <script>
+        const exclamationImgUrl = "{% static 'img/exclamation.png' %}";
+    </script>
 </body>
-
-   
-
 
 </html>

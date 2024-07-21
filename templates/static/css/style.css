@@ -19,6 +19,26 @@
     --cor-verde-escura:#20903F;
 }
 
+.contentInputEmailCriarConta{
+    flex-direction: column;
+    position: relative;
+}
+
+.inputEmailCConta{
+    margin-bottom: 0;
+}
+
+
+#msgValidaEmail{
+    position: absolute;
+    bottom: 0;
+    color: red;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
 
 /* POPUP*/
 .popup {
@@ -1876,4 +1896,9 @@ textarea:focus{
         font-size: 18px;
     }
     /**/
+}
+
+
+.input-email-error{
+    border: solid 2px red;
 }
