@@ -24,8 +24,9 @@ document.getElementById('MeusIngredientesCheck').addEventListener('change', func
                 data.MeusIngredientesList.forEach(ingrediente =>{
                     const item = document.createElement('li');
                     item.textContent = ingrediente.nomeIngrediente;
+                    item.dataset.idIngrediente = ingrediente.id;
                     ListaIngredientes.appendChild(item);
-                    console.log('passei aqui')
+                    console.log(item.idIngrediente)
                 });
             } else if (data.erro){
                 alert(data.erro);

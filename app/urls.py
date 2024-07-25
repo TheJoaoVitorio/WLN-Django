@@ -7,7 +7,7 @@ urlpatterns = [
     path('receitas/', views.Receitas, name='receitas'),
     path('criandoreceita/', views.CriandoReceita, name='criando-receita'),
 
-    path('criandoreceita/getValoresIngrediente/<str:nome>/', views.getValoresIngredientes, name='get-valores-ingrediente'),
+    path('criandoreceita/getValoresIngrediente/<int:id>/', views.getValoresIngredientes, name='get-valores-ingrediente'),
     path('criandoreceita/getAlergenicos/', views.GetAlergenicos, name='get-alergenicos'),  
     path('criandoreceita/getBaseIngredientes/', views.getBaseIngredientes, name='get-base-ingredientes'),
     

@@ -23,6 +23,7 @@ function getBaseIngredientes (){
                 data.baseIngredientesList.forEach(ingrediente =>{
                     const itemLI = document.createElement('li');
                     itemLI.textContent = ingrediente.nomeIngrediente;
+                    itemLI.dataset.idIngrediente = ingrediente.id; //pego o id do ingrediente
                     listaBaseIngredientes.appendChild(itemLI);
                 });
             } else if (data.erro){

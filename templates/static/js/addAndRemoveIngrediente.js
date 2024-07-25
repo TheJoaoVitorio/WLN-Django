@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (li.tagName === 'LI') {
             const NomeIngrediente = li.textContent;
+            const idIngrediente = li.dataset.idIngrediente;
             const idLinha = `linha-${Date.now()}`; // Gerar um ID único para cada linha da tabela
             
-            getValoresIngredientes(NomeIngrediente)
+            getValoresIngredientes(idIngrediente)
                 .then(valores => {
                     valoresIngredientes.push({
                         Id: valores.id,
@@ -116,8 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    async function getValoresIngredientes(NomeIngrediente) {
-        const url = `getValoresIngrediente/${encodeURIComponent(NomeIngrediente)}/`;
+    async function getValoresIngredientes(idIngrediente) {
+        const url = `getValoresIngrediente/${idIngrediente}`;
         return await fetch(url)
             .then(response => {
                 if (!response.ok) {

@@ -59,12 +59,12 @@ def CriandoReceita(request):
         return render (request, 'criando-receita.html')
 
 
-def getValoresIngredientes(request,nome):
+def getValoresIngredientes(request,id):
     try:
-        ingrediente = Ingrediente.objects.get(nomeIngrediente__icontains=nome)
+        ingrediente = Ingrediente.objects.get(id__icontains=id)
     
     except Ingrediente.MultipleObjectsReturned:
-        ingredientes = Ingrediente.objects.filter(nomeIngrediente=nome)
+        ingredientes = Ingrediente.objects.filter(id=id)
         ingrediente = ingredientes.first()
     
     except Ingrediente.DoesNotExist:
