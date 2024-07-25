@@ -53,9 +53,13 @@ def cadastroLogin(request):
         password = request.POST.get('senha')
 
         try:
-            user = User.objects.get(email=email)
-            messages.add_message(request,constants.ERROR,'Já existe um usuário com esse email.')
-            return redirect('/usuarios/cadastro')
+            if User.objects.filter(username=username).exists():
+                messages.add_message(request, constants.ERROR, 'Já existe um usuário com esse nome.')
+                return redirect('/usuarios/cadastro')
+            
+            if User.objects.filter(email=email).exists():
+                messages.add_message(request, constants.ERROR, 'Já existe um usuário com esse email.')
+                return redirect('/usuarios/cadastro')
         
         except ObjectDoesNotExist:
             user = User.objects.create_user(
