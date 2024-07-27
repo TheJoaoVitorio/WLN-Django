@@ -27,13 +27,13 @@ def home(request):
     
 
 @login_required(login_url='/usuarios/login/')
-def Receitas(request):
+def receitas(request):
     if request.method == 'GET':
         return render (request, 'receitas.html')
     
 
 @login_required(login_url='/usuarios/login/')
-def CriandoReceita(request):
+def criandoReceita(request):
     if request.method == 'POST':
         TituloDaReceita     = request.POST.get('TituloDaReceita')
         MedidaReceita       = request.POST.get('medidaReceita')
@@ -106,7 +106,7 @@ def userIngredientes(request):
 
 
 @login_required(login_url='/usuarios/login/')
-def CriarIngrediente(request):
+def criarIngrediente(request):
     if request.method == 'POST':
         try:
             NomeIngrediente = request.POST.get('nome-ingrediente')
@@ -154,7 +154,7 @@ def CriarIngrediente(request):
 
 
 @login_required(login_url='/usuarios/login/')
-def GetMeusIngredientes(request):
+def getMeusIngredientes(request):
     if request.user.is_authenticated: 
         filtraIngredientesUsuario = Ingrediente.objects.all().filter(id_user=request.user.id)
         meus_ingredientes = list(filtraIngredientesUsuario.values('id','nomeIngrediente'))
@@ -176,7 +176,7 @@ def getBaseIngredientes(request):
 
 
 @login_required(login_url='/usuarios/login')
-def GetAlergenicos(request):
+def getAlergenicos(request):
     if request.method == 'GET':
         searchAlergenico = request.GET.get('searchAlergenico')
         if searchAlergenico:
@@ -189,12 +189,12 @@ def GetAlergenicos(request):
 
 
 @login_required(login_url='/usuarios/login/')
-def MinhaConta(request):
+def minhaConta(request):
     return render(request,'user.html')
 
 
 @login_required(login_url='/usuarios/login/')
-def ContateNos(request):
+def contateNos(request):
     if request.method == 'POST':
         assunto = request.POST.get('assunto-contate-nos')
         mensagem = request.POST.get('mensagem-contate-nos')
@@ -219,7 +219,7 @@ def ContateNos(request):
         return render (request, 'contate-nos.html')
     
     
-def CriarAlergenico(request):
+def criarAlergenico(request):
     if request.method == 'POST':
         try:
             NomeAlergenico = request.POST.get('nomeAlergenico')

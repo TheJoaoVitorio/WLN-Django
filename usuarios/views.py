@@ -14,7 +14,7 @@ from django.urls import reverse
 
 
 @login_required(login_url='/usuarios/login/')
-def GerenciarConta(request):
+def gerenciarConta(request):
     if request.method == 'POST':
         old_password = request.POST.get('old_password')
         new_password = request.POST.get('new_password1')
@@ -72,7 +72,7 @@ def cadastroLogin(request):
         return render (request,'criar-conta.html')
 
 
-def Login(request):
+def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('senha')
