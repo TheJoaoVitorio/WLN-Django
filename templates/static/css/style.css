@@ -1344,6 +1344,7 @@ img.email{
     justify-content: space-between; 
     margin-top: 10px;
     
+    border-collapse: collapse;
     border-radius: 10px;
     width: 90%;
     
@@ -1356,6 +1357,29 @@ img.email{
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
+
+table {
+    border-spacing: 20px; /* Ajuste o valor conforme necessário */
+}
+th{ 
+    white-space: nowrap; /* Impede a quebra de linha */
+}
+
+.th-imagemBtn{
+    width: 30%;
+}
+
+
+th:last-child:not([data-no-sticky]),
+td:last-child:not([data-no-sticky]) {
+    position: -webkit-sticky; /* Para navegadores Webkit */
+    position: sticky;
+    right: 0;
+    background: none;
+    z-index: 1; /* Para garantir que a coluna fique sobre outras colunas */
+}
+
+
 .box-2 table {
     width: 100%;
     text-align: center;
@@ -1367,7 +1391,7 @@ img.email{
     padding: 40px;
 }
 .box-2 th {
-    padding-left: 5px;
+    padding-left: 15px;
     font-weight: 500;
     font-size: 12px;
 }
@@ -1426,6 +1450,34 @@ img.email{
 
 
 /* FIM BOTÃO CRIAR INGREDIENTES*/
+
+/* BOTÃO EDITAR INGREDIENTES*/
+
+#imagem_editar{
+    max-width: 75%;
+    height: auto
+}
+
+.btn-editar{
+    width: 50px;
+    display:flex;
+    border: none;
+    justify-content: end;
+    align-items: center;
+}
+
+th.th-imagemBtn {
+    padding: 0; /* Remove qualquer padding que possa afetar o alinhamento */
+    margin: 0; /* Remove qualquer margin que possa afetar o alinhamento */
+}
+
+th.th-imagemBtn input[type="image"] {
+    display: block; /* Remove o espaço extra abaixo da imagem */
+    margin: 0 auto; /* Centraliza o botão horizontalmente, se necessário */
+}
+
+/* FIM BOTÃO EDITAR INGREDIENTES*/
+
 
 
 
