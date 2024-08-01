@@ -1,4 +1,6 @@
 {% load static %}
+{% load pwa %}
+{% progressive_web_app_meta %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -95,6 +97,7 @@
     </div>
     
     <script src="{% static 'js/validaEmail.js' %}"></script>
+    <script src="{% static 'js/timerMessage.js' %}"></script>
     <script src="{% static 'js/scriptSlideLogin.js' %}"></script>
     <script src="{% static 'js/validationForm.js' %}"></script>
     <script>

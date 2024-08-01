@@ -72,6 +72,16 @@
 
 /*FIM POPUP*/
 
+/*BTN BAIXAR APP*/
+.section-btn-baixar-app{
+    justify-content: flex-start;
+}
+.btn-baixar-app{
+    width: 200px;
+    padding: 6px;
+}
+/**/
+
 
 /* CLASSES GERAIS */
 .flex{
@@ -84,7 +94,7 @@
     cursor: pointer;
     color: var(--cor-branca);
     font-weight: 500;
-    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.582);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 .btn-quadrado{
     border: none;
@@ -339,6 +349,7 @@ input[type="submit"]{
     border-radius: 80px;
     border:1px;
     font-size: xx-large;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 .ola{
     padding-bottom: 10px;
@@ -1114,12 +1125,6 @@ img.email{
         border: none;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
-    /* .btn-add-alergenicos{
-        width: 50px;
-        height: 35px;
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    } */
     .optionsAlergenicos{
         padding: 8px;
     }
@@ -1357,10 +1362,6 @@ img.email{
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-
-table {
-    border-spacing: 20px; /* Ajuste o valor conforme necessário */
-}
 th{ 
     white-space: nowrap; /* Impede a quebra de linha */
 }
@@ -1875,6 +1876,10 @@ textarea:focus{
 }
 
 @media (max-width:605px){
+    .section-btn-baixar-app{
+        justify-content: center;
+        align-items: center;
+    }
     /* Pagina inicial*/
     .recursos-item-image img{
         width: 50px;

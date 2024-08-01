@@ -6,4 +6,5 @@ urlpatterns = [
     path('',include('landingpage.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('app/', include('app.urls')),
+    path('', include('pwa.urls'))
 ]

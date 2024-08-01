@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ListaIngredientes = document.getElementById('optionsIngredientes');
     const IngredientesDaReceita = document.querySelector('.table-ingredientes-da-receita table tbody');
+    const ListaIngredientesTabela = document.querySelector('.listaIngredientesTabela');
     
-    const ListaIngredientesTabela = document.querySelector('.listaIngredientesTabela');//tabela do step4 
-    
-    let valoresIngredientes = []; // array que armazena os ingredientes
+    let valoresIngredientes = [];
     
     ListaIngredientes.addEventListener('click', function(event) {
         const li = event.target;
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (li.tagName === 'LI') {
             const NomeIngrediente = li.textContent;
             const idIngrediente = li.dataset.idIngrediente;
-            const idLinha = `linha-${Date.now()}`; // Gerar um ID único para cada linha da tabela
+            const idLinha = `linha-${Date.now()}`;
             
             getValoresIngredientes(idIngrediente)
                 .then(valores => {
@@ -29,13 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         Fibra: valores.Fibra,
                         Sodio: valores.Sodio,
                         Quantidade: '',
-                        idLinha: idLinha // Associar o ID da linha ao ingrediente
+                        idLinha: idLinha
                     });
 
-                    adicionarIngredienteReceita(NomeIngrediente, idLinha); // Adicionar na tabela HTML
-                    adicionarNomeIngrediente(NomeIngrediente, idLinha); // Adicionar o nome do ingrediente ao HTML
+                    adicionarIngredienteReceita(NomeIngrediente, idLinha);
+                    adicionarNomeIngrediente(NomeIngrediente, idLinha);
                     
-                    console.log(valoresIngredientes); // Exemplo de como você pode visualizar os valores armazenados
+                    console.log(valoresIngredientes);
+                    calcularTabelaNutricional(); // Calcular a tabela nutricional após adicionar o ingrediente
                 })
                 .catch(error => {
                     console.error(`Erro ao obter valores para ${NomeIngrediente}: ${error}`);
@@ -58,15 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>`;
         DeleteIng.innerHTML = `<button id="btnApagarIng" class="btnApagarIng"> <img width="35px" src="${apagarReceitaImgUrl}"></button>`;
 
-        // Adicionar evento para capturar quantidade quando o usuário a inserir
         const qtdInput = QtdIng.querySelector('.qtdDoIngredienteReceita');
         qtdInput.addEventListener('input', function() {
             const quantidade = qtdInput.value;
-            // Atualizar a quantidade no array valoresIngredientes
             const index = valoresIngredientes.findIndex(ingrediente => ingrediente.idLinha === idLinha);
             if (index !== -1) {
                 valoresIngredientes[index].Quantidade = quantidade;
-                console.log(valoresIngredientes); // Verificar se a quantidade foi atualizada corretamente
+                console.log(valoresIngredientes);
+                calcularTabelaNutricional(); // Calcular a tabela nutricional após atualizar a quantidade
             };
         });
 
@@ -75,12 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const linhaRemover = document.getElementById(idLinha);
             linhaRemover.remove();
             
-            // Remover o ingrediente da lista valoresIngredientes
             const index = valoresIngredientes.findIndex(ingrediente => ingrediente.idLinha === idLinha);
             if (index !== -1) {
                 valoresIngredientes.splice(index, 1);
-                removerNomeIngrediente(idLinha); // Remover o nome do ingrediente do HTML
+                removerNomeIngrediente(idLinha);
                 console.log(valoresIngredientes);
+                calcularTabelaNutricional(); // Calcular a tabela nutricional após remover o ingrediente
             };
         });
     };
@@ -105,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const nextSibling = h3Remover.nextSibling;
             h3Remover.remove();
             
-            // Remover a vírgula do último elemento, se for o caso
             if (nextSibling && nextSibling.tagName === 'H3' && nextSibling.textContent.startsWith(', ')) {
                 nextSibling.textContent = nextSibling.textContent.slice(2);
             } else {
@@ -127,4 +125,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();  
             });
     }
+
+    function calcularTabelaNutricional() {
+        let totais = {
+            Carboidratos: 0,
+            AcucaresTotais: 0,
+            AcucaresAdicionais: 0,
+            Proteinas: 0,
+            GordurasTotais: 0,
+            GordurasSaturadas: 0,
+            GordurasTrans: 0,
+            Fibra: 0,
+            Sodio: 0
+        };
+
+        valoresIngredientes.forEach(ingrediente => {
+            const quantidade = parseFloat(ingrediente.Quantidade) || 0;
+
+            totais.Carboidratos       += (ingrediente.Carboidratos * quantidade) / 100;
+            totais.AcucaresTotais     += (ingrediente.AcucaresTotais * quantidade) / 100;
+            totais.AcucaresAdicionais += (ingrediente.AcucaresAdicionais * quantidade) / 100;
+            totais.Proteinas          += (ingrediente.Proteinas * quantidade) / 100;
+            totais.GordurasTotais     += (ingrediente.GordurasTotais * quantidade) / 100;
+            totais.GordurasSaturadas  += (ingrediente.GordurasSaturadas * quantidade) / 100;
+            totais.GordurasTrans      += (ingrediente.GordurasTrans * quantidade) / 100;
+            totais.Fibra              += (ingrediente.Fibra * quantidade) / 100;
+            totais.Sodio              += (ingrediente.Sodio * quantidade) / 100;
+        });
+
+        const tabelaNutricional = document.querySelector('.tabela-nutricional table tbody');
+
+        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(3)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(3)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(3)').textContent = `${totais.AcucaresAdicionais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(3)').textContent = `${totais.Proteinas.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(5) td:nth-child(3)').textContent = `${totais.GordurasTotais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(6) td:nth-child(3)').textContent = `${totais.GordurasSaturadas.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(3)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(3)').textContent = `${totais.Fibra.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(3)').textContent = `${totais.Sodio.toFixed(2)}mg`;
+    }
+
+    console.log(totais);
 });

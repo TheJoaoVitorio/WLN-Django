@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-not_*^ey-n+=vnx@+x(64xo%j%4#2c=j#uo_*1ea9^)gfp#57p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.105','127.0.0.1','192.168.0.101']
+ALLOWED_HOSTS = ['192.168.0.105','127.0.0.1','192.168.0.101','192.168.97.57']
 
 
 # Application definition
@@ -29,7 +29,42 @@ INSTALLED_APPS = [
     'usuarios',
     'landingpage',
     'app',
+    "pwa",
 ]
+#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'templates/static/js', 'serviceworker.js')
+
+PWA_APP_NAME = 'WLNutrionApp'
+PWA_APP_DESCRIPTION = "Wlnutrion"
+PWA_APP_THEME_COLOR = '#000000'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+
+PWA_APP_ICONS = [
+    {
+        'src': '/static/img/logo.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/img/logo.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/img/logo.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'pt-br'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
