@@ -115,6 +115,7 @@
                                     <th>GORDURAS TRANS</th>
                                     <th>FIBRA</th>
                                     <th>SÓDIO</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -133,6 +134,11 @@
                                         <th> {{ingrediente.gordTrans}} g</th>
                                         <th> {{ingrediente.fibra}} g</th>
                                         <th> {{ingrediente.sodio}} mg</th>
+                                        <th class="th-imagemBtn">
+                                            <a class="btn-editar" href="editaringrediente/{{ingrediente.id}}">
+                                                <input type="image" value="{{ingrediente.id}}" src="{% static 'img/btn-editar.png'%}" alt="erro" id="imagem_editar">    
+                                            </a>
+                                        </th>
                                     </tr>
                                 {% endfor %}
                             </tbody>

@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     valoresIngredientes.push({
                         Id: valores.id,
                         NomeIngrediente: valores.Ingrediente,
+                        ValorEnergetico:valores.ValorEnergetico,
                         Carboidratos: valores.Carboidratos,
                         AcucaresTotais: valores.AcucaresTotais,
                         AcucaresAdicionais: valores.AcucaresAdicionais,
@@ -128,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function calcularTabelaNutricional() {
         let totais = {
+            ValorEnergetico:0,
             Carboidratos: 0,
             AcucaresTotais: 0,
             AcucaresAdicionais: 0,
@@ -142,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         valoresIngredientes.forEach(ingrediente => {
             const quantidade = parseFloat(ingrediente.Quantidade) || 0;
 
+            totais.ValorEnergetico    += (ingrediente.ValorEnergetico * quantidade) /100;
             totais.Carboidratos       += (ingrediente.Carboidratos * quantidade) / 100;
             totais.AcucaresTotais     += (ingrediente.AcucaresTotais * quantidade) / 100;
             totais.AcucaresAdicionais += (ingrediente.AcucaresAdicionais * quantidade) / 100;
@@ -153,17 +156,20 @@ document.addEventListener('DOMContentLoaded', function() {
             totais.Sodio              += (ingrediente.Sodio * quantidade) / 100;
         });
 
+        console.log(totais.ValorEnergetico)
+
         const tabelaNutricional = document.querySelector('.tabela-nutricional table tbody');
 
-        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(3)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(3)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(3)').textContent = `${totais.AcucaresAdicionais.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(3)').textContent = `${totais.Proteinas.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(5) td:nth-child(3)').textContent = `${totais.GordurasTotais.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(6) td:nth-child(3)').textContent = `${totais.GordurasSaturadas.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(3)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(3)').textContent = `${totais.Fibra.toFixed(2)}g`;
-        tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(3)').textContent = `${totais.Sodio.toFixed(2)}mg`;
+        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(2)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(2)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(2)').textContent = `${totais.AcucaresAdicionais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(5) td:nth-child(2)').textContent = `${totais.Proteinas.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(6) td:nth-child(2)').textContent = `${totais.GordurasTotais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(2)').textContent = `${totais.GordurasSaturadas.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(2)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(2)').textContent = `${totais.Fibra.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(2)').textContent = `${totais.Sodio.toFixed(2)}mg`;
     }
 
     console.log(totais);

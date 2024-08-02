@@ -79,6 +79,7 @@ def getValoresIngredientes(request,id):
     valores = {
         'id' : ingrediente.id,
         'Ingrediente' : ingrediente.nomeIngrediente,
+        'ValorEnergetico':ingrediente.valorEnergetico,
         'Carboidratos': ingrediente.carboidratos,
         'AcucaresTotais': ingrediente.acuTotais,
         'AcucaresAdicionais' : ingrediente.acuAdicionais,

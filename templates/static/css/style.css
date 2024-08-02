@@ -1375,8 +1375,8 @@ th:last-child:not([data-no-sticky]),
 td:last-child:not([data-no-sticky]) {
     position: -webkit-sticky; /* Para navegadores Webkit */
     position: sticky;
-    right: 0;
-    background: none;
+    right: -12;
+    background: #F0F0F0;        
     z-index: 1; /* Para garantir que a coluna fique sobre outras colunas */
 }
 
@@ -1470,6 +1470,7 @@ td:last-child:not([data-no-sticky]) {
 th.th-imagemBtn {
     padding: 0; /* Remove qualquer padding que possa afetar o alinhamento */
     margin: 0; /* Remove qualquer margin que possa afetar o alinhamento */
+    width: 10px;
 }
 
 th.th-imagemBtn input[type="image"] {
