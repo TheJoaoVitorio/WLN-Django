@@ -1371,8 +1371,7 @@ th{
 }
 
 
-th:last-child:not([data-no-sticky]),
-td:last-child:not([data-no-sticky]) {
+#th-img-btn {
     position: -webkit-sticky; /* Para navegadores Webkit */
     position: sticky;
     right: -12;

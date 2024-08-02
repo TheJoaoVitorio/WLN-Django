@@ -124,7 +124,7 @@
                                         <abbr title="{{ ingrediente.nomeIngrediente }}">
                                             <th> {{ingrediente.nomeIngrediente}} </th>
                                         </abbr>
-                                        <th> {{ingrediente.valorEnergetico }} kcal</th>
+                                        <th> {{ingrediente.valorEnergetico }}kcal</th>
                                         <th> {{ingrediente.carboidratos}}g</th>
                                         <th> {{ingrediente.acuTotais}} g</th>
                                         <th> {{ingrediente.acuAdicionais}} g</th>
@@ -134,7 +134,7 @@
                                         <th> {{ingrediente.gordTrans}} g</th>
                                         <th> {{ingrediente.fibra}} g</th>
                                         <th> {{ingrediente.sodio}} mg</th>
-                                        <th class="th-imagemBtn">
+                                        <th id="th-img-btn" class="th-imagemBtn">
                                             <a class="btn-editar" href="editaringrediente/{{ingrediente.id}}">
                                                 <input type="image" value="{{ingrediente.id}}" src="{% static 'img/btn-editar.png'%}" alt="erro" id="imagem_editar">    
                                             </a>

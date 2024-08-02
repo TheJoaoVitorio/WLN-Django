@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     valoresIngredientes.push({
                         Id: valores.id,
                         NomeIngrediente: valores.Ingrediente,
-                        ValorEnergetico:valores.ValorEnergetico,
+                        ValorEnergetico: valores.ValorEnergetico,
                         Carboidratos: valores.Carboidratos,
                         AcucaresTotais: valores.AcucaresTotais,
                         AcucaresAdicionais: valores.AcucaresAdicionais,
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(error => {
                     console.error(`Erro ao obter valores para ${NomeIngrediente}: ${error}`);
                 });
-        };
+        }
     });
 
     function adicionarIngredienteReceita(nome, idLinha) {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 valoresIngredientes[index].Quantidade = quantidade;
                 console.log(valoresIngredientes);
                 calcularTabelaNutricional(); // Calcular a tabela nutricional após atualizar a quantidade
-            };
+            }
         });
 
         const RemoverIng = DeleteIng.querySelector('.btnApagarIng');
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 removerNomeIngrediente(idLinha);
                 console.log(valoresIngredientes);
                 calcularTabelaNutricional(); // Calcular a tabela nutricional após remover o ingrediente
-            };
+            }
         });
-    };
+    }
 
     function adicionarNomeIngrediente(nome, idLinha) {
         const h3 = document.createElement('h3');
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         ListaIngredientesTabela.appendChild(h3);
-    };
+    }
 
     function removerNomeIngrediente(idLinha) {
         const h3Remover = document.getElementById(`nome-${idLinha}`);
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-    };
+    }
 
     async function getValoresIngredientes(idIngrediente) {
         const url = `getValoresIngrediente/${idIngrediente}`;
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function calcularTabelaNutricional() {
         let totais = {
-            ValorEnergetico:0,
+            ValorEnergetico: 0,
             Carboidratos: 0,
             AcucaresTotais: 0,
             AcucaresAdicionais: 0,
@@ -141,26 +141,37 @@ document.addEventListener('DOMContentLoaded', function() {
             Sodio: 0
         };
 
+        const VD = {
+            ValorEnergetico : 2000,
+            Carboidratos: 300,
+            AcucaresAdicionais: 50,
+            Proteinas: 50,
+            GordurasTotais: 70,
+            GordurasSaturadas: 20,
+            Fibra: 25,
+            Sodio: 2400
+        };
+
         valoresIngredientes.forEach(ingrediente => {
             const quantidade = parseFloat(ingrediente.Quantidade) || 0;
 
-            totais.ValorEnergetico    += (ingrediente.ValorEnergetico * quantidade) /100;
-            totais.Carboidratos       += (ingrediente.Carboidratos * quantidade) / 100;
-            totais.AcucaresTotais     += (ingrediente.AcucaresTotais * quantidade) / 100;
+            totais.ValorEnergetico += (ingrediente.ValorEnergetico * quantidade) / 100;
+            totais.Carboidratos += (ingrediente.Carboidratos * quantidade) / 100;
+            totais.AcucaresTotais += (ingrediente.AcucaresTotais * quantidade) / 100;
             totais.AcucaresAdicionais += (ingrediente.AcucaresAdicionais * quantidade) / 100;
-            totais.Proteinas          += (ingrediente.Proteinas * quantidade) / 100;
-            totais.GordurasTotais     += (ingrediente.GordurasTotais * quantidade) / 100;
-            totais.GordurasSaturadas  += (ingrediente.GordurasSaturadas * quantidade) / 100;
-            totais.GordurasTrans      += (ingrediente.GordurasTrans * quantidade) / 100;
-            totais.Fibra              += (ingrediente.Fibra * quantidade) / 100;
-            totais.Sodio              += (ingrediente.Sodio * quantidade) / 100;
+            totais.Proteinas += (ingrediente.Proteinas * quantidade) / 100;
+            totais.GordurasTotais += (ingrediente.GordurasTotais * quantidade) / 100;
+            totais.GordurasSaturadas += (ingrediente.GordurasSaturadas * quantidade) / 100;
+            totais.GordurasTrans += (ingrediente.GordurasTrans * quantidade) / 100;
+            totais.Fibra += (ingrediente.Fibra * quantidade) / 100;
+            totais.Sodio += (ingrediente.Sodio * quantidade) / 100;
         });
 
-        console.log(totais.ValorEnergetico)
+        console.log(totais.ValorEnergetico);
 
         const tabelaNutricional = document.querySelector('.tabela-nutricional table tbody');
 
-        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}kcal`;
         tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(2)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(2)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(2)').textContent = `${totais.AcucaresAdicionais.toFixed(2)}g`;
@@ -170,7 +181,15 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(2)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(2)').textContent = `${totais.Fibra.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(2)').textContent = `${totais.Sodio.toFixed(2)}mg`;
-    }
 
-    console.log(totais);
+        // Cálculo dos percentuais de valores diários
+        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(4)').textContent = `${((totais.ValorEnergetico / VD.ValorEnergetico) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(4)').textContent = `${((totais.Carboidratos / VD.Carboidratos) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(4)').textContent = `${((totais.AcucaresAdicionais / VD.AcucaresAdicionais) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(5) td:nth-child(4)').textContent = `${((totais.Proteinas / VD.Proteinas) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(6) td:nth-child(4)').textContent = `${((totais.GordurasTotais / VD.GordurasTotais) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(4)').textContent = `${((totais.GordurasSaturadas / VD.GordurasSaturadas) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
+        tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
+    }
 });
