@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calcularTabelaNutricional() {
+
         let totais = {
             ValorEnergetico: 0,
             Carboidratos: 0,
@@ -140,14 +141,14 @@ document.addEventListener('DOMContentLoaded', function() {
             Fibra: 0,
             Sodio: 0
         };
-
+        
         const VD = {
             ValorEnergetico : 2000,
             Carboidratos: 300,
             AcucaresAdicionais: 50,
-            Proteinas: 50,
-            GordurasTotais: 70,
-            GordurasSaturadas: 20,
+            Proteinas: 75,
+            GordurasTotais: 55,
+            GordurasSaturadas: 22,
             Fibra: 25,
             Sodio: 2400
         };
@@ -155,19 +156,55 @@ document.addEventListener('DOMContentLoaded', function() {
         valoresIngredientes.forEach(ingrediente => {
             const quantidade = parseFloat(ingrediente.Quantidade) || 0;
 
-            totais.ValorEnergetico += (ingrediente.ValorEnergetico * quantidade) / 100;
-            totais.Carboidratos += (ingrediente.Carboidratos * quantidade) / 100;
-            totais.AcucaresTotais += (ingrediente.AcucaresTotais * quantidade) / 100;
+            totais.ValorEnergetico    += (ingrediente.ValorEnergetico * quantidade) / 100;
+            totais.Carboidratos       += (ingrediente.Carboidratos * quantidade) / 100;
+            totais.AcucaresTotais     += (ingrediente.AcucaresTotais * quantidade) / 100;
             totais.AcucaresAdicionais += (ingrediente.AcucaresAdicionais * quantidade) / 100;
-            totais.Proteinas += (ingrediente.Proteinas * quantidade) / 100;
-            totais.GordurasTotais += (ingrediente.GordurasTotais * quantidade) / 100;
-            totais.GordurasSaturadas += (ingrediente.GordurasSaturadas * quantidade) / 100;
-            totais.GordurasTrans += (ingrediente.GordurasTrans * quantidade) / 100;
-            totais.Fibra += (ingrediente.Fibra * quantidade) / 100;
-            totais.Sodio += (ingrediente.Sodio * quantidade) / 100;
+            totais.Proteinas          += (ingrediente.Proteinas * quantidade) / 100;
+            totais.GordurasTotais     += (ingrediente.GordurasTotais * quantidade) / 100;
+            totais.GordurasSaturadas  += (ingrediente.GordurasSaturadas * quantidade) / 100;
+            totais.GordurasTrans      += (ingrediente.GordurasTrans * quantidade) / 100;
+            totais.Fibra              += (ingrediente.Fibra * quantidade) / 100;
+            totais.Sodio              += (ingrediente.Sodio * quantidade) / 100;
         });
-
         console.log(totais.ValorEnergetico);
+
+        //calculo pela porcao do usuario 
+        let totaisPorcao = {
+            ValorEnergetico: 0,
+            Carboidratos: 0,
+            AcucaresTotais: 0,
+            AcucaresAdicionais: 0,
+            Proteinas: 0,
+            GordurasTotais: 0,
+            GordurasSaturadas: 0,
+            GordurasTrans: 0,
+            Fibra: 0,
+            Sodio: 0
+        };
+        
+        const porcao = parseFloat(document.getElementById('porcao').value) || 0;
+
+        if (porcao > 0) {
+            valoresIngredientes.forEach(valorIngrediente => {
+                //const qtd = parseFloat(valorIngrediente.Quantidade) || 0;
+                
+                totaisPorcao.ValorEnergetico    += (valorIngrediente.ValorEnergetico * porcao) / 100;
+                totaisPorcao.Carboidratos       += (valorIngrediente.Carboidratos * porcao) / 100;
+                totaisPorcao.AcucaresTotais     += (valorIngrediente.AcucaresTotais * porcao) / 100;
+                totaisPorcao.AcucaresAdicionais += (valorIngrediente.AcucaresAdicionais * porcao) / 100;
+                totaisPorcao.Proteinas          += (valorIngrediente.Proteinas * porcao) / 100;
+                totaisPorcao.GordurasTotais     += (valorIngrediente.GordurasTotais * porcao) / 100;
+                totaisPorcao.GordurasSaturadas  += (valorIngrediente.GordurasSaturadas * porcao) / 100;
+                totaisPorcao.GordurasTrans      += (valorIngrediente.GordurasTrans * porcao) / 100;
+                totaisPorcao.Fibra              += (valorIngrediente.Fibra * porcao) / 100;
+                totaisPorcao.Sodio              += (valorIngrediente.Sodio * porcao) / 100;
+            });
+            console.log('Totais por Porção: ', totaisPorcao);
+        } else {
+            console.error('Valor da porção é inválido');
+        }
+
 
         const tabelaNutricional = document.querySelector('.tabela-nutricional table tbody');
 
@@ -182,7 +219,18 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(2)').textContent = `${totais.Fibra.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(2)').textContent = `${totais.Sodio.toFixed(2)}mg`;
 
-        // Cálculo dos percentuais de valores diários
+        tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(3)').textContent = `${totaisPorcao.ValorEnergetico.toFixed(2)}kcal`;
+        tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(3)').textContent = `${totaisPorcao.Carboidratos.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresTotais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresAdicionais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(5) td:nth-child(3)').textContent = `${totaisPorcao.Proteinas.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(6) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTotais.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(3)').textContent = `${totaisPorcao.GordurasSaturadas.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTrans.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(3)').textContent = `${totaisPorcao.Fibra.toFixed(2)}g`;
+        tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(3)').textContent = `${totaisPorcao.Sodio.toFixed(2)}mg`;
+
+        // Cálculo dos valores diários
         tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(4)').textContent = `${((totais.ValorEnergetico / VD.ValorEnergetico) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(4)').textContent = `${((totais.Carboidratos / VD.Carboidratos) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(4) td:nth-child(4)').textContent = `${((totais.AcucaresAdicionais / VD.AcucaresAdicionais) * 100).toFixed(2)}%`;
