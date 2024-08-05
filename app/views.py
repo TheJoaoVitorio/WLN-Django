@@ -17,7 +17,7 @@ from .models import Alergenico
 
 
 from django.shortcuts import get_object_or_404
-from django.urls import reverse  # Certifique-se de importar reverse
+from django.urls import reverse 
 
 
 
@@ -93,8 +93,6 @@ def getValoresIngredientes(request,id):
     
     return JsonResponse(valores)
 
-
-
 @login_required(login_url='/usuarios/login/')
 def userIngredientes(request):
     if request.method == 'GET':
@@ -158,40 +156,45 @@ def criarIngrediente(request):
     else:
         return render (request,'criando-ingredientes.html')
 
-
+@login_required(login_url='/usuarios/login/')
 def editar_ingrediente(request, Ingrediente_id):
-    obj_ingrediente = get_object_or_404(Ingrediente, id=Ingrediente_id)
+    try:
+        obj_ingrediente = get_object_or_404(Ingrediente, id=Ingrediente_id)
 
-    if request.method == 'GET':
-        if Ingrediente_id:
-            obj_ingrediente = get_object_or_404(Ingrediente, id=Ingrediente_id)
+        if request.method == 'GET':
+            if Ingrediente_id:
+                obj_ingrediente = get_object_or_404(Ingrediente, id=Ingrediente_id)
+                url = reverse('editar-ingrediente', kwargs={'Ingrediente_id': Ingrediente_id})
+                return render(request,'editar-ingrediente.html',{'ingrediente':obj_ingrediente})
+            else:
+                obj_ingrediente = None
+        else :
+            obj_ingrediente.nomeIngrediente = request.POST.get('nome-ingrediente').replace(',' , '.')
+            obj_ingrediente.valorEnergetico = request.POST.get('valor-energetico').replace(',' , '.')
+            obj_ingrediente.carboidratos = request.POST.get('carboidratos').replace(',' , '.')
+            obj_ingrediente.acuTotais = request.POST.get('acucarTotal').replace(',' , '.')
+            obj_ingrediente.acuAdicionais = request.POST.get('gordSaturadas').replace(',' , '.')
+            obj_ingrediente.proteinas = request.POST.get('proteinas').replace(',' , '.')
+            obj_ingrediente.gordTotais = request.POST.get('gordTotais').replace(',' , '.')               
+            obj_ingrediente.gordSaturadas =request.POST.get('gordSaturadas').replace(',' , '.')                      
+            obj_ingrediente.gordTrans = request.POST.get('gordTrans').replace(',' , '.')                           
+            obj_ingrediente.fibra = request.POST.get('fibraAlimentar').replace(',' , '.')
+            obj_ingrediente.sodio =request.POST.get('sodio').replace(',' , '.')
+
+            obj_ingrediente.save()
+            messages.add_message(request,constants.SUCCESS,"ingrediente editado com sucesso")
+
             url = reverse('editar-ingrediente', kwargs={'Ingrediente_id': Ingrediente_id})
-            return render(request,'editar-ingrediente.html',{'ingrediente':obj_ingrediente})
-        else:
-            obj_ingrediente = None
-    else :
-        obj_ingrediente.nomeIngrediente = request.POST.get('nome-ingrediente').replace(',' , '.')
-        obj_ingrediente.valorEnergetico = request.POST.get('valor-energetico').replace(',' , '.')
-        obj_ingrediente.carboidratos = request.POST.get('carboidratos').replace(',' , '.')
-        obj_ingrediente.acuTotais = request.POST.get('acucarTotal').replace(',' , '.')
-        obj_ingrediente.acuAdicionais = request.POST.get('gordSaturadas').replace(',' , '.')
-        obj_ingrediente.proteinas = request.POST.get('proteinas').replace(',' , '.')
-        obj_ingrediente.gordTotais = request.POST.get('gordTotais').replace(',' , '.')               
-        obj_ingrediente.gordSaturadas =request.POST.get('gordSaturadas').replace(',' , '.')                      
-        obj_ingrediente.gordTrans = request.POST.get('gordTrans').replace(',' , '.')                           
-        obj_ingrediente.fibra = request.POST.get('fibraAlimentar').replace(',' , '.')
-        obj_ingrediente.sodio =request.POST.get('sodio').replace(',' , '.')
-
-        # Atualizando dados no banco de dados
-        obj_ingrediente.save()
+            
+            return redirect('/app/meusingredientes/')
         
-         # Redirecionar ou mostrar uma página de sucesso
-    
-        messages.add_message(request,constants.SUCCESS,"ingrediente editado com sucesso")
+    except Ingrediente.DoesNotExist:
+        messages.add_message(request, constants.ERROR, f"Ingrediente não existe!")
+        return redirect('/app/meusingredientes/')
 
-        url = reverse('editar-ingrediente', kwargs={'Ingrediente_id': Ingrediente_id})
-         
-        return redirect('/app/meusingredientes/')  # Corrija para incluir o ID
+    except Exception as e:
+        messages.add_message(request, constants.ERROR, f"Erro inesperado: {e}")
+        return redirect('/app/meusingredientes/')
 
 @login_required(login_url='/usuarios/login/')
 def getMeusIngredientes(request):
@@ -220,10 +223,8 @@ def getAlergenicos(request):
     if request.method == 'GET':
         searchAlergenico = request.GET.get('searchAlergenico')
         if searchAlergenico:
-            
             alergenicos = Alergenico.objects.filter(nomeAlergenico__icontains=searchAlergenico)
             
-        
         alergenicos = Alergenico.objects.all().values("id", "nomeAlergenico")
         return JsonResponse({'ListaAlergenicos': list(alergenicos)})
 
@@ -266,7 +267,6 @@ def criarAlergenico(request):
 
             CriandoAlergenico = Alergenico(
                 nomeAlergenico = NomeAlergenico
-
             )
             CriandoAlergenico.save()
             

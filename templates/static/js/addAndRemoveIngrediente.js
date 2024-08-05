@@ -127,8 +127,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    const porcaoInput = document.getElementById('porcao');
+    porcaoInput.addEventListener('input',()=>{
+        const porcaoHeaderTabela = document.querySelector('.tabela-nutricional table thead th:nth-child(3)');
+        porcaoHeaderTabela.textContent = porcaoInput.value + 'g';
+        calcularTabelaNutricional();
+    })
+    
     function calcularTabelaNutricional() {
-
         let totais = {
             ValorEnergetico: 0,
             Carboidratos: 0,
@@ -182,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Fibra: 0,
             Sodio: 0
         };
+        
         
         const porcao = parseFloat(document.getElementById('porcao').value) || 0;
 
