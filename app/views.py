@@ -29,7 +29,22 @@ def home(request):
         baseIngredientes = Ingrediente.objects.filter(id_user=None)
       
         return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes})
-    
+
+
+@login_required(login_url='/usuarios/login')
+def verIngredientesSistema(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        if search:
+            BaseIngredientes = Ingrediente.objects.filter(id_user=None,nomeIngrediente__icontains=search)
+        else:
+            listBaseIngredientes = Ingrediente.objects.all().filter(id_user=None)
+            paginator = Paginator(listBaseIngredientes,4)
+            page = request.GET.get('page')
+
+            BaseIngredientes = paginator.get_page(page)
+            
+        return render (request,'baseIngredientes.html',{'baseIngredientes':BaseIngredientes})
 
 @login_required(login_url='/usuarios/login/')
 def receitas(request):
@@ -49,15 +64,6 @@ def criandoReceita(request):
         PesoFinalReceita    = request.POST.get('pesoFinal')
         PorcaoReceita       = request.POST.get('porcao')    
         MedidaCaseira       = request.POST.get('medidaCaseira') 
-
-        data = json.loads(request.body)
-        ingredientes = data.get('ingredientes')
-
-        # Agora você pode iterar sobre os ingredientes e fazer o que precisar com eles
-        for ingrediente in ingredientes:
-            nome = ingrediente.get('nome')
-            quantidade = ingrediente.get('quantidade')
-            # Aqui você pode criar objetos no banco de dados ou outra lógica necessária
 
         return JsonResponse({'success': True})
     else:

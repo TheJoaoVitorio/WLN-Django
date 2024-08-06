@@ -622,6 +622,15 @@ img.email{
     flex-direction: column;
     gap: 20px;
 }
+.dashboard .dashboard-menu > a{
+    color: #3B3A3A;
+    text-decoration: none;
+}
+.dashboard-item > a:link{
+    color: #30BE57;
+    text-decoration: none;
+    
+}
 .dashboard-item{
     width: 300px;
     height: 100px;
@@ -651,6 +660,9 @@ img.email{
 .linha-tbody th{
     font-weight: 400;
     font-size: 14px;
+}
+#baseIngredienteLink{
+    cursor: pointer;
 }
 /* FIM CONTENT - DASHBOARD */
 
@@ -688,6 +700,13 @@ img.email{
 #search-icon-meus-ingredientes{
     width: 16px;
     top: 12px;
+    cursor : pointer;
+    left: 10px;
+    position: absolute;
+}
+#search-icon-base-ingredientes{
+    width: 16px;
+    top: 16px;
     cursor : pointer;
     left: 10px;
     position: absolute;

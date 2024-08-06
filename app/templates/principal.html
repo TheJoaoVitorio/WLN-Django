@@ -87,44 +87,49 @@
                     {% endif %}
                     <div class="dashboard flex">        
                         <div class="dashboard-menu">
-                            <div class="dashboard-item flex">
-                                <div class="dashboard-text">
-                                    <h1 id="qtdMinhasReceitas">0</h1>
-                                    <p>Minhas receitas</p>
+                            <a href="{% url 'receitas' %}">
+                                <div class="dashboard-item flex">
+                                    <div class="dashboard-text">
+                                        <h1 id="qtdMinhasReceitas">0</h1>
+                                        <p>Minhas receitas</p>
+                                    </div>
+                                    <div class="dashboard-img">
+                                        <img src="{% static 'img/icon _book 1_.svg'%}" alt="">
+                                    </div>
                                 </div>
-                                <div class="dashboard-img">
-                                    <img src="{% static 'img/icon _book 1_.svg'%}" alt="">
+                            </a>
+                            <a href="{% url 'meus-ingredientes' %}">
+                                <div class="dashboard-item flex">
+                                    <div class="dashboard-text">
+                                        {% if MeusIngredientes.count == 0 %}
+                                            <h1 id="qtdMeusIngredientes"> 0 </h1>
+                                        {% else %}
+                                            <h1 id="qtdMeusIngredientes"> {{ MeusIngredientes.count }} </h1>
+                                        {% endif %}
+                                        <p>Meus ingredientes</p>
+                                    </div>
+                                    <div class="dashboard-img">
+                                        <img src="{% static 'img/fi-rr-salad.svg'%}" alt="">
+                                    </div>
                                 </div>
-                            </div>
-    
-                            <div class="dashboard-item flex">
-                                <div class="dashboard-text">
-                                    {% if MeusIngredientes.count == 0 %}
-                                        <h1 id="qtdMeusIngredientes"> 0 </h1>
-                                    {% else %}
-                                        <h1 id="qtdMeusIngredientes"> {{ MeusIngredientes.count }} </h1>
-                                    {% endif %}
-                                    <p>Meus ingredientes</p>
+                            </a>
+                            <a href="{% url 'ver-ingredientes-sitema' %}">
+                                <div class="dashboard-item flex">
+                                    <div class="dashboard-text">
+                                        {% if BaseIngredientes.count == 0 %}
+                                            <h1 id="baseIngredientes"> 0 </h1>
+                                        {% else %}
+                                            <h1 id="baseIngredientes"> {{ BaseIngredientes.count }} </h1>
+                                        {% endif %}
+                                        
+                                        <p>Base de ingredientes</p>
+                                    </div>
+                                    <div class="dashboard-img">
+                                        <img src="{% static 'img/database.svg'%}" alt=""> <!--BASE LINK-->
+                                    </div>
                                 </div>
-                                <div class="dashboard-img">
-                                    <img src="{% static 'img/fi-rr-salad.svg'%}" alt="">
-                                </div>
-                            </div>
-    
-                            <div class="dashboard-item flex">
-                                <div class="dashboard-text">
-                                    {% if BaseIngredientes.count == 0 %}
-                                        <h1 id="baseIngredientes"> 0 </h1>
-                                    {% else %}
-                                        <h1 id="baseIngredientes"> {{ BaseIngredientes.count }} </h1>
-                                    {% endif %}
-                                    
-                                    <p>Base de ingredientes</p>
-                                </div>
-                                <div class="dashboard-img">
-                                    <img src="{% static 'img/database.svg'%}" alt="">
-                                </div>
-                            </div>
+                            </a>
+
                         </div>
                         <div class="dashboard-menu-table">
                             <div class="title-table">Ultimas Receitas</div>

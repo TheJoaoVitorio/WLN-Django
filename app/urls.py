@@ -16,6 +16,8 @@ urlpatterns = [
     path('criaringrediente/', views.criarIngrediente , name='criar-ingrediente'),
     path('meusingredientes/editaringrediente/<int:Ingrediente_id>/', views.editar_ingrediente, name='editar-ingrediente'),
     
+    path('baseIngredientes/', views.verIngredientesSistema, name='ver-ingredientes-sitema'),
+
     path('contatenos/', views.contateNos, name='contate-nos'),
     path('minhaconta/', views.minhaConta, name='minha-conta'),
     path('gerenciarconta/', gerenciarConta, name='gerenciar-conta'), #import do app usuarios
