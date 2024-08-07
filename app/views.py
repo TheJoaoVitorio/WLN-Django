@@ -14,6 +14,8 @@ from django.core.paginator import Paginator
 
 from .models import Ingrediente
 from .models import Alergenico
+from .models import Receita
+from .models import IngredientesReceita
 
 
 from django.shortcuts import get_object_or_404
@@ -27,9 +29,9 @@ def home(request):
     if request.method == 'GET':
         meusIngredientes = Ingrediente.objects.all().filter(id_user=request.user.id)
         baseIngredientes = Ingrediente.objects.filter(id_user=None)
-      
-        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes})
-
+        receitas = Receita.objects.all().filter(user=request.user.id)
+        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes,'Receitas':receitas})
+    
 
 @login_required(login_url='/usuarios/login')
 def verIngredientesSistema(request):
@@ -49,27 +51,95 @@ def verIngredientesSistema(request):
 @login_required(login_url='/usuarios/login/')
 def receitas(request):
     if request.method == 'GET':
-        return render (request, 'receitas.html')
+        receitas = Receita.objects.all().filter(user=request.user.id)
+        return render (request, 'receitas.html', {'Receitas':receitas})
     
 
 @login_required(login_url='/usuarios/login/')
 def criandoReceita(request):
-    if request.method == 'POST':
-        TituloDaReceita     = request.POST.get('TituloDaReceita')
-        MedidaReceita       = request.POST.get('medidaReceita')
-        GlutenReceita       = request.POST.get('glutenReceita')
-        LactoseReceita      = request.POST.get('lactoseReceita')
-        TipoDePorcaoReceita = request.POST.get('tipoDePorcaoReceita')
-        PorcoesEmbReceita   = request.POST.get('porcoesEmbaladas')
-        PesoFinalReceita    = request.POST.get('pesoFinal')
-        PorcaoReceita       = request.POST.get('porcao')    
-        MedidaCaseira       = request.POST.get('medidaCaseira') 
-
-        return JsonResponse({'success': True})
-    else:
+    if request.method == "GET":
         return render (request, 'criando-receita.html')
 
+@login_required(login_url='/usuarios/login/')
+def cadastraReceita(request):
+    if request.method == "POST":
+        try:
+            TituloDaReceita     = request.POST.get('TituloDaReceita')
+            MedidaReceita       = request.POST.get('medidaReceita')
+            GlutenReceita       = request.POST.get('glutenReceita')
+            LactoseReceita      = request.POST.get('lactoseReceita')
+            TipoDePorcaoReceita = request.POST.get('tipoDePorcaoReceita')
+            PorcoesEmbReceita   = request.POST.get('porcoesEmbaladas')
+            PesoFinalReceita    = request.POST.get('pesoFinal')
+            PorcaoReceita       = request.POST.get('porcao')    
+            MedidaCaseira       = request.POST.get('medidaCaseira') 
 
+            usuario = request.user
+            
+            CriandoReceita = Receita(
+                nomeReceita = TituloDaReceita,
+                medida = MedidaReceita,
+                gluten = GlutenReceita,
+                lactose = LactoseReceita,
+                tipoDePorcao = TipoDePorcaoReceita,
+                porcaoEmb = PorcoesEmbReceita,
+                pesoFinal = PesoFinalReceita,
+                porcao = PorcaoReceita,
+                medidaCaseira = MedidaCaseira,
+                
+                user = usuario
+            )
+            
+            CriandoReceita.save()
+            messages.add_message(request, constants.SUCCESS, 'Receita Criada com sucesso!')
+            return JsonResponse({'message': 'Receita criada com sucesso!'}, status=200)
+        
+        except ValueError:
+            messages.add_message(request, constants.ERROR, 'Erro ao criar a receita!')
+            return redirect('/app/home/')
+        
+        except Exception as e:
+            messages.add_message(request, constants.ERROR, f"Erro inesperado: {e}")
+            return redirect('/app/home/')
+
+@login_required(login_url='/usuarios/login/')
+def cadastraIngredientesReceita(request):
+    try:
+        ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
+        #receita_id = ultimaReceita.id
+
+        data = json.loads(request.body)
+        ingredientes = data.get('ingredientes', [])
+
+        for ingrediente_data in ingredientes:
+            ingrediente_id = ingrediente_data.get('Id') 
+            ingrediente_qtd = ingrediente_data.get('Quantidade')
+            try:
+                ID_ingrediente = Ingrediente.objects.get(id=ingrediente_id)
+                IngredientesReceita.objects.create(
+                    #fields class | field da request
+                    id_receita = ultimaReceita,
+                    id_ingrediente = ID_ingrediente,
+                    qtdIngrediente = ingrediente_qtd
+                )
+            except Exception as e:
+                return JsonResponse({'error': str(e)}, status=500)
+            
+            except Ingrediente.DoesNotExist:
+                return JsonResponse({'error': f'Ingrediente com ID {ingrediente_id} não encontrado'}, status=400)
+            
+        #return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
+        messages.add_message(request, constants.SUCCESS, 'Receita criada com sucesso !')
+        return redirect('/app/home')
+    
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Receita.DoesNotExist:
+        return JsonResponse({'error': 'Nenhuma receita encontrada para o usuário'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+@login_required(login_url='/usuarios/login/')
 def getValoresIngredientes(request,id):
     try:
         ingrediente = Ingrediente.objects.get(id__icontains=id)
@@ -113,7 +183,6 @@ def userIngredientes(request):
 
             meusIngredientes = paginator.get_page(page)
         return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes})
-
 
 @login_required(login_url='/usuarios/login/')
 def criarIngrediente(request):

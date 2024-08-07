@@ -2,17 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const ListaIngredientes = document.getElementById('optionsIngredientes');
     const IngredientesDaReceita = document.querySelector('.table-ingredientes-da-receita table tbody');
     const ListaIngredientesTabela = document.querySelector('.listaIngredientesTabela');
-    
+
     let valoresIngredientes = [];
-    
+
     ListaIngredientes.addEventListener('click', function(event) {
         const li = event.target;
-    
+
         if (li.tagName === 'LI') {
             const NomeIngrediente = li.textContent;
             const idIngrediente = li.dataset.idIngrediente;
             const idLinha = `linha-${Date.now()}`;
-            
+
             getValoresIngredientes(idIngrediente)
                 .then(valores => {
                     valoresIngredientes.push({
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     adicionarIngredienteReceita(NomeIngrediente, idLinha);
                     adicionarNomeIngrediente(NomeIngrediente, idLinha);
-                    
+
                     console.log(valoresIngredientes);
                     calcularTabelaNutricional(); // Calcular a tabela nutricional após adicionar o ingrediente
                 })
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         RemoverIng.addEventListener('click', function() {
             const linhaRemover = document.getElementById(idLinha);
             linhaRemover.remove();
-            
+
             const index = valoresIngredientes.findIndex(ingrediente => ingrediente.idLinha === idLinha);
             if (index !== -1) {
                 valoresIngredientes.splice(index, 1);
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (h3Remover) {
             const nextSibling = h3Remover.nextSibling;
             h3Remover.remove();
-            
+
             if (nextSibling && nextSibling.tagName === 'H3' && nextSibling.textContent.startsWith(', ')) {
                 nextSibling.textContent = nextSibling.textContent.slice(2);
             } else {
@@ -115,6 +115,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
 
     async function getValoresIngredientes(idIngrediente) {
         const url = `getValoresIngrediente/${idIngrediente}`;
@@ -123,8 +139,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json();  
+                return response.json();
             });
+    }
+
+    function postValoresIngredientes(valoresIngredientes) {
+        const url = `postIngredientesReceita/`;
+
+        try {
+            const response = fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    ingredientes: valoresIngredientes
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = response.json();
+            return data;
+        } catch (error) {
+            console.error('Erro ao enviar os valores dos ingredientes:', error);
+        }
     }
 
     const porcaoInput = document.getElementById('porcao');
@@ -133,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         porcaoHeaderTabela.textContent = porcaoInput.value + 'g';
         calcularTabelaNutricional();
     })
-    
+
     function calcularTabelaNutricional() {
         let totais = {
             ValorEnergetico: 0,
@@ -147,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Fibra: 0,
             Sodio: 0
         };
-        
+
         const VD = {
             ValorEnergetico : 2000,
             Carboidratos: 300,
@@ -175,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         console.log(totais.ValorEnergetico);
 
-        //calculo pela porcao do usuario 
+        //calculo pela porcao do usuario
         let totaisPorcao = {
             ValorEnergetico: 0,
             Carboidratos: 0,
@@ -188,14 +230,14 @@ document.addEventListener('DOMContentLoaded', function() {
             Fibra: 0,
             Sodio: 0
         };
-        
-        
+
+
         const porcao = parseFloat(document.getElementById('porcao').value) || 0;
 
         if (porcao > 0) {
             valoresIngredientes.forEach(valorIngrediente => {
                 //const qtd = parseFloat(valorIngrediente.Quantidade) || 0;
-                
+
                 totaisPorcao.ValorEnergetico    += (valorIngrediente.ValorEnergetico * porcao) / 100;
                 totaisPorcao.Carboidratos       += (valorIngrediente.Carboidratos * porcao) / 100;
                 totaisPorcao.AcucaresTotais     += (valorIngrediente.AcucaresTotais * porcao) / 100;
@@ -247,4 +289,33 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
     }
+
+    const receitaForm = document.getElementById('CriandoReceita');
+    receitaForm.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const form = event.target;
+        const dadosForm = new FormData(form);
+
+        fetch('postReceita/', {
+            method : 'POST',
+            body : dadosForm,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken') // Adiciona o CSRF token se necessário
+            }
+        })
+        .then(response => {
+            if (!response.ok){
+                throw new Error('Erro na criação da receita');
+            }
+            return response.json();
+        })
+        .then(data => {
+            postValoresIngredientes(valoresIngredientes);
+        })
+        .catch(error =>{
+            console.error('Error: ', error);
+        });
+    })
+ 
 });

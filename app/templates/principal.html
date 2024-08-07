@@ -90,7 +90,11 @@
                             <a href="{% url 'receitas' %}">
                                 <div class="dashboard-item flex">
                                     <div class="dashboard-text">
-                                        <h1 id="qtdMinhasReceitas">0</h1>
+                                        {% if Receitas.count == 0 %}
+                                            <h1 id="qtdMinhasReceitas">0</h1>
+                                        {% else %}
+                                            <h1 id="qtdMinhasReceitas"> {{ Receitas.count }}</h1>
+                                        {% endif %}
                                         <p>Minhas receitas</p>
                                     </div>
                                     <div class="dashboard-img">
@@ -134,14 +138,16 @@
                         <div class="dashboard-menu-table">
                             <div class="title-table">Ultimas Receitas</div>
                                 <table>
-                                    <tbody>
-                                        <tr class="linha-tbody">
-                                            <th>Nome Receita</th>
-                                            <th>03/10/2023</th>
-                                        </tr>
-                                    </tbody>
+                                        <tbody>
+                                            {% for receita in Receitas %}
+                                                <tr class="linha-tbody">
+                                                    <th>{{receita.nomeReceita}}</th>
+                                                    <th>{{receita.created_at|date:"d-m-Y"}}</th>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    
                                 </table>
-    
                         </div>
                     </div>
                 </div>

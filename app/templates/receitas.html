@@ -87,25 +87,27 @@
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            Nome-da-receita
-                                        </th>
-                                        <th>
-                                            00/00/0000
-                                        </th>
-                                        <th id="actionReceita">
-                                            <abbr title="Ver Receita">
-                                                <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
-                                            </abbr>
-                                            <abbr title="Excluir Receita">
-                                                <button id="excluirReceita" ><img width="30px" src="{% static 'img/apagar-receita.png' %}" alt=""></button>
-                                            </abbr>
-                                        </th>
-                                    </tr>
-                                    
-                                </tbody>
+                                {% for receita in Receitas %}
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                {{receita.nomeReceita}}
+                                            </th>
+                                            <th>
+                                                {{receita.created_at|date:"d-m-Y"}}
+                                            </th>
+                                            <th id="actionReceita">
+                                                <abbr title="Ver Receita">
+                                                    <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
+                                                </abbr>
+                                                <abbr title="Excluir Receita">
+                                                    <button id="excluirReceita" ><img width="30px" src="{% static 'img/apagar-receita.png' %}" alt=""></button>
+                                                </abbr>
+                                            </th>
+                                        </tr>
+                                        
+                                    </tbody>
+                                {% endfor %}
                             </table>
                         </div>
 

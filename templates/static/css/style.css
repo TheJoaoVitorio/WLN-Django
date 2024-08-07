@@ -654,18 +654,38 @@ img.email{
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
 }
+.dashboard-menu-table table{
+    display: flex;
+    justify-content: space-around;
+}
 .title-table{
     font-weight: 600;
 }
 .linha-tbody th{
     font-weight: 400;
     font-size: 14px;
+    gap: 20px;
 }
 #baseIngredienteLink{
     cursor: pointer;
 }
 /* FIM CONTENT - DASHBOARD */
 
+
+/* BASE INGREDIENTES */
+.btnBaseIngredientes{
+    width: 60px;
+    padding: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+#iconUserIngredientes{
+    width: 28px;
+    height: 28px;
+}
 
 /* MINHAS RECEITAS */
 #title-minhas-receitas{
@@ -706,7 +726,7 @@ img.email{
 }
 #search-icon-base-ingredientes{
     width: 16px;
-    top: 16px;
+    top: 12px;
     cursor : pointer;
     left: 10px;
     position: absolute;
@@ -1012,7 +1032,7 @@ img.email{
         padding:5px;
     }
     .content-dropReceita .optionsIngredientes ,.optionsAlergenicos{
-        max-height:70px;
+        max-height: 140px;
         overflow-y: auto;
         gap: 8px;
         display:flex;

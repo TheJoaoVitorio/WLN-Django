@@ -7,6 +7,10 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('receitas/', views.receitas, name='receitas'),
     path('criandoreceita/', views.criandoReceita, name='criando-receita'),
+    
+    path('criandoreceita/postReceita/',views.cadastraReceita, name='cadastra-receita'),
+    path('criandoreceita/postIngredientesReceita/', views.cadastraIngredientesReceita, name='cadastra-ingredientes-receita'),
+    
     path('criandoreceita/getValoresIngrediente/<int:id>/', views.getValoresIngredientes, name='get-valores-ingrediente'),
     path('criandoreceita/getAlergenicos/', views.getAlergenicos, name='get-alergenicos'),  
     path('criandoreceita/getBaseIngredientes/', views.getBaseIngredientes, name='get-base-ingredientes'),

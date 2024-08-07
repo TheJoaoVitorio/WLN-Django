@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Ingrediente(models.Model):
-    id_user = models.ForeignKey(User, on_delete=models.PROTECT)
+    id_user = models.ForeignKey(User, on_delete=models.PROTECT,null=True)
     
     nomeIngrediente = models.CharField(max_length=40)
     valorEnergetico = models.DecimalField(max_digits=10, decimal_places=2)
@@ -60,7 +60,7 @@ class Receita(models.Model):
 class IngredientesReceita(models.Model):
     id_receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
     id_ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE, related_name='receitas_ingredientes')
-
+    qtdIngrediente = models.DecimalField(max_digits=10, decimal_places=2,default=0)
 
 
 class Alergenico(models.Model):
@@ -71,6 +71,6 @@ class Alergenico(models.Model):
 
 
 class AlergenicoReceita(models.Model):
-    id_receita = models.ForeignKey(Receita, on_delete=models.PROTECT)
+    #id_receita = models.ForeignKey(Receita, on_delete=models.PROTECT)
     id_alergenico = models.ForeignKey(Alergenico, on_delete=models.PROTECT)
 

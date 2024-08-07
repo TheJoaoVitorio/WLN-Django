@@ -92,7 +92,11 @@
 
                         <div class="box-4 ">
                             <a href="{% url 'meus-ingredientes' %}">
-                                <button class="btn-verde btnCriarIngrediente">Meus ingredientes</button>
+                                <abbr title="Ver Meus Ingredientes">
+                                    <button class="btn-verde btnBaseIngredientes">
+                                        <img id="iconUserIngredientes" src="{% static 'img/userIngredientes.png'%}" alt="">
+                                    </button> 
+                                </abbr>
                             </a>
                         </div>
                     </div>
