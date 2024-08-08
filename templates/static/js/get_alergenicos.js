@@ -24,6 +24,7 @@ document.getElementById('selectBtnAlergenicos').addEventListener('click', functi
             data.ListaAlergenicos.forEach(alergenico => {
                 const item = document.createElement('li');
                 item.textContent = alergenico.nomeAlergenico;
+                item.dataset.id = alergenico.id;
                 listAlergenicos.appendChild(item);
             });
         }

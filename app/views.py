@@ -16,6 +16,7 @@ from .models import Ingrediente
 from .models import Alergenico
 from .models import Receita
 from .models import IngredientesReceita
+from .models import AlergenicoReceita
 
 
 from django.shortcuts import get_object_or_404
@@ -48,17 +49,33 @@ def verIngredientesSistema(request):
             
         return render (request,'baseIngredientes.html',{'baseIngredientes':BaseIngredientes})
 
+
 @login_required(login_url='/usuarios/login/')
 def receitas(request):
     if request.method == 'GET':
         receitas = Receita.objects.all().filter(user=request.user.id)
-        return render (request, 'receitas.html', {'Receitas':receitas})
-    
+
+        paginator = Paginator(receitas,4)
+        page = request.GET.get('page')
+        minhasReceitas = paginator.get_page(page)
+        return render (request, 'receitas.html', {'Receitas':minhasReceitas})
+
+def excluirReceita(request,id):
+    receita = get_object_or_404(Receita, pk=id)
+    receita.delete()
+    messages.add_message(request, constants.SUCCESS, 'Receita deletada com sucesso!')
+    return redirect('/app/receitas/')
+
+# task = get_object_or_404(Task,pk=id)
+#     task.delete()
+
+#     messages.info(request,'Tarefa Deletada com Sucesso!')
 
 @login_required(login_url='/usuarios/login/')
 def criandoReceita(request):
     if request.method == "GET":
         return render (request, 'criando-receita.html')
+
 
 @login_required(login_url='/usuarios/login/')
 def cadastraReceita(request):
@@ -81,6 +98,7 @@ def cadastraReceita(request):
                 medida = MedidaReceita,
                 gluten = GlutenReceita,
                 lactose = LactoseReceita,
+
                 tipoDePorcao = TipoDePorcaoReceita,
                 porcaoEmb = PorcoesEmbReceita,
                 pesoFinal = PesoFinalReceita,
@@ -101,6 +119,7 @@ def cadastraReceita(request):
         except Exception as e:
             messages.add_message(request, constants.ERROR, f"Erro inesperado: {e}")
             return redirect('/app/home/')
+
 
 @login_required(login_url='/usuarios/login/')
 def cadastraIngredientesReceita(request):
@@ -128,9 +147,9 @@ def cadastraIngredientesReceita(request):
             except Ingrediente.DoesNotExist:
                 return JsonResponse({'error': f'Ingrediente com ID {ingrediente_id} não encontrado'}, status=400)
             
-        #return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
-        messages.add_message(request, constants.SUCCESS, 'Receita criada com sucesso !')
-        return redirect('/app/home')
+        return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
+        # messages.add_message(request, constants.SUCCESS, 'Receita criada com sucesso !')
+        # return redirect('/app/home')
     
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
@@ -138,6 +157,34 @@ def cadastraIngredientesReceita(request):
         return JsonResponse({'error': 'Nenhuma receita encontrada para o usuário'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+@login_required(login_url='/usuarios/login/')
+def cadastraAlergenicos(request):
+    try:
+        ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
+    
+        data = json.loads(request.body)
+        alergenicos = data.get('alergenicos', [])
+        
+        for alergenico_data in alergenicos:
+            alergenico_id = alergenico_data.get('idAlergenico')
+            try:
+                ID_ALERGENICO = Alergenico.objects.get(id=alergenico_id)
+                AlergenicoReceita.objects.create(
+                    id_receita = ultimaReceita,
+                    id_alergenico = ID_ALERGENICO
+                )
+                
+            except Exception as e:
+                return JsonResponse({'error': str(e)}, status=500)
+
+            except Alergenico.DoesNotExist:
+                return JsonResponse({'error': 'Nenhum Alergenico encontrado'},status=404)
+            
+            return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
+        
+    except Receita.DoesNotExist:
+        return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)
 
 @login_required(login_url='/usuarios/login/')
 def getValoresIngredientes(request,id):
@@ -169,6 +216,7 @@ def getValoresIngredientes(request,id):
     
     return JsonResponse(valores)
 
+
 @login_required(login_url='/usuarios/login/')
 def userIngredientes(request):
     if request.method == 'GET':
@@ -183,6 +231,7 @@ def userIngredientes(request):
 
             meusIngredientes = paginator.get_page(page)
         return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes})
+
 
 @login_required(login_url='/usuarios/login/')
 def criarIngrediente(request):

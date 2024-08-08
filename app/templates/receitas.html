@@ -112,20 +112,36 @@
                         </div>
 
                         <div class="menu-paginacao">
-                            <button id="anteriorReceitas">
-                                <img src="{% static 'img/fi-bs-angle-left.png'%}">
-                            </button>
-                            <input id="InputPaginacaoReceita" type="text" id="" placeholder="1">
-                            <button id="proximoReceitas">
-                                <img src="{% static 'img/fi-bs-angle-right.png'%}">
-                            </button>
+                            {% if Receitas.has_previous %}
+                                <a href="?page={{ Receitas.previous_page_number }}">
+                                    <button id="anteriorReceitas">
+                                        <img src="{% static 'img/fi-bs-angle-left.png'%}">
+                                    </button>
+                                </a>
+                            {% else %}
+                                <button class="btn-disable" id="anteriorReceitas">
+                                    <img src="{% static 'img/fi-bs-angle-left.png'%}">
+                                </button>
+                            {% endif %}  
+                            <input id="InputPaginacaoReceita" type="text" id="" value="{{Receitas.number}}" placeholder="0">
+                             {% if Receitas.has_next %}
+                                <a href="?page={{ Receitas.next_page_number}}">
+                                    <button id="proximoReceitas">
+                                        <img src="{% static 'img/fi-bs-angle-right.png'%}">
+                                    </button>
+                                </a>
+                            {% else %}
+                                <button class="btn-disable" id="proximoReceitas">
+                                    <img src="{% static 'img/fi-bs-angle-right.png'%}">
+                                </button>
+                            {% endif %}
                         </div>
-                        <div id="divBtnReceita">
-                            <a href="{% url 'criando-receita'%}">
-                                <button class="btn-verde btnCriarReceita">Criar Receita</button>
-                            </a>
-                        </div>
-                        
+                            <div id="divBtnReceita">
+                                <a href="{% url 'criando-receita'%}">
+                                    <button class="btn-verde btnCriarReceita">Criar Receita</button>
+                                </a>
+                            </div>
+                            
                     </div>
                    
                 </div>
