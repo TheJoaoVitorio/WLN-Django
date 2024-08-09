@@ -8,6 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 alert.remove(); // Remove from DOM
             }, 600); // Wait for the fade-out effect to complete
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 2000); // 3000 milliseconds = 3 seconds
     });
 });

@@ -74,7 +74,7 @@ def excluirReceita(request,Receita_id):
         receita = get_object_or_404(Receita, id=Receita_id)
         receita.delete()
         messages.add_message(request, constants.SUCCESS, 'Receita deletada com sucesso!')
-        return redirect('/app/receitas/')
+        return redirect('/app/home/')
 
 @login_required(login_url='/usuarios/login/')
 def criandoReceita(request):

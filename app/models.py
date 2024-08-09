@@ -71,6 +71,6 @@ class Alergenico(models.Model):
 
 
 class AlergenicoReceita(models.Model):
-    id_receita = models.ForeignKey(Receita, on_delete=models.PROTECT,default=None)
-    id_alergenico = models.ForeignKey(Alergenico, on_delete=models.PROTECT)
+    id_receita = models.ForeignKey(Receita, on_delete=models.CASCADE,default=None)
+    id_alergenico = models.ForeignKey(Alergenico, on_delete=models.CASCADE)
 
