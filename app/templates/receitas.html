@@ -73,10 +73,12 @@
                     </div>
 
                     <div class="content-minhas-receitas">
-                        <div class="pesquisar-receitas">
-                            <input id="inputReceitas" type="text" placeholder="Buscar">
-                            <img id="search-icon" src="{% static 'img/pesquisar.png'%}">
-                        </div>
+                        <form method="GET">
+                            <div class="pesquisar-receitas">
+                                <input id="inputReceitas" type="text" name="search" type="submit" value="{{ request.GET.search }}" placeholder="Buscar">
+                                <img id="search-icon" src="{% static 'img/pesquisar.png'%}">
+                            </div>
+                        </form>
 
                         <div class="receitas">
                             <table class="table-receitas">

@@ -53,12 +53,17 @@ def verIngredientesSistema(request):
 @login_required(login_url='/usuarios/login/')
 def receitas(request):
     if request.method == 'GET':
-        receitas = Receita.objects.all().filter(user=request.user.id)
+        search = request.GET.get('search')
+        if search:
+            minhasReceitas = Receita.objects.filter(nomeReceita__icontains=search)
+        else:
+            receitas = Receita.objects.all().filter(user=request.user.id)
 
-        paginator = Paginator(receitas,4)
-        page = request.GET.get('page')
-        minhasReceitas = paginator.get_page(page)
+            paginator = Paginator(receitas,4)
+            page = request.GET.get('page')
+            minhasReceitas = paginator.get_page(page)
         return render (request, 'receitas.html', {'Receitas':minhasReceitas})
+        
 
 @login_required(login_url='/usuarios/login')
 def excluirReceita(request,Receita_id):
