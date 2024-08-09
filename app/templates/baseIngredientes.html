@@ -148,6 +148,10 @@
                                     <img src="{% static 'img/fi-bs-angle-left.png'%}" alt="esquerda">
                                 </button>
                             </a>
+                        {% else %}
+                            <button class="btn-disable" id="anteriorIngredientes">
+                                <img src="{% static 'img/fi-bs-angle-left.png'%}" alt="esquerda">
+                            </button>
                         {% endif %}  
                         <div>
                             <input type="text" readonly value="{{baseIngredientes.number}}">
@@ -158,6 +162,10 @@
                                     <img src="{% static 'img/fi-bs-angle-right.png'%}" alt="direita">
                                 </button>
                             </a>
+                        {% else %}
+                            <button class="btn-disable" id="ProximoIngredientes">
+                                <img src="{% static 'img/fi-bs-angle-right.png'%}" alt="direita">
+                            </button> 
                         {% endif %}
                     </div>
                 </div>
