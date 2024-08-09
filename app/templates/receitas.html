@@ -84,7 +84,7 @@
                                     <tr>
                                         <th>Receitas</th>
                                         <th>Data de criação</th>
-                                        <th>Ação</th>
+                                        
                                     </tr>
                                 </thead>
                                 {% for receita in Receitas %}
@@ -100,9 +100,11 @@
                                                 <abbr title="Ver Receita">
                                                     <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
                                                 </abbr>
-                                                <abbr title="Excluir Receita">
-                                                    <button id="excluirReceita" ><img width="30px" src="{% static 'img/apagar-receita.png' %}" alt=""></button>
-                                                </abbr>
+                                                <a href="excluirReceita/{{receita.id}}">
+                                                    <abbr title="Excluir Receita">
+                                                        <input type="image" width="30px" value="{{receita.id}}" src="{% static 'img/apagar-receita.png' %}" >
+                                                    </abbr>
+                                                </a>
                                             </th>
                                         </tr>
                                         

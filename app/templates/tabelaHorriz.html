@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilo/horrz_Style.css">
+    <link rel="stylesheet" href="{% static 'css/bronk_Horriz_Style.css'%}">
 
-    <title>WLN_Rotulos_ HORRIZONTAL</title>
+    <title>WLNUTRION</title>
 </head>
 <body>
     <div class="content-rotulos">
 
         <div class="logo">
-            <img src="estilo/img/logo.png" alt="erro">
+            <img src="{% static 'img/logo.png' %}" alt="logo">
         </div>
-        <h1 style="font-size: xx-large; ">Nome da Receita</h1>
+        <h1 id="nomeReceitaTabelaHorizontal" style="font-size: xx-large; ">Nome da Receita</h1>
 
-        <div class="tabela-nutricional">
+        <div class="tabela-nutricional-horizontal">
             <div>
                 <h2>INFORMAÇÃO NUTRICIONAL</h2>
                 <hr>
                 <p>Porção por emb..: <span id="porcoesEmbTabela"></span> 00</p>
                 <p>Porção: 00 ml <span id="porcaoTabela"></span> <span id="medidaCaseiraTabela"></span> </p>
                 <hr id="linhaGrossaTabelaNutricional">
-                
             </div>
             
             <table>
@@ -124,6 +123,6 @@
                 
         </div>
     </div>
-    
+    <script src="{% static 'js/receitaAPI.js'%}"></script>
 </body>
 </html>

@@ -60,16 +60,13 @@ def receitas(request):
         minhasReceitas = paginator.get_page(page)
         return render (request, 'receitas.html', {'Receitas':minhasReceitas})
 
-def excluirReceita(request,id):
-    receita = get_object_or_404(Receita, pk=id)
-    receita.delete()
-    messages.add_message(request, constants.SUCCESS, 'Receita deletada com sucesso!')
-    return redirect('/app/receitas/')
-
-# task = get_object_or_404(Task,pk=id)
-#     task.delete()
-
-#     messages.info(request,'Tarefa Deletada com Sucesso!')
+@login_required(login_url='/usuarios/login')
+def excluirReceita(request,Receita_id):
+    if request.method == 'GET':
+        receita = get_object_or_404(Receita, id=Receita_id)
+        receita.delete()
+        messages.add_message(request, constants.SUCCESS, 'Receita deletada com sucesso!')
+        return redirect('/app/receitas/')
 
 @login_required(login_url='/usuarios/login/')
 def criandoReceita(request):

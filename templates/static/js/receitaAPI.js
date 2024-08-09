@@ -237,8 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (porcao > 0) {
             valoresIngredientes.forEach(valorIngrediente => {
-                //const qtd = parseFloat(valorIngrediente.Quantidade) || 0;
-
+               
                 totaisPorcao.ValorEnergetico    += (valorIngrediente.ValorEnergetico * porcao) / 100;
                 totaisPorcao.Carboidratos       += (valorIngrediente.Carboidratos * porcao) / 100;
                 totaisPorcao.AcucaresTotais     += (valorIngrediente.AcucaresTotais * porcao) / 100;
@@ -257,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         const tabelaNutricional = document.querySelector('.tabela-nutricional table tbody');
-
+        //essa tabela é de preview da receita | aqui armazena os valores totais no calculo por 100
         tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}kcal`;
         tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(2)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(2)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
@@ -268,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(2)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(2)').textContent = `${totais.Fibra.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(2)').textContent = `${totais.Sodio.toFixed(2)}mg`;
-
+        //aqui é armazenado os valores , relacionado com os calculos por porção
         tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(3)').textContent = `${totaisPorcao.ValorEnergetico.toFixed(2)}kcal`;
         tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(3)').textContent = `${totaisPorcao.Carboidratos.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(3) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresTotais.toFixed(2)}g`;
@@ -279,7 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(8) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTrans.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(3)').textContent = `${totaisPorcao.Fibra.toFixed(2)}g`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(3)').textContent = `${totaisPorcao.Sodio.toFixed(2)}mg`;
-
         // Cálculo dos valores diários
         tabelaNutricional.querySelector('tr:nth-child(1) td:nth-child(4)').textContent = `${((totais.ValorEnergetico / VD.ValorEnergetico) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(2) td:nth-child(4)').textContent = `${((totais.Carboidratos / VD.Carboidratos) * 100).toFixed(2)}%`;
@@ -289,7 +287,44 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(4)').textContent = `${((totais.GordurasSaturadas / VD.GordurasSaturadas) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
+    
+        //tabela nutriconal horizontal
+        const tabelaNutricionalHorizontal = document.querySelector('.tabela-nutricional-horizontal table tbody');
+        //calculo dos valores totais
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}kcal`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(2) td:nth-child(2)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(3) td:nth-child(2)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(4) td:nth-child(2)').textContent = `${totais.AcucaresAdicionais.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(5) td:nth-child(2)').textContent = `${totais.Proteinas.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(6) td:nth-child(2)').textContent = `${totais.GordurasTotais.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(7) td:nth-child(2)').textContent = `${totais.GordurasSaturadas.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(8) td:nth-child(2)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(9) td:nth-child(2)').textContent = `${totais.Fibra.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(10) td:nth-child(2)').textContent = `${totais.Sodio.toFixed(2)}mg`;
+        //aqui é armazenado os valores , relacionado com os calculos por porção
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(3)').textContent = `${totaisPorcao.ValorEnergetico.toFixed(2)}kcal`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(2) td:nth-child(3)').textContent = `${totaisPorcao.Carboidratos.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(3) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresTotais.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(4) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresAdicionais.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(5) td:nth-child(3)').textContent = `${totaisPorcao.Proteinas.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(6) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTotais.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(7) td:nth-child(3)').textContent = `${totaisPorcao.GordurasSaturadas.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(8) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTrans.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(9) td:nth-child(3)').textContent = `${totaisPorcao.Fibra.toFixed(2)}g`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(10) td:nth-child(3)').textContent = `${totaisPorcao.Sodio.toFixed(2)}mg`;
+        // Cálculo dos valores diários
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(4)').textContent = `${((totais.ValorEnergetico / VD.ValorEnergetico) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(2) td:nth-child(4)').textContent = `${((totais.Carboidratos / VD.Carboidratos) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(4) td:nth-child(4)').textContent = `${((totais.AcucaresAdicionais / VD.AcucaresAdicionais) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(5) td:nth-child(4)').textContent = `${((totais.Proteinas / VD.Proteinas) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(6) td:nth-child(4)').textContent = `${((totais.GordurasTotais / VD.GordurasTotais) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(7) td:nth-child(4)').textContent = `${((totais.GordurasSaturadas / VD.GordurasSaturadas) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
+        tabelaNutricionalHorizontal.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
+    
+    
     }
+    
 
     //ALERGENICOS DA RECEITA
     const ListaAlergenicos = document.getElementById('optionsAlergenicos');
@@ -398,6 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const form = event.target;
         const dadosForm = new FormData(form);
+        const opcaoModeloReceita = document.getElementById('')
 
         fetch('postReceita/', {
             method : 'POST',

@@ -8,7 +8,7 @@
         font-family: Arial, Helvetica;
     }
 
-    .tabela-nutricional {
+    .tabela-nutricional-horizontal {
       
         background-color: #fff;
         padding: 10px;
@@ -20,7 +20,7 @@
        
     }
 
-    .tabela-nutricional table {
+    .tabela-nutricional-horizontal table {
         width: 50%;
         border-collapse: collapse;
         margin: 0;
@@ -28,18 +28,18 @@
         
     } 
 
-    .tabela-nutricional tbody{    
+    .tabela-nutricional-horizontal tbody{    
         border-collapse: collapse;
     }
 
 
-    .tabela-nutricional .section1 {
+    .tabela-nutricional-horizontal .section1 {
       
         flex-direction: column;
         padding-left: 5px;
       
     }
-    .tabela-nutricional .section2 {
+    .tabela-nutricional-horizontal .section2 {
       
         flex-direction: column;
         padding-left: 5px;
@@ -99,13 +99,13 @@
 
 
 
-    .tabela-nutricional h2 {
+    .tabela-nutricional-horizontal h2 {
         text-align: center;
         margin-bottom: 0px;
         font-size: 22px;
     }
 
-    .tabela-nutricional p {
+    .tabela-nutricional-horizontal p {
         font-size: 0.9em;
         text-align: left;
         margin: 5px 0;
@@ -116,12 +116,12 @@
     margin: 30px;
    }
 
-    .tabela-nutricional table th tr{
+    .tabela-nutricional-horizontal table th tr{
         border: 1px solid black;
 
     }
 
-    .tabela-nutricional th {
+    .tabela-nutricional-horizontal th {
         text-align: right;
         padding: 5px;
         white-space: nowrap;
@@ -136,13 +136,13 @@
     }
 
     
-    .tabela-nutricional tbody tr{
+    .tabela-nutricional-horizontal tbody tr{
     border: none;
     white-space: nowrap;
     
     }
 
-    .tabela-nutricional tbody td {
+    .tabela-nutricional-horizontal tbody td {
         width: 25%;
         border-bottom: 80px solid #ddd;
         text-align: end;
@@ -170,7 +170,7 @@
     #td-percentual{
         border-bottom: none;
     }
-    .tabela-nutricional tbody tr td:first-child {
+    .tabela-nutricional-horizontal tbody tr td:first-child {
         text-align: left; /* Alinhe o texto à esquerda ou conforme necessário */
         font-size: smaller;
         padding-left: 2px; /* Opcional: Ajustar espaçamento */
@@ -179,7 +179,7 @@
         width: 50%;
     }
 
-    .tabela-nutricional tbody tr th:last-child {
+    .tabela-nutricional-horizontal tbody tr th:last-child {
         border-right: none;
     }
 
@@ -195,17 +195,17 @@
             padding: 20px;
         }
 
-        .tabela-nutricional {
+        .tabela-nutricional-horizontal {
             height: auto;
             padding: 5px;
         }
 
-        .tabela-nutricional h2 {
+        .tabela-nutricional-horizontal h2 {
             font-size: 20px;
         }
 
-        .tabela-nutricional table th, 
-        .tabela-nutricional table td {
+        .tabela-nutricional-horizontal table th, 
+        .tabela-nutricional-horizontal table td {
             font-size: 12px;
             padding: 5px;
         }

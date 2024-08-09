@@ -6,8 +6,9 @@ from django.urls import reverse
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('receitas/', views.receitas, name='receitas'),
+    path('receitas/excluirReceita/<int:Receita_id>', views.excluirReceita, name='excluir-receita'),
+
     path('criandoreceita/', views.criandoReceita, name='criando-receita'),
-    
     path('criandoreceita/postReceita/',views.cadastraReceita, name='cadastra-receita'),
     path('criandoreceita/postIngredientesReceita/', views.cadastraIngredientesReceita, name='cadastra-ingredientes-receita'),
     path('criandoreceita/postAlergenicosReceita/', views.cadastraAlergenicos, name='cadastra-alergenicos-receita'),
