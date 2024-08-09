@@ -31,7 +31,8 @@ def home(request):
         meusIngredientes = Ingrediente.objects.all().filter(id_user=request.user.id)
         baseIngredientes = Ingrediente.objects.filter(id_user=None)
         receitas = Receita.objects.all().filter(user=request.user.id)
-        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes,'Receitas':receitas})
+        ultimasReceitas = Receita.objects.all().filter(user=request.user.id).order_by('-created_at')[:5]
+        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes,'UltimasReceitas':ultimasReceitas , 'Receitas':receitas})
     
 
 @login_required(login_url='/usuarios/login')
@@ -63,7 +64,9 @@ def receitas(request):
             page = request.GET.get('page')
             minhasReceitas = paginator.get_page(page)
         return render (request, 'receitas.html', {'Receitas':minhasReceitas})
-        
+
+def modelosTabelas(request):
+    pass
 
 @login_required(login_url='/usuarios/login')
 def excluirReceita(request,Receita_id):

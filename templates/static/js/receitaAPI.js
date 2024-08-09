@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
     
-        //tabela nutriconal horizontal
+        // TABELA NUTRICIONAL HORIZONTAL
         const tabelaNutricionalHorizontal = document.querySelector('.tabela-nutricional-horizontal table tbody');
         //calculo dos valores totais
         tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}kcal`;
@@ -455,6 +455,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data =>{
             postAlergenicos(ListaAlergenicosTotais);
             console.log('PostAlergenicoss');
+        })
+        .then(data =>{
+            //
         })
         .catch(error =>{
             console.error('Error: ', error);

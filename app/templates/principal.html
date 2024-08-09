@@ -139,14 +139,13 @@
                             <div class="title-table">Ultimas Receitas</div>
                                 <table>
                                         <tbody>
-                                            {% for receita in Receitas %}
+                                            {% for receita in UltimasReceitas %}
                                                 <tr class="linha-tbody">
                                                     <th>{{receita.nomeReceita}}</th>
                                                     <th>{{receita.created_at|date:"d-m-Y"}}</th>
                                                 </tr>
                                             {% endfor %}
                                         </tbody>
-                                    
                                 </table>
                         </div>
                     </div>
