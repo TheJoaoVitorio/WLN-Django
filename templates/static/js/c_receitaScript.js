@@ -111,13 +111,15 @@ function dropDownReceita() {
     });
 
     //form four
-    const dropReceitaTiposRotulos = document.querySelector('.contentTiposRotulos');
-    const selectBtn4 = document.querySelector('.select-btn-frm4');
+    const selectBtn4 = document.querySelector('.select-btn4');
     const rotationIcon4 = selectBtn4.querySelector('i');
 
     selectBtn4.addEventListener('click', () => {
-        dropReceitaTiposRotulos.classList.toggle('activeDrop');
-        rotationIcon4.classList.toggle('rotation-icon');
+        if (rotationIcon4.classList.contains('rotation-icon')) {
+            rotationIcon4.classList.remove('rotation-icon');
+        } else {
+            rotationIcon4.classList.add('rotation-icon');
+        }
     });
 }
 

@@ -112,7 +112,7 @@
                                             <label for="select">Medida</label>
                                             <select class="inputForm2" name="medidaReceita" id="selectOption">
                                                 <div class="options">
-                                                    <option class="op" disabled>Selecione</option>
+                                                    <!-- <option class="op" disabled>Selecione</option> -->
                                                     <option class="op" value="gramas">Gramas(g)</option>
                                                     <option value="mililitros">Mililitros(ml)</option>
                                                 </div>
@@ -124,7 +124,7 @@
                                         <div class="glutenReceita flex">
                                             <label for="">Glúten</label>
                                             <select class="inputForm2" name="glutenReceita" id="selectOption">
-                                                <option value=''disabled >Selecione</option>
+                                                <!-- <option value=''disabled >Selecione</option> -->
                                                 <option value="Não Contém Glúten">Não Contém Glúten</option>
                                                 <option value="Contém Glúten">Contém Glúten</option>
                                             </select>
@@ -135,7 +135,7 @@
                                         <div class="lactoseReceita flex">
                                             <label for="">Lactose</label>
                                             <select class="inputForm2" name="lactoseReceita" id="selectOption">
-                                                <option value=''disabled >Selecione</option>
+                                                <!-- <option value=''disabled >Selecione</option> -->
                                                 <option value="Zero Lactose">Zero Lactose</option>
                                                 <option value="Baixo Teor de Lactose">Baixo Teor de Lactose</option>
                                                 <option value="Contém Lactose">Contém Lactose</option>
@@ -147,7 +147,7 @@
                                         <div class="tipoPorcaoReceita flex">
                                             <label for="">Tipo de Porção</label>
                                             <select class="inputForm2" name="tipoDePorcaoReceita" id="selectOption" required>
-                                                <option  value=''disabled >Selecione</option>
+                                                <!-- <option  value=''disabled >Selecione</option> -->
                                                 <option value="Porção Inteira">Porção Inteira</option>
                                                 <option value="Porção Quebrada">Porção Quebrada</option>
                                                 <option value="Sem Porção">Sem Porção</option>
@@ -237,18 +237,24 @@
 
                                 <div class="form-four form-step">
                                     <div class="selectModelosRotulos">
-                                        <div class="select-btn select-btn-frm4" >
+                                        <!-- <div class="select-btn select-btn-frm4" >
                                             <span>Selecione</span>
                                             <i class='bx bxs-down-arrow'></i>
                                         </div>
     
-                                        <div class="content-dropReceita contentTiposRotulos">
-                                            <ul class="optionsModelosRotulos">
-                                                <li>Modelo Vertical</li>
-                                                <li>Modelo Horizontal</li>
-                                                <li>Modelo Linear</li>
-                                            </ul>
+                                        
+                                        </div> -->
+                                        <div class="div-pai-select-form4">
+                                            <select class="inputForm2 select-btn4"  id="selectOption">
+                                                <option value="ModeloHorizontal">Modelo Horizontal</option>
+                                                <option value="ModeloVertical">Modelo Vertical</option>
+                                                <option value="ModeloLinear">Modelo Linear</option>
+                                            </select>
+                                            <div class="arrow arrow-select-modelos">
+                                                <i class='bx bxs-down-arrow'></i>
+                                            </div>
                                         </div>
+
                                     </div>
 
                                     <div class="btn-submit-receita">
@@ -373,10 +379,10 @@
     <script src="{% static 'js/apenasLetras.js' %}" ></script>
     <script src="{% static 'js/get_baseingredientes.js' %}"></script>
     <script src="{% static 'js/atualizaCamposTabela.js'%}" ></script>
-    <script src="{% static 'js/c_receitaScript.js'%}" ></script>
     <script src="{% static 'js/get_meusingredientes.js' %}"></script>
     <script src="{% static 'js/receitaAPI.js' %}"></script>
     <script src="{% static 'js/get_alergenicos.js' %}"></script>
+    <script src="{% static 'js/c_receitaScript.js'%}" ></script>
     
     <script>
         const apagarReceitaImgUrl = "{% static 'img/apagar-receita.png' %}";

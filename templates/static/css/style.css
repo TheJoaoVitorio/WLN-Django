@@ -1190,9 +1190,10 @@ img.email{
         padding: 5px;
     }
     .optionsModelosRotulos li:hover{
-        background: #d4d4d4;
+        background: #c47171;
     }
 
+    
     .selectModelosRotulos{
         display: flex;
         display: flex;
@@ -1200,6 +1201,18 @@ img.email{
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
+        position: relative;
+        margin-top: 20px;
+    }
+    .arrow-select-modelos{
+        font-size:14px;
+        position: absolute;
+        top: 15px;
+        right: 85px;
+        color:#474747;
+    }
+    .select-btn4{
+        width: 350px;
     }
 
     .tabela-nutricional {
