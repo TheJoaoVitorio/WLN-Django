@@ -645,15 +645,44 @@ img.email{
     width: 400px;
     height: 350px;
     padding: 14px;
+    position: relative;
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites */
 
     background: var(--cor-cinza3);
     border-radius: 12px;
     display: flex;
+    justify-content: center;    
     flex-direction: column;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    overflow: auto;
+    overflow: hidden;
 }
+
+.text-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.show-more-btn {
+    display: none; /* Esconde o botão por padrão em telas maiores */
+}
+
+.truncated-text {
+    display: inline;
+}
+.full-text {
+    display: none; /* Inicialmente oculta o texto completo */
+    white-space: nowrap;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 5px;
+    position: absolute;
+    left: 0;
+    top: 100%; /* Posiciona o texto completo abaixo do texto truncado */
+    z-index: 1;
+}
+
 .dashboard-menu-table table{
     display: flex;
     justify-content: space-around;
@@ -663,15 +692,19 @@ img.email{
 }
 .title-table{
     font-weight: 600;
+    margin-bottom: 15px;
 }
 .linha-tbody th{
     font-weight: 400;
     font-size: 14px;
 }
 .dashboard-menu-table table tbody tr th{
-    gap: 10px;
-    column-gap: 40px;
+   padding-left: 20px;
+   padding-bottom: 2px;
 }
+
+
+
 #baseIngredienteLink{
     cursor: pointer;
 }
@@ -750,14 +783,48 @@ img.email{
     margin-top: 10px;
     background: #F0F0F0;
     border-radius: 6px;
-
+    
+    
+    position: relative; 
     max-width: 95%;
     width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    overflow: hidden;
+    
+    white-space: nowrap; 
 }
+
+
+.text-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.truncated-text {
+    display: inline;
+}
+
+.full-text {
+    visibility: hidden; /* Esconde o texto completo inicialmente */
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 100%; /* Posiciona o texto completo abaixo do texto truncado */
+    white-space: nowrap;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 5px;
+    transition: opacity 0.3s;
+    z-index: 1;
+}
+
+
+
+
 .receitas table th{
     font-weight: 400;
 }
@@ -1833,6 +1900,7 @@ textarea:focus{
     .dashboard-menu-table{
         width: 300px;
         height: 250px;
+        
     }
 
     .-container-telaUser{
@@ -1923,7 +1991,11 @@ textarea:focus{
         width: 300px;
     }
 }
-
+@media (min-width: 606px) {
+    .show-more-btn {
+        display: none;
+    }
+}
 @media (max-width:605px){
     .section-btn-baixar-app{
         justify-content: center;
@@ -1964,6 +2036,16 @@ textarea:focus{
     .footer-text h1{
         font-size: 18px;
     }
+
+    .full-text {
+        display: none; /* Inicialmente oculta o texto completo em dispositivos móveis */
+    }
+
+    .text-container.show-full .full-text {
+        display: block; /* Exibe o texto completo ao clicar */
+    }
+
+    
     /**/
 
     /* Principal */
@@ -1984,9 +2066,32 @@ textarea:focus{
         width: 30px;
     }
     .dashboard-menu-table{
-        width: 260px;
-        height: 100px;
+        width: 290px;
+        height: 160px;
+        overflow: auto;
+         height: 200px;
     }
+    .title-table {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+    .text-container {
+        display: block;
+        
+    }
+    
+    .show-more-btn {
+    display: inline-block; /* Exibe o botão para todos os tamanhos de tela */
+    background: none;
+    border: 1px solid #007bff;
+    color: #007bff;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s;
+}
     /**/
 
     /* Conta */

@@ -93,7 +93,14 @@
                                     <tbody>
                                         <tr>
                                             <th>
-                                                {{receita.nomeReceita}}
+                                                <div class="text-container" title="{{ receita.nomeReceita }}">
+                                                    {% if receita.nomeReceita|length > 15 %}
+                                                        <span class="truncated-text">{{ receita.nomeReceita|slice:":10" }}...</span>
+                                                    {% else %}
+                                                        <span class="truncated-text">{{ receita.nomeReceita }}</span>
+                                                    {% endif %}
+                                                        <span class="full-text">{{ receita.nomeReceita }}</span>
+                                                </div>
                                             </th>
                                             <th>
                                                 {{receita.created_at|date:"d-m-Y"}}

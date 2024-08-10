@@ -4,6 +4,8 @@ from usuarios.views import gerenciarConta
 from django.urls import reverse
 
 urlpatterns = [
+    
+
     path('home/', views.home, name='home'),
     path('receitas/', views.receitas, name='receitas'),
     path('receitas/excluirReceita/<int:Receita_id>', views.excluirReceita, name='excluir-receita'),

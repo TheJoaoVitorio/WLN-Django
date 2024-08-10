@@ -25,6 +25,9 @@ from django.urls import reverse
 
 
 # Create your views here.
+
+
+
 @login_required(login_url='/usuarios/login/')
 def home(request):
     if request.method == 'GET':
