@@ -804,8 +804,9 @@ img.email{
     font-weight: 600;
 }
 .btn-disable{
-    opacity: 50%;
-    cursor: none;
+    opacity: 30%;
+    /* cursor: none; */
+    cursor: not-allowed;
 }
 
     /* Criando receita - PROGRESS BAR*/

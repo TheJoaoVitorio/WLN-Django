@@ -65,11 +65,14 @@ const updateProgress = () => {
 
     if (active === 1) {
         prevButton.disabled = true;
+        prevButton.classList.add('btn-disable');
     } else if (active === steps.length) {
         nextButton.disabled = true;
+        prevButton.classList.remove('btn-disable');
     } else {
         prevButton.disabled = false;
         nextButton.disabled = false;
+        prevButton.classList.remove('btn-disable');
     }
 
     if (active === steps.length){
