@@ -8,7 +8,7 @@
         font-family: Arial, Helvetica;
     }
 
-    .tabela-nutricional-horizontal {
+    .tabela-nutricional-horizontal-quebrada {
       
         background-color: #fff;
         padding: 10px;
@@ -20,7 +20,7 @@
        
     }
 
-    .tabela-nutricional-horizontal table {
+    .tabela-nutricional-horizontal-quebrada table {
         width: 50%;
         border-collapse: collapse;
         margin: 0;
@@ -28,18 +28,18 @@
         
     } 
 
-    .tabela-nutricional-horizontal tbody{    
+    .tabela-nutricional-horizontal-quebrada tbody{    
         border-collapse: collapse;
     }
 
 
-    .tabela-nutricional-horizontal .section1 {
+    .tabela-nutricional-horizontal-quebrada .section1 {
       
         flex-direction: column;
         padding-left: 5px;
       
     }
-    .tabela-nutricional-horizontal .section2 {
+    .tabela-nutricional-horizontal-quebrada .section2 {
       
         flex-direction: column;
         padding-left: 5px;
@@ -99,13 +99,13 @@
 
 
 
-    .tabela-nutricional-horizontal h2 {
+    .tabela-nutricional-horizontal-quebrada h2 {
         text-align: center;
         margin-bottom: 0px;
         font-size: 22px;
     }
 
-    .tabela-nutricional-horizontal p {
+    .tabela-nutricional-horizontal-quebrada p {
         font-size: 0.9em;
         text-align: left;
         margin: 5px 0;
@@ -116,12 +116,12 @@
     margin: 30px;
    }
 
-    .tabela-nutricional-horizontal table th tr{
+    .tabela-nutricional-horizontal-quebrada table th tr{
         border: 1px solid black;
 
     }
 
-    .tabela-nutricional-horizontal th {
+    .tabela-nutricional-horizontal-quebrada th {
         text-align: right;
         padding: 5px;
         white-space: nowrap;
@@ -136,13 +136,13 @@
     }
 
     
-    .tabela-nutricional-horizontal tbody tr{
+    .tabela-nutricional-horizontal-quebrada tbody tr{
     border: none;
     white-space: nowrap;
     
     }
 
-    .tabela-nutricional-horizontal tbody td {
+    .tabela-nutricional-horizontal-quebrada tbody td {
         width: 25%;
         border-bottom: 80px solid #ddd;
         text-align: end;
@@ -170,7 +170,7 @@
     #td-percentual{
         border-bottom: none;
     }
-    .tabela-nutricional-horizontal tbody tr td:first-child {
+    .tabela-nutricional-horizontal-quebrada tbody tr td:first-child {
         text-align: left; /* Alinhe o texto à esquerda ou conforme necessário */
         font-size: smaller;
         padding-left: 2px; /* Opcional: Ajustar espaçamento */
@@ -179,7 +179,7 @@
         width: 50%;
     }
 
-    .tabela-nutricional-horizontal tbody tr th:last-child {
+    .tabela-nutricional-horizontal-quebrada tbody tr th:last-child {
         border-right: none;
     }
 
@@ -195,17 +195,17 @@
             padding: 20px;
         }
 
-        .tabela-nutricional-horizontal {
+        .tabela-nutricional-horizontal-quebrada {
             height: auto;
             padding: 5px;
         }
 
-        .tabela-nutricional-horizontal h2 {
+        .tabela-nutricional-horizontal-quebrada h2 {
             font-size: 20px;
         }
 
-        .tabela-nutricional-horizontal table th, 
-        .tabela-nutricional-horizontal table td {
+        .tabela-nutricional-horizontal-quebrada table th, 
+        .tabela-nutricional-horizontal-quebrada table td {
             font-size: 12px;
             padding: 5px;
         }

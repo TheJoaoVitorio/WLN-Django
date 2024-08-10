@@ -4,14 +4,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
-
+    
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
     <title>WLNutrion - Minhas Receitas</title>
 </head>
 <body>
@@ -71,7 +73,7 @@
                     <div class="content-title">
                         <h1 id="minhas-receitas">Minhas Receitas</h1>
                     </div>
-
+                
                     <div class="content-minhas-receitas">
                         <form method="GET">
                             <div class="pesquisar-receitas">
@@ -86,32 +88,39 @@
                                     <tr>
                                         <th>Receitas</th>
                                         <th>Data de criação</th>
-                                        
                                     </tr>
                                 </thead>
-                                {% for receita in Receitas %}
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                {{receita.nomeReceita}}
-                                            </th>
-                                            <th>
-                                                {{receita.created_at|date:"d-m-Y"}}
-                                            </th>
-                                            <th id="actionReceita">
-                                                <abbr title="Ver Receita">
-                                                    <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
-                                                </abbr>
-                                                <a href="excluirReceita/{{receita.id}}">
-                                                    <abbr title="Excluir Receita">
-                                                        <input type="image" width="30px" value="{{receita.id}}" src="{% static 'img/apagar-receita.png' %}" >
-                                                    </abbr>
-                                                </a>
-                                            </th>
-                                        </tr>
-                                        
-                                    </tbody>
-                                {% endfor %}
+                                {% if Receitas %}
+                                    {% for receita in Receitas %}
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    {{receita.nomeReceita}}
+                                                </th>
+                                                <th>
+                                                    {{receita.created_at|date:"d-m-Y"}}
+                                                </th>
+                                                <th id="actionReceita">
+                                                    <a href="">
+                                                        <abbr title="Ver Receita">
+                                                            <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
+                                                        </abbr>
+                                                    </a>
+                                                    <a href="excluirReceita/{{receita.id}}">
+                                                        <abbr title="Excluir Receita">
+                                                            <input type="image" width="30px" value="{{receita.id}}" src="{% static 'img/apagar-receita.png' %}" >
+                                                        </abbr>
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td class="text-opacity" colspan="3">Nenhuma receita criada.</td>
+                                    </tr>
+                                {% endif %}
                             </table>
                         </div>
 
@@ -156,5 +165,6 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/5.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/timerMessage.js' %}"></script>
 </body>
 </html>

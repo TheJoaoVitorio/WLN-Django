@@ -1,19 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="estilo/linh_Style.css">
-
+    <link rel="stylesheet" href="{% static 'css/linh_Style.css'%}">
+    <script src="{% static 'js/receitaAPI.js'%}"></script>
     <title>WLN_Rotulos_ LINEAR</title>
 </head>
 <body>
     <div class="content-rotulos">
 
         <div class="logo">
-            <img src="estilo/img/logo.png" alt="erro">
-            
+            <img src="{% static 'img/logo.png' %}" alt="logo">
         </div>
         <h1 style="font-size: xx-large; ">Nome da Receita</h1>
         <div class="tabela-nutricional">

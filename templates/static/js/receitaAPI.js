@@ -433,8 +433,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const form = event.target;
         const dadosForm = new FormData(form);
-        const opcaoModeloReceita = document.getElementById('')
-
+        const opcaoModeloReceita = document.getElementById('selectOptionModeloTabela').value;
+    
         fetch('postReceita/', {
             method : 'POST',
             body : dadosForm,
@@ -457,7 +457,28 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('PostAlergenicoss');
         })
         .then(data =>{
-            //
+            let urlModelo;
+
+            if (opcaoModeloReceita === 'ModeloHorizontal') {
+                urlModelo = 'getmodelohorizontal/';
+            } else if (opcaoModeloReceita === 'ModeloVertical') {
+                urlModelo = 'getmodelovertical/';
+            } else if (opcaoModeloReceita === 'ModeloLinear') {
+                urlModelo = 'getmodelolinear/';
+            }
+
+            if (urlModelo) {
+                return fetch(urlModelo)
+                    .then(response => response.text())
+                    .then(html => {
+                        let janelaImpressao = window.open('', '_blank');
+                        janelaImpressao.document.write(html);
+                        janelaImpressao.resizeTo(screen.width, screen.height);
+                        janelaImpressao.document.close();
+                        janelaImpressao.print();
+                        return
+                    });
+            }
         })
         .catch(error =>{
             console.error('Error: ', error);

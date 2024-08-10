@@ -65,9 +65,6 @@ def receitas(request):
             minhasReceitas = paginator.get_page(page)
         return render (request, 'receitas.html', {'Receitas':minhasReceitas})
 
-def modelosTabelas(request):
-    pass
-
 @login_required(login_url='/usuarios/login')
 def excluirReceita(request,Receita_id):
     if request.method == 'GET':
@@ -125,12 +122,22 @@ def cadastraReceita(request):
             messages.add_message(request, constants.ERROR, f"Erro inesperado: {e}")
             return redirect('/app/home/')
 
+def getModeloHorizontal(request):
+    if request.method == "GET":
+        return render (request,'tabelaHorriz.html')
+
+def getModeloVertical(request):
+    if request.method == "GET":
+        return render (request, 'tabelaVert.html')
+    
+def getModeloLinear(request):
+    if request.method == "GET":
+        return render (request, 'tabelaLinear.html')
 
 @login_required(login_url='/usuarios/login/')
 def cadastraIngredientesReceita(request):
     try:
         ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
-        #receita_id = ultimaReceita.id
 
         data = json.loads(request.body)
         ingredientes = data.get('ingredientes', [])
@@ -186,7 +193,8 @@ def cadastraAlergenicos(request):
             except Alergenico.DoesNotExist:
                 return JsonResponse({'error': 'Nenhum Alergenico encontrado'},status=404)
             
-            return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
+            #return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
+            return redirect('/app/home/')
         
     except Receita.DoesNotExist:
         return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)

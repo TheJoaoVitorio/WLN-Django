@@ -119,28 +119,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for ingrediente in MeusIngredientes%}
+                                {% if MeusIngredientes %}
+                                    {% for ingrediente in MeusIngredientes%}
+                                        <tr>
+                                            <abbr title="{{ ingrediente.nomeIngrediente }}">
+                                                <th> {{ingrediente.nomeIngrediente}} </th>
+                                            </abbr>
+                                            <th> {{ingrediente.valorEnergetico }}kcal</th>
+                                            <th> {{ingrediente.carboidratos}}g</th>
+                                            <th> {{ingrediente.acuTotais}} g</th>
+                                            <th> {{ingrediente.acuAdicionais}} g</th>
+                                            <th> {{ingrediente.proteinas}} g</th>
+                                            <th> {{ingrediente.gordTotais}} g</th>
+                                            <th> {{ingrediente.gordSaturadas}} g</th>
+                                            <th> {{ingrediente.gordTrans}} g</th>
+                                            <th> {{ingrediente.fibra}} g</th>
+                                            <th> {{ingrediente.sodio}} mg</th>
+                                            <th id="th-img-btn" class="th-imagemBtn">
+                                                <a class="btn-editar" href="editaringrediente/{{ingrediente.id}}">
+                                                    <input type="image" value="{{ingrediente.id}}" src="{% static 'img/btn-editar.png'%}" alt="erro" id="imagem_editar">    
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
                                     <tr>
-                                        <abbr title="{{ ingrediente.nomeIngrediente }}">
-                                            <th> {{ingrediente.nomeIngrediente}} </th>
-                                        </abbr>
-                                        <th> {{ingrediente.valorEnergetico }}kcal</th>
-                                        <th> {{ingrediente.carboidratos}}g</th>
-                                        <th> {{ingrediente.acuTotais}} g</th>
-                                        <th> {{ingrediente.acuAdicionais}} g</th>
-                                        <th> {{ingrediente.proteinas}} g</th>
-                                        <th> {{ingrediente.gordTotais}} g</th>
-                                        <th> {{ingrediente.gordSaturadas}} g</th>
-                                        <th> {{ingrediente.gordTrans}} g</th>
-                                        <th> {{ingrediente.fibra}} g</th>
-                                        <th> {{ingrediente.sodio}} mg</th>
-                                        <th id="th-img-btn" class="th-imagemBtn">
-                                            <a class="btn-editar" href="editaringrediente/{{ingrediente.id}}">
-                                                <input type="image" value="{{ingrediente.id}}" src="{% static 'img/btn-editar.png'%}" alt="erro" id="imagem_editar">    
-                                            </a>
-                                        </th>
+                                        <td class="text-opacity " colspan="12">Nenhum ingrediente criado.</td>
                                     </tr>
-                                {% endfor %}
+                                {% endif %}
                             </tbody>
                         </table>
 

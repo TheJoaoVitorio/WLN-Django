@@ -2017,3 +2017,8 @@ textarea:focus{
 .input-email-error{
     border: solid 2px red;
 }
+
+.text-opacity{
+    opacity: 30%;
+    padding: 20px;
+}
