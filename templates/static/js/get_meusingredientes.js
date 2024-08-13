@@ -14,6 +14,7 @@ document.getElementById('MeusIngredientesCheck').addEventListener('change', func
                         if (ingrediente.nomeIngrediente.toLowerCase().includes(searchTerm)) {
                             const item = document.createElement('li');
                             item.textContent = ingrediente.nomeIngrediente;
+                            item.dataset.idIngrediente = ingrediente.id;
                             ListaIngredientes.appendChild(item);
                         }
                     });

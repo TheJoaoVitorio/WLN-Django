@@ -14,6 +14,7 @@ function getBaseIngredientes (){
                         if (ingrediente.nomeIngrediente.toLowerCase().includes(termoBuscado)){
                             const itemLI = document.createElement('li');
                             itemLI.textContent = ingrediente.nomeIngrediente;
+                            itemLI.dataset.idIngrediente = ingrediente.id;
                             listaBaseIngredientes.appendChild(itemLI);
                         }
                     })

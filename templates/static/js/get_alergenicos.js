@@ -14,6 +14,7 @@ document.getElementById('selectBtnAlergenicos').addEventListener('click', functi
                     if (alergenico.nomeAlergenico.toLowerCase().includes(termoBuscado)){
                         const item = document.createElement('li');
                         item.textContent = alergenico.nomeAlergenico;
+                        item.dataset.id = alergenico.id;
                         listAlergenicos.appendChild(item);
                     }
                 });
