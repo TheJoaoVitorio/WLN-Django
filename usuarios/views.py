@@ -52,6 +52,10 @@ def cadastroLogin(request):
         email = request.POST.get('email')
         password = request.POST.get('senha')
 
+        if len(password) < 8:
+            messages.add_message(request, constants.ERROR, 'Insira uma senha maior que 8 caracteres ')
+            return redirect('/usuarios/cadastro')
+
         if User.objects.filter(username=username).exists():
             messages.add_message(request, constants.ERROR, 'Já existe um usuário com esse nome.')
             return redirect('/usuarios/cadastro')
