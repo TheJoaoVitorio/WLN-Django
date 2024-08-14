@@ -171,7 +171,7 @@ def cadastraIngredientesReceita(request):
         return JsonResponse({'error': str(e)}, status=500)
 
 @login_required(login_url='/usuarios/login/')
-def cadastraAlergenicos(request):
+def cadastraAlergenicosReceita(request):
     try:
         ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
     
@@ -193,8 +193,8 @@ def cadastraAlergenicos(request):
             except Alergenico.DoesNotExist:
                 return JsonResponse({'error': 'Nenhum Alergenico encontrado'},status=404)
             
-            #return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
-            return redirect('/app/home/')
+            return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
+            #return redirect('/app/home/')
         
     except Receita.DoesNotExist:
         return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)

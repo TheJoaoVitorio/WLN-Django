@@ -428,35 +428,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const receitaForm = document.getElementById('CriandoReceita');
-    receitaForm.addEventListener('submit',function(event){
+    receitaForm.addEventListener('submit', async function(event){
         event.preventDefault();
 
         const form = event.target;
         const dadosForm = new FormData(form);
         const opcaoModeloReceita = document.getElementById('selectOptionModeloTabela').value;
-    
-        fetch('postReceita/', {
-            method : 'POST',
-            body : dadosForm,
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken') // Adiciona o CSRF token se necessário
-            }
-        })
-        .then(response => {
-            if (!response.ok){
+        
+        try{
+            const response = await fetch('postReceita/', {
+                method: 'POST',
+                body: dadosForm,
+                headers: {
+                  'X-CSRFToken': getCookie('csrftoken') // Adiciona o CSRF token se necessário
+                }
+              });
+
+            if (!response.ok) {
                 throw new Error('Erro na criação da receita');
             }
-            return response.json();
-        })
-        .then(data => {
-            postValoresIngredientes(valoresIngredientes);
-            console.log('PostIngredientes');
-        })
-        .then(data =>{
-            postAlergenicos(ListaAlergenicosTotais);
-            console.log('PostAlergenicoss');
-        })
-        .then(data =>{
+
+            const data = await response.json();
+            console.log('Receita criada com sucesso');
+
+            await postValoresIngredientes(valoresIngredientes);
+            console.log('Ingredientes postados com sucesso');
+
+            await postAlergenicos(ListaAlergenicosTotais);
+            console.log('Alergenicos postados com sucesso');
+
             let urlModelo;
 
             if (opcaoModeloReceita === 'ModeloHorizontal') {
@@ -468,21 +468,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (urlModelo) {
-                return fetch(urlModelo)
-                    .then(response => response.text())
-                    .then(html => {
-                        let janelaImpressao = window.open('', '_blank');
-                        janelaImpressao.document.write(html);
-                        janelaImpressao.resizeTo(screen.width, screen.height);
-                        janelaImpressao.document.close();
-                        janelaImpressao.print();
-                        return
-                    });
+            const response = await fetch(urlModelo);
+            const html = await response.text();
+            let janelaImpressao = window.open('', '_blank');
+            janelaImpressao.document.write(html);
+            janelaImpressao.resizeTo(screen.width, screen.height);
+            janelaImpressao.document.close();
+            janelaImpressao.print();
             }
-        })
-        .catch(error =>{
-            console.error('Error: ', error);
-        });
+            
+            window.location.href = '/app/home/';
+            
+        }catch(error){
+            console.error('Error no processo das receitas: ', error);
+        }
+
     })
  
 });
