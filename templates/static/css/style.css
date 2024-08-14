@@ -641,36 +641,13 @@ img.email{
     background: var(--cor-cinza3);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-.dashboard-menu-table{
-    width: 400px;
-    height: 350px;
-    padding: 14px;
 
-    background: var(--cor-cinza3);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    overflow: auto;
-}
-.dashboard-menu-table table{
-    display: flex;
-    justify-content: space-around;
-}
 .dashboard-menu-table body{
     width: 400px;
 }
 .title-table{
+    padding-bottom: 4px;
     font-weight: 600;
-}
-.linha-tbody th{
-    font-weight: 400;
-    font-size: 14px;
-}
-.dashboard-menu-table table tbody tr th{
-    gap: 10px;
-    column-gap: 40px;
 }
 #baseIngredienteLink{
     cursor: pointer;
@@ -745,19 +722,7 @@ img.email{
     position: absolute;
 }
 
-.receitas{
-    padding:10px;
-    margin-top: 10px;
-    background: #F0F0F0;
-    border-radius: 6px;
 
-    max-width: 95%;
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-}
 .receitas table th{
     font-weight: 400;
 }
@@ -1831,6 +1796,99 @@ textarea:focus{
     
     /* Fim Info User - CONTA */
 
+
+
+
+
+/*MINHAS ALTERACOES*/
+/*#########################################################################*/
+
+
+
+
+
+
+
+.receitas{
+    overflow: auto;
+    padding:10px;
+    margin-top: 10px;
+    background: #F0F0F0;
+    border-radius: 6px;
+
+    max-width: 95%;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+
+
+
+
+
+
+
+
+/**/
+
+
+.show-more-btn{
+    width: 60px;
+    font-size: 300px;
+    display: inline-block;
+    border: none;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.linha-tbody th{
+    display: flex;
+    font-weight: 400;
+    font-size: 14px;
+}
+.linha-tbody{
+    padding-block: 5px;
+    justify-content: space-between;
+   display: flex;
+}
+
+.dashboard-menu-table table{
+    display: flex;
+    justify-content: space-around;
+}
+
+.dashboard-menu-table{
+    width: 400px;
+    height: 350px;
+    padding: 14px;
+    overflow: auto;
+
+    background: var(--cor-cinza3);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+   
+}
+
+.dashboard-menu-table table tbody tr th{
+    margin-inline: 20px;
+   padding-bottom: 5px;
+}
+/*#########################################################################*/
+
+
+
+
+
+
+
+
 /* Fim Conta */
 
 
@@ -1846,7 +1904,7 @@ textarea:focus{
     }
     .dashboard-menu-table{
         width: 300px;
-        height: 250px;
+        height: 200px;
     }
 
     .-container-telaUser{
@@ -1939,6 +1997,7 @@ textarea:focus{
 }
 
 @media (max-width:605px){
+    
     .section-btn-baixar-app{
         justify-content: center;
         align-items: center;
@@ -1997,10 +2056,7 @@ textarea:focus{
     .dashboard-img img{
         width: 30px;
     }
-    .dashboard-menu-table{
-        width: 260px;
-        height: 100px;
-    }
+    
     /**/
 
     /* Conta */
@@ -2010,7 +2066,27 @@ textarea:focus{
     .caixa2 > div{
         font-size: 18px;
     }
-    /**/
+    /*##############################################################*/
+    #tresbtn{
+        margin-inline: 8px;
+        width: 40px;
+    }
+
+    .show-more-btn{
+        width: 30px;
+        font-size: 300px;
+        display: inline-block;
+        border: none;
+        font-size: 15px;
+        text-decoration: none;
+        border-radius: 3px;
+    }
+    .th-mostar_nome{
+        display: flex;
+    }
+
+    /*#################################################################*/
+
 }
 
 

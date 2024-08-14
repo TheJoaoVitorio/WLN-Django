@@ -136,17 +136,39 @@
 
                         </div>
                         <div class="dashboard-menu-table">
-                            <div class="title-table">Ultimas Receitas</div>
-                                <table>
-                                        <tbody>
-                                            {% for receita in UltimasReceitas %}
-                                                <tr class="linha-tbody">
-                                                    <th>{{receita.nomeReceita}}</th>
-                                                    <th>{{receita.created_at|date:"d-m-Y"}}</th>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                </table>
+                           
+                            <table>
+                                <div class="title-table">Ultimas Receitas</div>
+                                <tbody>
+                                    {% for receita in UltimasReceitas %}
+                                        <tr class="linha-tbody">
+                                            <th id="th-mostar_nome">
+                                                <div class="text-container" id="recipe-{{ forloop.counter }}">
+                                                    {% if receita.nomeReceita|length > 15 %}
+                                                        <span class="truncated-text">{{ receita.nomeReceita|slice:":15" }}...  </span>
+                                                    {% else %}
+                                                        {{ receita.nomeReceita }}
+                                                    {% endif %}
+                                                    
+                                                    <span class="full-text" style="display: none;">{{ receita.nomeReceita }}</span>
+                                                </div>
+                                                {% if receita.nomeReceita|length > 15 %}
+                                                    <button class="show-more-btn" 
+                                                            data-receita="{{ receita.nomeReceita }}" 
+                                                            data-img-open="{% static 'img/icon_olho-aberto.png' %}"
+                                                            data-img-closed="{% static 'img/icon_olho-fechado.png' %}"
+                                                            onclick="toggleText(this)">
+                                                        <img id="tresbtn" src="{% static 'img/icon_olho-fechado.png' %}" alt="Mostrar mais">
+                                                    </button>
+                                                {% endif %}
+                                            </th>
+                                            
+                                            <th>{{ receita.created_at|date:"d-m" }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            
                         </div>
                     </div>
                 </div>
@@ -160,5 +182,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="{% static 'js/timerMessage.js' %}"></script>
+    <script src="{% static 'js/show-btn.js' %}"></script>
 </body>
 </html>
