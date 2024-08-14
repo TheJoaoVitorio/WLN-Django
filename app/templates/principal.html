@@ -136,31 +136,41 @@
 
                         </div>
                         <div class="dashboard-menu-table">
-                            <div class="title-table">Últimas Receitas</div>
+                           
                             <table>
+                                <thead><div class="title-table">Últimas Receitas</div></thead>
                                 <tbody>
                                     {% for receita in UltimasReceitas %}
                                         <tr class="linha-tbody">
-                                            <th>
-                                                <div class="text-container" title="{{ receita.nomeReceita }}" onclick="toggleText(this)">
+                                            <th id="th-mostar_nome">
+                                                <div class="text-container" id="recipe-{{ forloop.counter }}">
                                                     {% if receita.nomeReceita|length > 15 %}
-                                                        <span class="truncated-text">{{ receita.nomeReceita|slice:":15" }}...</span>
+                                                        <span class="truncated-text">{{ receita.nomeReceita|slice:":15" }}...  </span>
                                                     {% else %}
                                                         {{ receita.nomeReceita }}
                                                     {% endif %}
                                                     
-                                                    {% if receita.nomeReceita|length > 15 %}
-                                                        <button class="show-more-btn" onclick="toggleText(this)">Mostrar mais</button>
-                                                    {% endif %}
-                                                    <span class="full-text">{{ receita.nomeReceita }}</span>
+                                                    <span class="full-text" style="display: none;">{{ receita.nomeReceita }}</span>
+                                                    <div class="receita-nome" style="display: none;"></div> <!-- Elemento para mostrar o nome completo -->
                                                 </div>
+                                                {% if receita.nomeReceita|length > 15 %}
+                                                <button class="show-more-btn" 
+                                                data-receita="{{ receita.nomeReceita }}" 
+                                                data-img-open="{% static 'img/icon_olho-aberto.png' %}"
+                                                data-img-closed="{% static 'img/icon_olho-fechado.png' %}"
+                                                onclick="toggleText(this)">
+                                            <img id="tresbtn" src="{% static 'img/icon_olho-fechado.png' %}" alt="Mostrar mais">
+                                        </button>
+                                                    {% endif %}
                                             </th>
-                                            <th>{{ receita.created_at|date:"d-m-Y" }}</th>
+                                            
+                                            <th>{{ receita.created_at|date:"d-m" }}</th>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -173,16 +183,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="{% static 'js/timerMessage.js' %}"></script>
-    <script>
-        function toggleText(button) {
-        const textContainer = button.parentElement;
-        textContainer.classList.toggle('show-full');
-        // Alterar o texto do botão para refletir a ação
-        if (textContainer.classList.contains('show-full')) {
-            button.textContent = 'mostra menos';
-        } else {
-            button.textContent = 'Mostrar mais';
-        }
-    }</script>
+    <script src="{% static 'js/show-btn.js' %}"></script>
 </body>
 </html>
