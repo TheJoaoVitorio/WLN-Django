@@ -646,6 +646,8 @@ img.email{
     width: 400px;
 }
 .title-table{
+    left: 60%;
+    position: fixed;
     padding-bottom: 4px;
     font-weight: 600;
 }
@@ -1843,6 +1845,7 @@ textarea:focus{
     font-size: 15px;
     text-decoration: none;
     border-radius: 3px;
+    background: none;
 }
 
 .linha-tbody th{
@@ -1859,6 +1862,7 @@ textarea:focus{
 .dashboard-menu-table table{
     display: flex;
     justify-content: space-around;
+    margin-top: 80px;
 }
 
 .dashboard-menu-table{
@@ -1880,6 +1884,7 @@ textarea:focus{
     margin-inline: 20px;
    padding-bottom: 5px;
 }
+
 /*#########################################################################*/
 
 
@@ -2067,19 +2072,27 @@ textarea:focus{
         font-size: 18px;
     }
     /*##############################################################*/
+
+    .dashboard-menu-table table{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2px;
+    }
+    
+    .title-table{
+        display: contents;
+        padding-bottom: 4px;
+        font-weight: 600;
+    }
+    
     #tresbtn{
         margin-inline: 8px;
         width: 40px;
+        background: none;
     }
 
     .show-more-btn{
-        width: 30px;
-        font-size: 300px;
-        display: inline-block;
-        border: none;
-        font-size: 15px;
-        text-decoration: none;
-        border-radius: 3px;
+        display: none;
     }
     .th-mostar_nome{
         display: flex;
@@ -2093,6 +2106,7 @@ textarea:focus{
 .input-email-error{
     border: solid 2px red;
 }
+
 
 .text-opacity{
     opacity: 30%;
