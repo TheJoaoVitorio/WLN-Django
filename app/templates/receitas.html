@@ -92,10 +92,20 @@
                                 </thead>
                                 {% if Receitas %}
                                     {% for receita in Receitas %}
+                                        
                                         <tbody>
                                             <tr>
                                                 <th>
-                                                    {{receita.nomeReceita}}
+                                                    <div class="text-container" id="recipe-{{ forloop.counter }}">
+                                                        {% if receita.nomeReceita|length > 15 %}
+                                                            <span class="truncated-text">{{ receita.nomeReceita|slice:":15" }}... </span>
+                                                        {% else %}
+                                                            {{ receita.nomeReceita }}
+                                                        {% endif %}
+                                                        <span class="full-text" style="display: none;">{{ receita.nomeReceita }}</span>
+                                                    </div> 
+                                                    
+                                                       
                                                 </th>
                                                 <th>
                                                     {{receita.created_at|date:"d-m-Y"}}
@@ -166,5 +176,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/5.5.1/jquery.min.js"></script>
     <script src="{% static 'js/timerMessage.js' %}"></script>
+    <script src="{% static 'js/show-btn.js' %}"></script>
 </body>
 </html>
