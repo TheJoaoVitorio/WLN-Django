@@ -9,7 +9,11 @@ function ApenasLetras(e, t) {
             return true;
         }
         
-        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32) {
+        // Permitir letras maiúsculas e minúsculas (A-Z, a-z), espaço (32) e acentuação (192-255)
+        if ((charCode >= 65 && charCode <= 90) || // Letras maiúsculas
+            (charCode >= 97 && charCode <= 122) || // Letras minúsculas
+            charCode == 32 || // Espaço
+            (charCode >= 192 && charCode <= 255)) { // Letras acentuadas
             return true;
         } else {
             return false;

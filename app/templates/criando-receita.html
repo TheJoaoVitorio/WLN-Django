@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="porcoesEmbaladasReceita flex">
                                             <label for="porcoesEmbaladas">Porções Embaladas</label>
-                                            <input name="porcoesEmbaladas" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="porcoesEmbaladas" class="inputForm2" type="number" placeholder="00" required>
+                                            <input name="porcoesEmbaladas" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 44 || event.charCode == 46" id="porcoesEmbaladas" class="inputForm2" type="number" placeholder="00" required>
                                         </div>
                                         <div class="pesoFinalReceita flex">
                                             <label for="pesoFinal">Peso Final(g/ml)</label>
@@ -166,7 +166,7 @@
                                         </div>
                                         <div class="porcaoReceita flex">
                                             <label for="porcao">Porção(g/ml)</label>
-                                            <input name="porcao" id="porcao" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputForm2" type="number" placeholder="00" required>
+                                            <input name="porcao" id="porcao" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 44 || event.charCode == 46" class="inputForm2" type="number" placeholder="00" required>
                                         </div>
                                         <div class="medidaCaseiraReceita flex">
                                             <label for="medidaCaseira">Medida Caseira</label>
