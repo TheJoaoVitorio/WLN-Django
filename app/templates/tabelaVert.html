@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/vert_Style.css'%}">
-    <title>WLN_Rotulos_ VERTICAL</title>
+    <title>WLN - Rotulo VERTICAL</title>
 </head>
 <body>
     <div class="content-rotulos">
@@ -13,83 +13,84 @@
         <div class="logo">
             <img src="{% static 'img/logo.png' %}" alt="logo">
         </div>
-        <h1 style="font-size: xx-large; ">Nome da Receita</h1>
+    
+        <h1 style="font-size: xx-large; ">{{ Valores.info.NomeReceita }}</h1>
 
         <div class="tabela-nutricional">
             <h2>INFORMAÇÃO NUTRICIONAL</h2>
             <hr>
-            <p>Porção por embalagem: <span id="porcoesEmbTabela"></span> porções</p>
-            <p>Porção: <span id="porcaoTabela"></span> <span id="medidaCaseiraTabela"></span> </p>
+            <p>Porção por embalagem: <span id="porcoesEmbTabela">{{ Valores.info.PorcaoEmb }}</span> porções</p>
+            <p>Porção: <span id="porcaoTabela">{{ Valores.info.Porcao }}</span> <span id="medidaCaseiraTabela">({{ Valores.info.MedidaCaseira }})</span></p>
             <hr id="linhaGrossaTabelaNutricional">
             <table>
                 <thead>
                     <tr>
                         <th></th>
                         <th>100g</th> 
-                        <th>000g</th>
+                        <th>{{ Valores.info.Porcao }}g</th>
                         <th>% VD*</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Valor Energético (kcal)</td>
-                        <td>kcal</td> <!-- kcal g -->
-                        <td></td>
-                        <td>12%</td>
+                        <td class="valor-energetico">{{ Valores.totais.ValorEnergetico }}</td> 
+                        <td class="valor-energetico">{{ Valores.totaisPorPorcao.ValorEnergetico }}</td>
+                        <td class="vd">{{ Valores.VD.ValorEnergetico }}</td>
                     </tr>
                     <tr>
                         <td>Carboidratos totais (g)</td>
-                        <td>g</td> <!-- carboidratos  g -->
-                        <td></td>
-                        <td>10%</td>
+                        <td class="carboidratos">{{ Valores.totais.Carboidratos }}</td>
+                        <td class="carboidratos">{{ Valores.totaisPorPorcao.Carboidratos }}</td>
+                        <td class="vd">{{ Valores.VD.Carboidratos }}</td>
                     </tr>
                     <tr>
                         <td>Açúcares totais (g)</td>
-                        <td>g</td> <!-- acucar totais g -->
-                        <td></td>
-                        <td>10%</td>
+                        <td class="acucares">{{ Valores.totais.AcucaresTotais }}</td>
+                        <td class="acucares">{{ Valores.totaisPorPorcao.AcucaresTotais }}</td>
+                        <td class="vd"></td>
                     </tr>
                     <tr>
-                        <td >Açúcares adicionados (g)</td>
-                        <td>g</td> <!-- acucar adicionado g -->
-                        <td></td>
-                        <td>10%</td>
+                        <td>Açúcares adicionados (g)</td>
+                        <td class="acucares">{{ Valores.totais.AcucaresAdicionais }}</td>
+                        <td class="acucares">{{ Valores.totaisPorPorcao.AcucaresAdicionais }}</td>
+                        <td class="vd">{{ Valores.VD.AcucaresAdicionais }}</td>
                     </tr>
                     <tr>
-                        <td>Proteínas</td>
-                        <td>g</td> <!-- proteinas g -->
-                        <td></td>
-                        <td>7%</td>
+                        <td>Proteínas (g)</td>
+                        <td class="proteinas">{{ Valores.totais.Proteinas }}</td>
+                        <td class="proteinas">{{ Valores.totaisPorPorcao.Proteinas }}</td>
+                        <td class="vd">{{ Valores.VD.Proteinas }}</td>
                     </tr>
                     <tr>
-                        <td>Gorduras Totais</td>
-                        <td>g</td> <!-- gorduras totais g -->
-                        <td></td>
-                        <td>18%</td>
+                        <td>Gorduras Totais (g)</td>
+                        <td class="gorduras">{{ Valores.totais.GordurasTotais }}</td>
+                        <td class="gorduras">{{ Valores.totaisPorPorcao.GordurasTotais }}</td>
+                        <td class="vd">{{ Valores.VD.GordurasTotais }}</td>
                     </tr>
                     <tr>
-                        <td>Gorduras Saturadas</td>
-                        <td>g</td> <!-- gorduras saturadas g -->
-                        <td></td>
-                        <td>9%</td>
+                        <td>Gorduras Saturadas (g)</td>
+                        <td class="gorduras">{{ Valores.totais.GordurasSaturadas }}</td>
+                        <td class="gorduras">{{ Valores.totaisPorPorcao.GordurasSaturadas }}</td>
+                        <td class="vd">{{ Valores.VD.GordurasSaturadas }}</td>
                     </tr>
                     <tr>
-                        <td>Gorduras Trans</td>
-                        <td>g</td> <!-- gorduras trans g -->
-                        <td></td>
-                        <td>**</td>
+                        <td>Gorduras Trans (g)</td>
+                        <td class="gorduras">{{ Valores.totais.GordurasTrans }}</td>
+                        <td class="gorduras">{{ Valores.totaisPorPorcao.GordurasTrans }}</td>
+                        <td class="vd">**</td>
                     </tr>
                     <tr>
-                        <td>Fibra Alimentar</td>
-                        <td>g</td> <!-- fibra g -->
-                        <td></td>
-                        <td>8%</td>
+                        <td>Fibra Alimentar (g)</td>
+                        <td class="fibra">{{ Valores.totais.Fibra }}</td>
+                        <td class="fibra">{{ Valores.totaisPorPorcao.Fibra }}</td>
+                        <td class="vd">{{ Valores.VD.Fibra }}</td>
                     </tr>
                     <tr>
-                        <td>Sódio</td>
-                        <td>mg</td> <!-- sodio mg -->
-                        <td></td>
-                        <td>12%</td>
+                        <td>Sódio (mg)</td>
+                        <td class="sodio">{{ Valores.totais.Sodio }}</td>
+                        <td class="sodio">{{ Valores.totaisPorPorcao.Sodio }}</td>
+                        <td class="vd">{{ Valores.VD.Sodio }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -100,12 +101,16 @@
         <div class="containerListaItensTabela">
             <div class="listaIngredientesTabela flex">
                 <h2>INGREDIENTES:</h2>
-                <!-- NOME DOS INGREDIENTES É ADICIONADO AQUI -->
+                {% for ingrediente in Valores.listaIngredientes %}
+                    <h3>{{ingrediente.NomeIngrediente}}</h3><!-- NOME DOS INGREDIENTES É ADICIONADO AQUI -->
+                {% endfor%}
+                
             </div>
             <div class="listaAlergenicosTabela flex ">
                 <h2>ALERGÊNICOS:</h2>
-                <!-- NOME DOS ALERGENICOS É ADICIONADO AQUI -->
-                    
+                {% for alergenico in Valores.listaAlergenicos %}
+                    <h3>{{alergenico.NomeAlergenico}}</h3><!-- NOME DOS ALERGENICOS É ADICIONADO AQUI -->
+                {% endfor %}
             </div>
         </div>
 
@@ -117,6 +122,7 @@
                 
         </div>
     </div>
-    
+    <script src="{% static 'js/arredondaCamposTabela.js' %}"></script>
+    <script src="{% static 'js/receitaAPI.js' %}"></script>
 </body>
 </html>

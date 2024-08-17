@@ -287,42 +287,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(7) td:nth-child(4)').textContent = `${((totais.GordurasSaturadas / VD.GordurasSaturadas) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
-    
-        // TABELA NUTRICIONAL HORIZONTAL
-        const tabelaNutricionalHorizontal = document.querySelector('.tabela-nutricional-horizontal table tbody');
-        //calculo dos valores totais
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(2)').textContent = `${totais.ValorEnergetico.toFixed(2)}kcal`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(2) td:nth-child(2)').textContent = `${totais.Carboidratos.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(3) td:nth-child(2)').textContent = `${totais.AcucaresTotais.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(4) td:nth-child(2)').textContent = `${totais.AcucaresAdicionais.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(5) td:nth-child(2)').textContent = `${totais.Proteinas.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(6) td:nth-child(2)').textContent = `${totais.GordurasTotais.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(7) td:nth-child(2)').textContent = `${totais.GordurasSaturadas.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(8) td:nth-child(2)').textContent = `${totais.GordurasTrans.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(9) td:nth-child(2)').textContent = `${totais.Fibra.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(10) td:nth-child(2)').textContent = `${totais.Sodio.toFixed(2)}mg`;
-        //aqui é armazenado os valores , relacionado com os calculos por porção
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(3)').textContent = `${totaisPorcao.ValorEnergetico.toFixed(2)}kcal`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(2) td:nth-child(3)').textContent = `${totaisPorcao.Carboidratos.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(3) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresTotais.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(4) td:nth-child(3)').textContent = `${totaisPorcao.AcucaresAdicionais.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(5) td:nth-child(3)').textContent = `${totaisPorcao.Proteinas.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(6) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTotais.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(7) td:nth-child(3)').textContent = `${totaisPorcao.GordurasSaturadas.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(8) td:nth-child(3)').textContent = `${totaisPorcao.GordurasTrans.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(9) td:nth-child(3)').textContent = `${totaisPorcao.Fibra.toFixed(2)}g`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(10) td:nth-child(3)').textContent = `${totaisPorcao.Sodio.toFixed(2)}mg`;
-        // Cálculo dos valores diários
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(1) td:nth-child(4)').textContent = `${((totais.ValorEnergetico / VD.ValorEnergetico) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(2) td:nth-child(4)').textContent = `${((totais.Carboidratos / VD.Carboidratos) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(4) td:nth-child(4)').textContent = `${((totais.AcucaresAdicionais / VD.AcucaresAdicionais) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(5) td:nth-child(4)').textContent = `${((totais.Proteinas / VD.Proteinas) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(6) td:nth-child(4)').textContent = `${((totais.GordurasTotais / VD.GordurasTotais) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(7) td:nth-child(4)').textContent = `${((totais.GordurasSaturadas / VD.GordurasSaturadas) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
-        tabelaNutricionalHorizontal.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
-    
-    
     }
     
 
@@ -427,6 +391,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    async function getTabelaNutricional(ModeloTabela){
+        const url = `getTabelaNutricional/${ModeloTabela}`;
+
+        try{
+            const response = await fetch(url,{
+                method : 'GET',
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            });
+            if(!response.ok){
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const html = await response.text();
+            let janelaImpressao = window.open('', '_blank');
+            janelaImpressao.document.write(html);
+            janelaImpressao.resizeTo(screen.width, screen.height);
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+
+            window.location.href = '/app/home/';
+        } catch (error){
+            console.error('Erro ao enviar os valores dos alergenicos:', error);
+        }
+    }
+
     const receitaForm = document.getElementById('CriandoReceita');
     receitaForm.addEventListener('submit', async function(event){
         event.preventDefault();
@@ -457,28 +449,9 @@ document.addEventListener('DOMContentLoaded', function() {
             await postAlergenicos(ListaAlergenicosTotais);
             console.log('Alergenicos postados com sucesso');
 
-            let urlModelo;
-
-            if (opcaoModeloReceita === 'ModeloHorizontal') {
-                urlModelo = 'getmodelohorizontal/';
-            } else if (opcaoModeloReceita === 'ModeloVertical') {
-                urlModelo = 'getmodelovertical/';
-            } else if (opcaoModeloReceita === 'ModeloLinear') {
-                urlModelo = 'getmodelolinear/';
-            }
-
-            if (urlModelo) {
-            const response = await fetch(urlModelo);
-            const html = await response.text();
-            let janelaImpressao = window.open('', '_blank');
-            janelaImpressao.document.write(html);
-            janelaImpressao.resizeTo(screen.width, screen.height);
-            janelaImpressao.document.close();
-            janelaImpressao.print();
-            }
-            
-            window.location.href = '/app/home/';
-            
+            await getTabelaNutricional(opcaoModeloReceita);
+            console.log('GETZADA NA RECEITA');
+        
         }catch(error){
             console.error('Error no processo das receitas: ', error);
         }

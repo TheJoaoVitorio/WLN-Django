@@ -18,7 +18,7 @@ from .models import Receita
 from .models import IngredientesReceita
 from .models import AlergenicoReceita
 
-
+from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from django.urls import reverse 
 
@@ -198,6 +198,130 @@ def cadastraAlergenicosReceita(request):
         
     except Receita.DoesNotExist:
         return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)
+
+
+@login_required(login_url='/usuarios/login/')
+def getTabelaNutricional(request,modeloTabela):
+    if request.method == 'GET':
+        totais = {
+               'ValorEnergetico'      : 0,
+                'Carboidratos'         : 0,
+                'AcucaresTotais'       : 0,
+                'AcucaresAdicionais'   : 0,
+                'Proteinas'            : 0,
+                'GordurasTotais'       : 0,
+                'GordurasSaturadas'    : 0,
+                'GordurasTrans'        : 0,
+                'Fibra'                : 0,
+                'Sodio'                : 0
+        }
+
+        totaisPorPorcao = {
+                'ValorEnergetico'      : 0,
+                'Carboidratos'         : 0,
+                'AcucaresTotais'       : 0,
+                'AcucaresAdicionais'   : 0,
+                'Proteinas'            : 0,
+                'GordurasTotais'       : 0,
+                'GordurasSaturadas'    : 0,
+                'GordurasTrans'        : 0,
+                'Fibra'                : 0,
+                'Sodio'                : 0
+        }
+
+        VD = {
+                'ValorEnergetico'   : 2000,
+                'Carboidratos'      : 300,
+                'AcucaresAdicionais': 50,
+                'Proteinas'         : 75,
+                'GordurasTotais'    : 55,
+                'GordurasSaturadas' : 22,
+                'Fibra'             : 25,
+                'Sodio'             : 2400
+        }
+
+        valoresDiarios = {
+                'ValorEnergetico'   : 0,
+                'Carboidratos'      : 0,
+                'AcucaresAdicionais': 0,
+                'Proteinas'         : 0,
+                'GordurasTotais'    : 0,
+                'GordurasSaturadas' : 0,
+                'Fibra'             : 0,
+                'Sodio'             : 0
+        }
+        
+    
+        ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
+
+        nomeReceita = ultimaReceita.nomeReceita
+        porcaoEmbalada = ultimaReceita.porcaoEmb
+        porcaoReceita = ultimaReceita.porcao
+        medidaCaseiraReceita = ultimaReceita.medidaCaseira
+        ingredientesReceita = IngredientesReceita.objects.filter(id_receita_id=ultimaReceita.id)
+        alergenicosReceita = AlergenicoReceita.objects.filter(id_receita=ultimaReceita.id)
+
+        #listaIngredientes = []
+        listaIngredientes = []
+        listaAlergenicos = []
+
+        info = {
+            'NomeReceita': nomeReceita,
+            'PorcaoEmb' :porcaoEmbalada,
+            'Porcao': porcaoReceita,
+            'MedidaCaseira': medidaCaseiraReceita
+        }
+        for item in alergenicosReceita:
+            listaAlergenicos.append({'NomeAlergenico': item.id_alergenico.nomeAlergenico})
+        
+
+        for item in ingredientesReceita:
+            quantidade = Decimal(item.qtdIngrediente) or Decimal('0')
+        
+            listaAlergenicos.append({'NomeIngrediente': item.id_ingrediente.nomeIngrediente})
+        
+            totais["ValorEnergetico"]    += (item.id_ingrediente.valorEnergetico * quantidade) / Decimal('100')
+            totais["Carboidratos"]       += (item.id_ingrediente.carboidratos * quantidade) / Decimal('100')
+            totais["AcucaresTotais"]     += (item.id_ingrediente.acuTotais * quantidade) / Decimal('100')
+            totais["AcucaresAdicionais"] += (item.id_ingrediente.acuAdicionais * quantidade) / Decimal('100')
+            totais["Proteinas"]          += (item.id_ingrediente.proteinas * quantidade) / Decimal('100')
+            totais["GordurasTotais"]     += (item.id_ingrediente.gordTotais * quantidade) / Decimal('100')
+            totais["GordurasSaturadas"]  += (item.id_ingrediente.gordSaturadas * quantidade) / Decimal('100')
+            totais["GordurasTrans"]      += (item.id_ingrediente.gordTrans * quantidade) / Decimal('100')
+            totais["Fibra"]              += (item.id_ingrediente.fibra * quantidade) / Decimal('100')
+            totais["Sodio"]              += (item.id_ingrediente.sodio * quantidade) / Decimal('100')
+
+        for item in ingredientesReceita:
+            totaisPorPorcao["ValorEnergetico"]    += (item.id_ingrediente.valorEnergetico * porcaoReceita) / 100
+            totaisPorPorcao["Carboidratos"]       += (item.id_ingrediente.carboidratos * porcaoReceita) / 100
+            totaisPorPorcao["AcucaresTotais"]     += (item.id_ingrediente.acuTotais * porcaoReceita) / 100
+            totaisPorPorcao["AcucaresAdicionais"] += (item.id_ingrediente.acuAdicionais * porcaoReceita) / 100
+            totaisPorPorcao["Proteinas"]          += (item.id_ingrediente.proteinas * porcaoReceita) / 100
+            totaisPorPorcao["GordurasTotais"]     += (item.id_ingrediente.gordTotais * porcaoReceita) / 100
+            totaisPorPorcao["GordurasSaturadas"]  += (item.id_ingrediente.gordSaturadas * porcaoReceita) / 100
+            totaisPorPorcao["GordurasTrans"]      += (item.id_ingrediente.gordTrans * porcaoReceita) / 100
+            totaisPorPorcao["Fibra"]              += (item.id_ingrediente.fibra * porcaoReceita) / 100
+            totaisPorPorcao["Sodio"]              += (item.id_ingrediente.sodio * porcaoReceita) / 100
+        
+        for item in totais:
+            if item in VD:
+                valoresDiarios[item] = (totais[item] / VD[item]) * 100
+                
+        conteudo = {
+            'info'             : info,
+            'totais'           : totais,
+            'totaisPorPorcao'  : totaisPorPorcao,
+            'VD'               : valoresDiarios,
+            'listaIngredientes': listaIngredientes,
+            'listaAlergenicos'  : listaAlergenicos
+        }
+        if modeloTabela == 'ModeloVertical':
+            return render (request,'tabelaVert.html', {'Valores':conteudo})
+        elif modeloTabela == 'ModeloHorizontal':
+            return render (request,'tabelaHorriz.html', {'Valores':conteudo})
+        elif modeloTabela == 'ModeloLinear':
+            return render (request,'tabelaLinear.html', {'Valores':conteudo})   
+
 
 @login_required(login_url='/usuarios/login/')
 def getValoresIngredientes(request,id):

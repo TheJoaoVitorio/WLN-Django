@@ -13,6 +13,8 @@ urlpatterns = [
     path('criandoreceita/postIngredientesReceita/', views.cadastraIngredientesReceita, name='cadastra-ingredientes-receita'),
     path('criandoreceita/postAlergenicosReceita/', views.cadastraAlergenicosReceita, name='cadastra-alergenicos-receita'),
 
+    path('criandoreceita/getTabelaNutricional/<str:modeloTabela>', views.getTabelaNutricional, name='get-tabela-nutricional'),
+
     path('criandoreceita/getmodelohorizontal/', views.getModeloHorizontal),
     path('criandoreceita/getmodelovertical/', views.getModeloVertical),
     path('criandoreceita/getmodelolinear/', views.getModeloLinear),
