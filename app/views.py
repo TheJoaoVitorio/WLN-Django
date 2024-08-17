@@ -172,32 +172,33 @@ def cadastraIngredientesReceita(request):
 
 @login_required(login_url='/usuarios/login/')
 def cadastraAlergenicosReceita(request):
-    try:
-        ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
-    
-        data = json.loads(request.body)
-        alergenicos = data.get('alergenicos', [])
+    if request.method == 'POST':
+        try:
+            ultimaReceita = Receita.objects.filter(user=request.user).latest('id')
         
-        for alergenico_data in alergenicos:
-            alergenico_id = alergenico_data.get('idAlergenico')
-            try:
-                ID_ALERGENICO = Alergenico.objects.get(id=alergenico_id)
-                AlergenicoReceita.objects.create(
-                    id_receita = ultimaReceita,
-                    id_alergenico = ID_ALERGENICO
-                )
-                
-            except Exception as e:
-                return JsonResponse({'error': str(e)}, status=500)
-
-            except Alergenico.DoesNotExist:
-                return JsonResponse({'error': 'Nenhum Alergenico encontrado'},status=404)
+            data = json.loads(request.body)
+            alergenicos = data.get('alergenicos', [])
             
+            for alergenico_data in alergenicos:
+                alergenico_id = alergenico_data.get('idAlergenico')
+                try:
+                    ID_ALERGENICO = Alergenico.objects.get(id=alergenico_id)
+                    AlergenicoReceita.objects.create(
+                        id_receita = ultimaReceita,
+                        id_alergenico = ID_ALERGENICO
+                    )
+                    
+                except Exception as e:
+                    return JsonResponse({'error': str(e)}, status=500)
+
+                except Alergenico.DoesNotExist:
+                    return JsonResponse({'error': 'Nenhum Alergenico encontrado'},status=404)
+                
             return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
-            #return redirect('/app/home/')
-        
-    except Receita.DoesNotExist:
-        return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)
+                #return redirect('/app/home/')
+            
+        except Receita.DoesNotExist:
+            return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)
 
 
 @login_required(login_url='/usuarios/login/')
@@ -278,7 +279,7 @@ def getTabelaNutricional(request,modeloTabela):
         for item in ingredientesReceita:
             quantidade = Decimal(item.qtdIngrediente) or Decimal('0')
         
-            listaAlergenicos.append({'NomeIngrediente': item.id_ingrediente.nomeIngrediente})
+            listaIngredientes.append({'NomeIngrediente': item.id_ingrediente.nomeIngrediente})
         
             totais["ValorEnergetico"]    += (item.id_ingrediente.valorEnergetico * quantidade) / Decimal('100')
             totais["Carboidratos"]       += (item.id_ingrediente.carboidratos * quantidade) / Decimal('100')

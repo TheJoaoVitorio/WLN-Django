@@ -144,31 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    function postValoresIngredientes(valoresIngredientes) {
-        const url = `postIngredientesReceita/`;
-
-        try {
-            const response = fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify({
-                    ingredientes: valoresIngredientes
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = response.json();
-            return data;
-        } catch (error) {
-            console.error('Erro ao enviar os valores dos ingredientes:', error);
-        }
-    }
+   
 
     const porcaoInput = document.getElementById('porcao');
     porcaoInput.addEventListener('input',()=>{
@@ -366,11 +342,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function postAlergenicos(ListaAlergenicosTotais){
+    async function postValoresIngredientes(valoresIngredientes) {
+        const url = `postIngredientesReceita/`;
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    ingredientes: valoresIngredientes
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Erro ao enviar os valores dos ingredientes:', error);
+        }
+    }
+
+    async function postAlergenicos(ListaAlergenicosTotais){
         const url = `postAlergenicosReceita/`;
 
         try{
-            const response = fetch(url,{
+            const response = await fetch(url,{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json',
@@ -384,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const data = response.json();
+            const data = await response.json();
             return data;
         } catch (error){
             console.error('Erro ao enviar os valores dos alergenicos:', error);
