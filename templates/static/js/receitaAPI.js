@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+   
     function adicionarNomeIngrediente(nome, idLinha) {
         const h3 = document.createElement('h3');
         const ingredientesExistentes = ListaIngredientesTabela.getElementsByTagName('h3');
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         ListaIngredientesTabela.appendChild(h3);
     }
-
+    
     function removerNomeIngrediente(idLinha) {
         const h3Remover = document.getElementById(`nome-${idLinha}`);
         if (h3Remover) {
