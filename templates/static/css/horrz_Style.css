@@ -24,7 +24,7 @@
     .dominio{
         text-align: end;
         display: flex;
-        font-size: 15px;
+        font-size: larger;
         justify-content: end;
     }
 
