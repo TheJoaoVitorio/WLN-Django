@@ -13,6 +13,10 @@ body, html {
     margin-top: 20px; 
 }
 
+#linhaGrossaTabelaNutricional{
+    border: 3px solid;
+}
+
 .content_dominio{
     display:table-column;
 
