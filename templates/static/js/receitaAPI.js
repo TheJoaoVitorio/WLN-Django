@@ -55,9 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
         NomeIng.textContent = nome;
         QtdIng.innerHTML = `<div class="qtdIngredienteInput flex">
                                 <label for="qtdDoIngredienteReceita">Qtd(g/ml)</label>
-                                <input class="qtdDoIngredienteReceita" type="text">
+                                <input id="qtdDoIngredienteReceita" class="qtdDoIngredienteReceita" type="text">
                             </div>`;
         DeleteIng.innerHTML = `<button id="btnApagarIng" class="btnApagarIng"> <img width="35px" src="${apagarReceitaImgUrl}"></button>`;
+        
+        $('#qtdDoIngredienteReceita').mask('000.000.000.000.000,00', {reverse: true});
 
         const qtdInput = QtdIng.querySelector('.qtdDoIngredienteReceita');
         qtdInput.addEventListener('input', function() {

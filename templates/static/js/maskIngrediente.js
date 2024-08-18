@@ -8,3 +8,5 @@ $('#gordSaturadas').mask('000.000.000.000.000,00', {reverse: true});
 $('#gordTrans').mask('000.000.000.000.000,00', {reverse: true});
 $('#fibraAlimentar').mask('000.000.000.000.000,00', {reverse: true});
 $('#sodio').mask('000.000.000.000.000,00', {reverse: true});
+
+$('#qtdDoIngredienteReceita').mask('000.000.000.000.000,00', {reverse: true});
