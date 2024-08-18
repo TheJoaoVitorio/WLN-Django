@@ -200,7 +200,7 @@
     padding:30px;
 }
 .recursos-content{
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap:wrap;
 
     padding:20px;
