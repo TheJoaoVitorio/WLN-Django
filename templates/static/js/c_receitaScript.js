@@ -35,7 +35,8 @@ prevButtonFinal.addEventListener('click', ()=>{
 
 const updateProgress = () => {
     console.log('steps.length =>' + steps.length);
-    console.log('active =>' + active);
+    console.log
+    ('active =>' + active);
 
     steps.forEach((step, i) => {
         if (i < active) {

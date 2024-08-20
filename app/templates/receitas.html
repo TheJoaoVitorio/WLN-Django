@@ -21,7 +21,7 @@
         <div class="navbar-content">
             <div class="logo">
                 <a href=" {% url 'home' %} ">
-                    <img src="{% static 'img/logo.png'%}">
+                    <img src="{% static 'img/logo.png' %}">
                 </a>
             </div>
             <div class="logo user-navbar">
@@ -104,21 +104,21 @@
                                                         {% endif %}
                                                         <span class="full-text" style="display: none;">{{ receita.nomeReceita }}</span>
                                                     </div> 
-                                                    
+                                                     
                                                        
                                                 </th>
                                                 <th>
                                                     {{receita.created_at|date:"d-m-Y"}}
                                                 </th>
                                                 <th id="actionReceita">
-                                                    <a href="">
+                                                    <a href="{% url 'ver_receita_page'%}">
                                                         <abbr title="Ver Receita">
-                                                            <button id="verReceita" ><img width="30px" src="{% static 'img/olhar-receita.png' %}"></button>
+                                                            <button id="verReceita" ><img width="35px" src="{% static 'img/ver_icon.png' %}"></button>
                                                         </abbr>
                                                     </a>
                                                     <a href="excluirReceita/{{receita.id}}">
                                                         <abbr title="Excluir Receita">
-                                                            <input type="image" width="30px" value="{{receita.id}}" src="{% static 'img/apagar-receita.png' %}" >
+                                                            <input type="image" width="35px"  box-shadow="10px 10px 20px rgba(0, 0, 0, 0.5);"  value="{{receita.id}}" src="{% static 'img/excluir_icon.png' %}" >
                                                         </abbr>
                                                     </a>
                                                 </th>

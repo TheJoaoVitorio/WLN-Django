@@ -3,6 +3,7 @@ from . import views
 from usuarios.views import gerenciarConta
 from django.urls import reverse
 
+
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('receitas/', views.receitas, name='receitas'),
@@ -12,6 +13,8 @@ urlpatterns = [
     path('criandoreceita/postReceita/',views.cadastraReceita, name='cadastra-receita'),
     path('criandoreceita/postIngredientesReceita/', views.cadastraIngredientesReceita, name='cadastra-ingredientes-receita'),
     path('criandoreceita/postAlergenicosReceita/', views.cadastraAlergenicosReceita, name='cadastra-alergenicos-receita'),
+    path('visualizareceita/',views.ver_receita, name='ver_receita_page' ),
+    
 
     path('criandoreceita/getTabelaNutricional/<str:modeloTabela>', views.getTabelaNutricional, name='get-tabela-nutricional'),
 

@@ -22,7 +22,7 @@ from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from django.urls import reverse 
 
-
+ 
 
 # Create your views here.
 @login_required(login_url='/usuarios/login/')
@@ -458,6 +458,22 @@ def editar_ingrediente(request, Ingrediente_id):
         messages.add_message(request, constants.ERROR, f"Erro inesperado: {e}")
         return redirect('/app/meusingredientes/')
 
+
+###### Funcao para alimentar a tabela de visualizar receita #######
+@login_required(login_url='/usuarios/login/')
+def visualizar_receita(request, receita_id):
+    # Busca a receita pelo ID
+    vereceita = get_object_or_404(Receita, id= receita_id)
+    
+    # Renderiza a página com a receita específica
+    return render(request, 'visualizar_receita.html', {
+        {'receita': ver_receita},
+    }) 
+
+###### FIM Funcao para alimentar a tabela de visualizar receita #####
+
+
+
 @login_required(login_url='/usuarios/login/')
 def getMeusIngredientes(request):
     if request.user.is_authenticated: 
@@ -536,3 +552,7 @@ def criarAlergenico(request):
             return
 
         return
+    
+def ver_receita(request):
+    return render( request, 'tabelaPreView.html')
+

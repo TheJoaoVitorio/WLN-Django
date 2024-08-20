@@ -1,0 +1,182 @@
+/*STYLE SITE*/
+.container-principal {}
+/*STYLE DA TABELA VERTICAL */
+/*##################################################################################*/
+
+.logoTabela{
+
+}
+.arrow-select-modelos-preview {
+    font-size: 14px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #474747;
+}
+
+
+.nome_receita{
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;  
+    
+}
+.text_nome_receita{
+    font-weight: 300;
+}
+.view_text1{
+    font-weight: 500;
+    white-space:nowrap;
+}
+
+.btn-submit-receita_preview button{
+    width: 250px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    gap: 5px;
+    font-family: "Poppins";
+    border: none;
+    border-radius: 5px;
+}
+.btn-voltar-preview{
+    display: flex   ;
+}
+.roda_voltar_preview{
+    text-decoration: none;
+}
+.pai-select{
+    margin-block: 25px;
+}
+.containerListaItensTabela {
+    max-width: 600px;
+    width: 100%; 
+    text-align: left; /* Alinha texto à esquerda */
+    margin-top: 20px; 
+}
+
+.content_dominio{
+    display:table-column;
+
+}
+.dominio{
+    text-align: end;
+    display:inline;
+    font-size: larger;
+    align-items: end;
+    align-content: end;
+}
+
+.linha_dominio{
+    font-size:40px;
+    width: 100%;
+}
+
+.content-rotulos {
+    
+    display: flex; 
+    font-size: 20px;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;  
+    box-sizing: border-box; 
+
+    max-width: 600px;
+}
+.container-pai-rotulo {
+    padding-top: 62vh;
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+
+.tabela-nutricional-preview {
+    background-color: #fff;
+    padding: 10px;
+    /*border-radius: 10px;*/
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+    border : 4px solid;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 12px;
+    margin-bottom:20px ;
+    
+}
+
+.tabela-nutricional-preview h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tabela-nutricional-preview p {
+    font-size: 0.9em;
+    text-align: left;
+    margin: 5px 0;
+}
+
+.tabela-nutricional-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    border-left:none ;
+    border-right: none;
+} 
+
+.tabela-nutricional-preview table th tr{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.tabela-nutricional-preview thead th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: solid;
+    border-left: 1px solid;
+}
+
+.tabela-nutricional-preview tbody{
+   border: none;
+    border-collapse: collapse;
+}
+
+.tabela-nutricional-preview tbody tr{
+   /* border:2px solid red;*/
+}
+.tabela-nutricional-preview thead :first-child{
+    border-left: none;
+}
+.tabela-nutricional-preview tbody td {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    font-size: 16px;
+}
+
+.tabela-nutricional-preview tbody tr:last-child td {
+    border-bottom: none;
+}
+.tabela-nutricional-preview tbody td:last-child {
+    border-right: none;
+}
+
+.tabela-nutricional-preview tbody td:nth-child(13){
+    margin-left: 10px;
+}
+/*FIM STYLE DA VER TABELA  */
+
+/*MIDIA SCREEN*/
+@media (max-width:805px ){
+    
+}
+/*##################################################################################*/
