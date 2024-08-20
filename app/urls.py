@@ -18,10 +18,7 @@ urlpatterns = [
 
     path('criandoreceita/getTabelaNutricional/<str:modeloTabela>', views.getTabelaNutricional, name='get-tabela-nutricional'),
 
-    path('criandoreceita/getmodelohorizontal/', views.getModeloHorizontal),
-    path('criandoreceita/getmodelovertical/', views.getModeloVertical),
-    path('criandoreceita/getmodelolinear/', views.getModeloLinear),
-    
+
     path('criandoreceita/getValoresIngrediente/<int:id>/', views.getValoresIngredientes, name='get-valores-ingrediente'),
     path('criandoreceita/getAlergenicos/', views.getAlergenicos, name='get-alergenicos'),  
     path('criandoreceita/getBaseIngredientes/', views.getBaseIngredientes, name='get-base-ingredientes'),

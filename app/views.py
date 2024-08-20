@@ -122,17 +122,6 @@ def cadastraReceita(request):
             messages.add_message(request, constants.ERROR, f"Erro inesperado: {e}")
             return redirect('/app/home/')
 
-def getModeloHorizontal(request):
-    if request.method == "GET":
-        return render (request,'tabelaHorriz.html')
-
-def getModeloVertical(request):
-    if request.method == "GET":
-        return render (request, 'tabelaVert.html')
-    
-def getModeloLinear(request):
-    if request.method == "GET":
-        return render (request, 'tabelaLinear.html')
 
 @login_required(login_url='/usuarios/login/')
 def cadastraIngredientesReceita(request):
@@ -141,7 +130,7 @@ def cadastraIngredientesReceita(request):
 
         data = json.loads(request.body)
         ingredientes = data.get('ingredientes', [])
-    # Carboidratos = request.POST.get('carboidratos').replace(',' , '.')
+
         for ingrediente_data in ingredientes:
             ingrediente_id = ingrediente_data.get('Id') 
             ingrediente_qtd = ingrediente_data.get('Quantidade').replace(',' , '.')
@@ -160,8 +149,7 @@ def cadastraIngredientesReceita(request):
                 return JsonResponse({'error': f'Ingrediente com ID {ingrediente_id} não encontrado'}, status=400)
             
         return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
-        # messages.add_message(request, constants.SUCCESS, 'Receita criada com sucesso !')
-        # return redirect('/app/home')
+
     
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
@@ -169,6 +157,7 @@ def cadastraIngredientesReceita(request):
         return JsonResponse({'error': 'Nenhuma receita encontrada para o usuário'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
 
 @login_required(login_url='/usuarios/login/')
 def cadastraAlergenicosReceita(request):
@@ -459,19 +448,21 @@ def editar_ingrediente(request, Ingrediente_id):
         return redirect('/app/meusingredientes/')
 
 
-###### Funcao para alimentar a tabela de visualizar receita #######
+
 @login_required(login_url='/usuarios/login/')
 def visualizar_receita(request, receita_id):
-    # Busca a receita pelo ID
-    vereceita = get_object_or_404(Receita, id= receita_id)
-    
-    # Renderiza a página com a receita específica
-    return render(request, 'visualizar_receita.html', {
-        {'receita': ver_receita},
-    }) 
+    if request.method == "GET":
+        try:
+            verReceita = get_object_or_404(Receita, id= receita_id)
 
-###### FIM Funcao para alimentar a tabela de visualizar receita #####
-
+        except Receita.DoesNotExist:
+            messages.add_message(request, constants.ERROR, f"Receita não existe! ")
+            return redirect('/app/receitas')
+        except Exception as error:
+            messages.add_message(request, constants.ERROR, f"Erro inesperado: {error} ")
+            return redirect('/app/receitas')
+        
+        return render(request, 'visualizar_receita.html', {{'receita': ver_receita},}) 
 
 
 @login_required(login_url='/usuarios/login/')
