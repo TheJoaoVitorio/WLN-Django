@@ -1233,7 +1233,7 @@ img.email{
     }
 
     .tabela-nutricional tbody tr{
-        border:2px solid red;
+        /*border:2px solid red;*/
     }
     
     .tabela-nutricional tbody td {
@@ -1465,7 +1465,7 @@ th{
 
 /* BOTÃO CRIAR INGREDIENTES*/
 .btnCriarIngrediente{
-    width: 100px;
+    width: 106px;
     padding: 6px;
     cursor: pointer;
     font-weight: 600;
@@ -1818,7 +1818,7 @@ textarea:focus{
     background: #F0F0F0;
     border-radius: 6px;
 
-    max-width: 95%;
+    max-width: 85%;
     width: 400px;
     display: flex;
     justify-content: center;

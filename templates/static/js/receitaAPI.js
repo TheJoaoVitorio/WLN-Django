@@ -266,8 +266,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tabelaNutricional.querySelector('tr:nth-child(9) td:nth-child(4)').textContent = `${((totais.Fibra / VD.Fibra) * 100).toFixed(2)}%`;
         tabelaNutricional.querySelector('tr:nth-child(10) td:nth-child(4)').textContent = `${((totais.Sodio / VD.Sodio) * 100).toFixed(2)}%`;
     }
-    
-
     //ALERGENICOS DA RECEITA
     const ListaAlergenicos = document.getElementById('optionsAlergenicos');
     const AlergenicosDaReceita = document.querySelector('.table-alergenicos table tbody');

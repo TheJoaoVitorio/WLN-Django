@@ -1,0 +1,217 @@
+{% load static %}
+{% load pwa %}
+{% progressive_web_app_meta %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   
+    <link rel="stylesheet" href="{% static 'css/tab_PreView.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+
+    <title>WLN_Rotulos_ VER_VERTICAL</title>
+</head>
+<body>
+    <nav class="container-navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png'%}">
+                </a>
+            </div>
+            <div class="logo user-navbar">
+                <a href="{% url 'minha-conta' %}">
+                    <img src="{% static 'img/user.png'%}">
+                </a>
+            </div>
+        </div>
+    </nav>  
+
+    <div class="container-pai-de-todos">
+        <div class="container-principal flex">
+            <div class="nav-left">
+                <div class="nav-items-lateral">
+                    <div class="item-lateral ">
+                        <a href="{% url 'home' %}">
+                            <img id="image-sidebar" src="{% static 'img/home.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral active">
+                        <a href="{% url 'receitas' %}">
+                            <img id="image-sidebar" src="{% static 'img/receita-active.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'meus-ingredientes' %}">
+                            <img id="image-sidebar" src="{% static 'img/ingredientes.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href="{% url 'contate-nos' %} ">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-headset.png'%}">
+                        </a>
+                    </div>
+    
+                    <div class="item-lateral">
+                        <a href=" {% url 'minha-conta' %} ">
+                            <img id="image-sidebar" src="{% static 'img/fi-rr-user.png'%}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+<!--############################################################ TABELA PREVIEW ############################################################################# -->
+           
+            <div class="container-pai-rotulo">
+                <div id="div_campos"> 
+                    <div class="content-rotulos">
+                        <div><h1 class="view_text1"> Informações da Receita :</h1></div>
+                        <div class="nome_receita" ><h2 class="text_nome_receita"> Nome Receita </h2></div>    
+                        
+                            <div class="selectModelosRotulos">
+                                <div>
+                                    <div class="div-pai-select-form4">
+                                        <select class="inputForm2 select-btn4"  id="selectOptionModeloTabela">
+                                            <option value="ModeloHorizontal">Modelo Horizontal</option>
+                                            <option value="ModeloVertical">Modelo Vertical</option>
+                                            <option value="ModeloLinear">Modelo Linear</option>
+                                        </select>
+                                        <div class="arrow-select-modelos-preview">
+                                            <i class='bx bxs-down-arrow'></i>
+                                        </div>
+                                    </div>
+                                </div>        
+                       
+                
+                        
+                
+                        <div class="btn-submit-receita_preview">
+                            <button id="btnGerarReceita" type="submit" class="btn-verde btn-gerar-pdf">Gerar Pdf <img width="25px" src="{% static 'img/fi-rr-file.png'%}"> </button>
+                            <a class="roda_voltar_preview"   href="{% url 'receitas'%}">
+                                <button style="background: no-repeat; font-weight: 700; color: 838383;" type="button" class="btn-voltar-preview">
+                                  
+                                    <img src="{% static 'img/fi-sr-arrow-small-right.png'%}">
+                                    Voltar
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>        
+            
+                    <div class="tabela-nutricional-preview">
+                        <h2>INFORMAÇÃO NUTRICIONAL</h2>
+                        <hr>
+                        <p>Porção por embalagem: <span id="porcoesEmbTabela"></span> porções</p>
+                        <p>Porção: <span id="porcaoTabela"></span> <span id="medidaCaseiraTabela"></span> </p>
+                        <hr id="linhaGrossaTabelaNutricional">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>100g</th> 
+                                    <th>000g</th>
+                                    <th>% VD*</th>
+                                </tr>
+                            </thead>
+                            <tbody style="border: none;">
+                                <tr>
+                                    <td>Valor Energético (kcal)</td>
+                                    <td>0000000000kcal</td> <!-- kcal g -->
+                                    <td>0000000000</td>
+                                    <td>12%</td>
+                                </tr>
+                                <tr>
+                                    <td>Carboidratos totais (g)</td>
+                                    <td>g</td> <!-- carboidratos  g -->
+                                    <td></td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td>Açúcares totais (g)</td>
+                                    <td>g</td> <!-- acucar totais g -->
+                                    <td></td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td >Açúcares adicionados (g)</td>
+                                    <td>g</td> <!-- acucar adicionado g -->
+                                    <td></td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td>Proteínas</td>
+                                    <td>g</td> <!-- proteinas g -->
+                                    <td></td>
+                                    <td>7%</td>
+                                </tr>
+                                <tr>
+                                    <td>Gorduras Totais</td>
+                                    <td>g</td> <!-- gorduras totais g -->
+                                    <td></td>
+                                    <td>18%</td>
+                                </tr>
+                                <tr>
+                                    <td>Gorduras Saturadas</td>
+                                    <td>g</td> <!-- gorduras saturadas g -->
+                                    <td></td>
+                                    <td>9%</td>
+                                </tr>
+                                <tr>
+                                    <td>Gorduras Trans</td>
+                                    <td>g</td> <!-- gorduras trans g -->
+                                    <td></td>
+                                    <td>**</td>
+                                </tr>
+                                <tr>
+                                    <td>Fibra Alimentar</td>
+                                    <td>g</td> <!-- fibra g -->
+                                    <td></td>
+                                    <td>8%</td>
+                                </tr>
+                                <tr>
+                                    <td>Sódio</td>
+                                    <td>mg</td> <!-- sodio mg -->
+                                    <td></td>
+                                    <td>12%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr id="linhaFinaTabelaNutricional">
+                        <p>*Percentual de valores diários fornecidos pela porção.</p>
+
+                        <div class="containerListaItensTabela">
+                            <div class="listaIngredientesTabela flex">
+                                <h2>INGREDIENTES:</h2>
+                                <!-- NOME DOS INGREDIENTES É ADICIONADO AQUI -->
+                            </div>
+                            <div class="listaAlergenicosTabela flex ">
+                                <h2>ALERGÊNICOS:</h2>
+                                <!-- NOME DOS ALERGENICOS É ADICIONADO AQUI -->
+                                    
+                            </div>
+                        </div>
+                    </div>
+            
+                    
+            
+                    
+                </div>
+            </div>    
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/5.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/timerMessage.js' %}"></script>
+    <script src="{% static 'js/show-btn.js' %}"></script>  
+</body>
+</html>
