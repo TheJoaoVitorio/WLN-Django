@@ -56,7 +56,7 @@ def receitas(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         if search:
-            minhasReceitas = Receita.objects.filter(nomeReceita__icontains=search)
+            minhasReceitas = Receita.objects.filter(nomeReceita__icontains=search, user=request.user.id)
         else:
             receitas = Receita.objects.all().filter(user=request.user.id)
 
@@ -141,10 +141,10 @@ def cadastraIngredientesReceita(request):
 
         data = json.loads(request.body)
         ingredientes = data.get('ingredientes', [])
-
+    # Carboidratos = request.POST.get('carboidratos').replace(',' , '.')
         for ingrediente_data in ingredientes:
             ingrediente_id = ingrediente_data.get('Id') 
-            ingrediente_qtd = ingrediente_data.get('Quantidade')
+            ingrediente_qtd = ingrediente_data.get('Quantidade').replace(',' , '.')
             try:
                 ID_ingrediente = Ingrediente.objects.get(id=ingrediente_id)
                 IngredientesReceita.objects.create(

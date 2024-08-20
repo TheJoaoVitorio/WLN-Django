@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>`;
         DeleteIng.innerHTML = `<button id="btnApagarIng" class="btnApagarIng"> <img width="35px" src="${apagarReceitaImgUrl}"></button>`;
         
-        $('#qtdDoIngredienteReceita').mask('000.000.000.000.000,00', {reverse: true});
+        $('.qtdDoIngredienteReceita').mask('000.000.000.000.000,00', {reverse: true});
 
         const qtdInput = QtdIng.querySelector('.qtdDoIngredienteReceita');
         qtdInput.addEventListener('input', function() {

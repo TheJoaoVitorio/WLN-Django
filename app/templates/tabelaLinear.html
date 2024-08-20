@@ -1,12 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/linh_Style.css'%}">
-    <script src="{% static 'js/receitaAPI.js'%}"></script>
-    <title>WLN_Rotulos_ LINEAR</title>
+    <title>WLN - Rotulo LINEAR</title>
 </head>
 <body>
     <div class="content-rotulos">
@@ -23,8 +22,7 @@
                 <p> *Porção:<span id="porcaoTabela">{{ Valores.info.Porcao }}</span> <span id="medidaCaseiraTabela">({{ Valores.info.MedidaCaseira }})</span> </p>
             </div>
           
-            <hr id="linhaGrossa">
-            
+            <hr id="linhaGrossa"> 
                 <tbody>
                         <tr>
                             <th>Por 100g</th> 
@@ -40,7 +38,7 @@
                     <tr>
                         <td> *Carboidratos totais</td>
                         <td class="carboidratos">{{ Valores.totais.Carboidratos }}</td>
-                        <td>({{ Valores.totaisPorPorcao.Carboidratos }}, </td>
+                        <td class="carboidratos">({{ Valores.totaisPorPorcao.Carboidratos }}, </td>
                         <td class="vd">{{ Valores.VD.Carboidratos }})</td>
                     </tr>
                     <tr>
@@ -57,7 +55,7 @@
                     <tr>
                         <td>*Proteínas</td>
                         <td class="proteinas">{{ Valores.totais.Proteinas }}</td> <!-- proteinas g -->
-                        <td>({{ Valores.totaisPorPorcao.Proteinas }}, </td>
+                        <td class="proteinas"></tdclass>>({{ Valores.totaisPorPorcao.Proteinas }}, </td>
                         <td class="vd">{{ Valores.VD.Proteinas }})</td>
                     </tr>
                     <tr>
@@ -82,7 +80,7 @@
                         <td>Fibra Alimentar</td>
                         <td class="fibra">{{ Valores.totais.Fibra }}</td> <!-- fibra g -->
                         <td class="fibra">({{ Valores.totaisPorPorcao.Fibra }}, </td>
-                        <td>class="vd">{{ Valores.VD.Fibra }})</td>
+                        <td class="vd">{{ Valores.VD.Fibra }})</td>
                     </tr>
                     <tr>
                         <td>*Sódio</td>
