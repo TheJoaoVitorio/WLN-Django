@@ -91,10 +91,12 @@
 
                                 <div class="btn-submit-receita">
                                     <button id="btnGerarReceita" type="submit" class="btn-verde btn-gerar-pdf">Gerar Pdf <img width="25px" src="{% static 'img/fi-rr-file.png' %}"> </button>
-                                    <button type="button" class="btn-voltar2">
-                                        <img src="{% static 'img/fi-sr-arrow-small-right.png' %}">
-                                        Voltar
-                                    </button>
+                                    <a href="{% url 'receitas' %}">
+                                        <button type="button" class="btn-voltar2">
+                                            <img src="{% static 'img/fi-sr-arrow-small-right.png' %}">
+                                            Voltar
+                                        </button>
+                                    </a>
                                 </div>
 
                                 <div class="tabela-nutricional">
