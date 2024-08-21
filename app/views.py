@@ -374,8 +374,13 @@ def userIngredientes(request):
             meusIngredientesList = Ingrediente.objects.all().filter(id_user=request.user.id)
             paginator = Paginator(meusIngredientesList , 3)
             page = request.GET.get('page')
+            try:
+                meusIngredientes = paginator.get_page(page)
+            except PageNotAnInteger:
+                meusIngredientes = paginator.get_page(1)
+            except EmptyPage:
+                meusIngredientes = paginator.page(paginator.num_pages)
 
-            meusIngredientes = paginator.get_page(page)
         return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes})
 
 
