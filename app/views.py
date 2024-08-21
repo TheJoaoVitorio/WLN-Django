@@ -7,10 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.messages import constants
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 from django.contrib.auth import update_session_auth_hash
 from django.core.mail import BadHeaderError,send_mail
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Ingrediente
 from .models import Alergenico
@@ -45,8 +46,12 @@ def verIngredientesSistema(request):
             listBaseIngredientes = Ingrediente.objects.all().filter(id_user=None)
             paginator = Paginator(listBaseIngredientes,4)
             page = request.GET.get('page')
-
-            BaseIngredientes = paginator.get_page(page)
+            try:
+                BaseIngredientes = paginator.get_page(page)
+            except PageNotAnInteger:
+                BaseIngredientes = paginator.get_page(1)
+            except EmptyPage:
+                BaseIngredientes = paginator.page(paginator.num_pages)
             
         return render (request,'baseIngredientes.html',{'baseIngredientes':BaseIngredientes})
 
@@ -62,16 +67,30 @@ def receitas(request):
 
             paginator = Paginator(receitas,4)
             page = request.GET.get('page')
-            minhasReceitas = paginator.get_page(page)
+            try:
+                minhasReceitas = paginator.get_page(page)
+            except PageNotAnInteger:
+                minhasReceitas = paginator.get_page(1)
+            except EmptyPage:
+                minhasReceitas = paginator.page(paginator.num_pages)
+
         return render (request, 'receitas.html', {'Receitas':minhasReceitas})
+
 
 @login_required(login_url='/usuarios/login')
 def excluirReceita(request,Receita_id):
     if request.method == 'GET':
-        receita = get_object_or_404(Receita, id=Receita_id)
-        receita.delete()
-        messages.add_message(request, constants.SUCCESS, 'Receita deletada com sucesso!')
-        return redirect('/app/home/')
+        try:
+            receita = get_object_or_404(Receita, id=Receita_id)
+            if receita.user != request.user:
+                return HttpResponseForbidden("Você não tem permissão para excluir esta receita.")
+        
+            receita.delete()
+            messages.add_message(request, constants.SUCCESS, 'Receita deletada com sucesso!')
+            return redirect('/app/home/')
+        except Exception as Error:
+            messages.add_message(request, constants.ERROR, f'Error:{Error}')
+            return redirect('/app/receitas')
 
 @login_required(login_url='/usuarios/login/')
 def criandoReceita(request):
@@ -462,7 +481,7 @@ def visualizar_receita(request, receita_id):
             messages.add_message(request, constants.ERROR, f"Erro inesperado: {error} ")
             return redirect('/app/receitas')
         
-        return render(request, 'visualizar_receita.html', {{'receita': ver_receita},}) 
+        return render(request, 'tabelaPreView.html', {{'receita': ver_receita},}) 
 
 
 @login_required(login_url='/usuarios/login/')
