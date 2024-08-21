@@ -184,7 +184,7 @@ def cadastraAlergenicosReceita(request):
                     return JsonResponse({'error': 'Nenhum Alergenico encontrado'},status=404)
                 
             return JsonResponse({'message': 'Ingredientes cadastrados com sucesso!'}, status=201)
-                #return redirect('/app/home/')
+        
             
         except Receita.DoesNotExist:
             return JsonResponse({'error': 'Nenhuma Receita encontrada'},status=404)
