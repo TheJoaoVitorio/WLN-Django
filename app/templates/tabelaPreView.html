@@ -69,7 +69,13 @@
                 <div class="container-content">
                     <div class="content-title">
                         <h1 id="TituloCriandoReceita">Informações da receita</h1>
-                        <h3>{{ Valores.info.NomeReceita }}</h3>
+                        <h3>
+                            {% if Valores.info.NomeReceita|length > 10 %}
+                                {{ Valores.info.NomeReceita|slice:":20" }}...
+                            {% else %}
+                                {{ Valores.info.NomeReceita }}
+                            {% endif %}
+                        </h3>
                     </div>
 
                     <div class="content-minhas-receitas">
@@ -189,7 +195,13 @@
                                         </div>
                                         {% for ingrediente in Valores.listaIngredientes %} 
                                             <div class="sectionListaIngredientes">
-                                                <p>{{ingrediente.NomeIngrediente}}</p>
+                                                <p>
+                                                    {% if ingrediente.NomeIngrediente > 15 %}
+                                                        {{ingrediente.NomeIngrediente|slice:"15"}} ...
+                                                    {% else %}
+                                                        {{ingrediente.NomeIngrediente}}
+                                                    {% endif %}    
+                                                </p>
                                                 <i class='bx bxs-bowl-hot'></i>
                                             </div>
                                         {% endfor %}
@@ -200,7 +212,13 @@
                                         </div> 
                                         {% for alergenico in Valores.listaAlergenicos %}
                                             <div class="sectionListaIngredientes">
-                                                <p>{{alergenico.NomeAlergenico}}</p>
+                                                <p>
+                                                    {% if alergenico.NomeAlergenico > 15 %}
+                                                        {{alergenico.NomeAlergenico| slice:"15"}} ...
+                                                    {%else%}
+                                                        {{alergenico.NomeAlergenico}}   
+                                                    {%endif%}    
+                                                </p>
                                                 <i class='bx bxs-error'></i>
                                             </div>
                                         {% endfor %}

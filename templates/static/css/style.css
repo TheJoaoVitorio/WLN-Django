@@ -538,7 +538,7 @@ img.email{
 
 }
 @media screen and (min-width:600px){
-    /* telas de comutadores */
+    /* telas de computadores */
     .seta{
         display: none;
    
@@ -2035,8 +2035,7 @@ textarea:focus{
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     }
-
-    
+   
 }
 
 @media (max-width:605px){
@@ -2137,6 +2136,14 @@ textarea:focus{
         display: flex;
     }
 
+    .containerSectionsReceitas{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 12px;
+        width: 80%;
+        margin-left: 7vh;
+    }
     /*#################################################################*/
 
 }
@@ -2198,3 +2205,13 @@ textarea:focus{
     background: #f7f7f7;
     color: #EE7828;
 }
+
+@media screen and (max-width:605px)  and (orientation:landscape){
+    .containerSectionsReceitas{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 12px;
+ 
+    margin-left: 20vh;
+}}
