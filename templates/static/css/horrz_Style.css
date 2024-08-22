@@ -114,9 +114,8 @@
     }
 
     .tabela-nutricional-horizontal tbody tr{
-    border: none;
-    white-space: nowrap;
-    
+        border: none;
+        white-space: nowrap;
     }
 
     .tabela-nutricional-horizontal tbody td {

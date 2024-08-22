@@ -6,6 +6,11 @@ body, html {
     height: 100%;
     font-family: Arial, Helvetica;
 }
+.containerRotulos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .containerListaItensTabela {
     max-width: 600px;
     width: 100%; 
@@ -98,9 +103,6 @@ body, html {
     border-collapse: collapse;
 }
 
-.tabela-nutricional tbody tr{
-   /* border:2px solid red;*/
-}
 .tabela-nutricional thead :first-child{
     border-left: none;
 }

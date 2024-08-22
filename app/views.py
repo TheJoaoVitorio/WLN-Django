@@ -213,7 +213,7 @@ def cadastraAlergenicosReceita(request):
 def getTabelaNutricional(request,modeloTabela):
     if request.method == 'GET':
         totais = {
-               'ValorEnergetico'      : 0,
+               'ValorEnergetico'       : 0,
                 'Carboidratos'         : 0,
                 'AcucaresTotais'       : 0,
                 'AcucaresAdicionais'   : 0,
@@ -322,8 +322,9 @@ def getTabelaNutricional(request,modeloTabela):
             'totaisPorPorcao'  : totaisPorPorcao,
             'VD'               : valoresDiarios,
             'listaIngredientes': listaIngredientes,
-            'listaAlergenicos'  : listaAlergenicos
+            'listaAlergenicos' : listaAlergenicos
         }
+
         if modeloTabela == 'ModeloVertical':
             return render (request,'tabelaVert.html', {'Valores':conteudo})
         elif modeloTabela == 'ModeloHorizontal':

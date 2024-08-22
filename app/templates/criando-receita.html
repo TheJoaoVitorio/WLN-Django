@@ -162,7 +162,7 @@
                                         </div>
                                         <div class="pesoFinalReceita flex">
                                             <label for="pesoFinal">Peso Final(g/ml)</label>
-                                            <input name="pesoFinal" id="pesoFinal" class="inputForm2" type="number" placeholder="0" required>
+                                            <input name="pesoFinal" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 44 || event.charCode == 46" id="pesoFinal" class="inputForm2" type="number" placeholder="0" required>
                                         </div>
                                         <div class="porcaoReceita flex">
                                             <label for="porcao">Porção(g/ml)</label>
