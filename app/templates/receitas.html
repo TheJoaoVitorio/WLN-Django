@@ -92,7 +92,6 @@
                                 </thead>
                                 {% if Receitas %}
                                     {% for receita in Receitas %}
-                                        
                                         <tbody>
                                             <tr>
                                                 <th>
@@ -111,7 +110,7 @@
                                                     {{receita.created_at|date:"d-m-Y"}}
                                                 </th>
                                                 <th id="actionReceita">
-                                                    <a href="{% url 'ver_receita_page'%}">
+                                                    <a href="visualizarReceita/{{receita.id}}">
                                                         <abbr title="Ver Receita">
                                                             <button id="verReceita" ><img width="35px" src="{% static 'img/ver_icon.png' %}"></button>
                                                         </abbr>
