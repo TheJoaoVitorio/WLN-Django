@@ -83,7 +83,7 @@
                         </form>
 
                         <div class="receitas">
-                            <table class="table-receitas">
+                            <table class="table-receitas" >
                                 <thead>
                                     <tr>
                                         <th>Receitas</th>
@@ -97,7 +97,7 @@
                                                 <th>
                                                     <div class="text-container" id="recipe-{{ forloop.counter }}">
                                                         {% if receita.nomeReceita|length > 15 %}
-                                                            <span class="truncated-text">{{ receita.nomeReceita|slice:":15" }}... </span>
+                                                            <span class="truncated-text">{{ receita.nomeReceita|slice:":10" }}... </span>
                                                         {% else %}
                                                             {{ receita.nomeReceita }}
                                                         {% endif %}
