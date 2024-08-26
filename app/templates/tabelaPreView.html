@@ -69,43 +69,45 @@
                 <div class="container-content">
                     <div class="content-title">
                         <h1 id="TituloCriandoReceita">Informações da receita</h1>
-                        <h3>
-                            {% if Valores.info.NomeReceita|length > 10 %}
-                                {{ Valores.info.NomeReceita|slice:":20" }}...
-                            {% else %}
-                                {{ Valores.info.NomeReceita }}
-                            {% endif %}
-                        </h3>
+                        <h3>{{ Valores.info.NomeReceita }}</h3>
                     </div>
 
                     <div class="content-minhas-receitas">
                         <div class="formReceita">      
                             <div class="">
-                                <div class="selectModelosRotulos">
-                                    <form action="">
-                                        <div class="div-pai-select-form4">
-                                            <select class="inputForm2 select-btn4" id="selectOptionModeloTabela">
-                                                <option value="ModeloHorizontal">Modelo Horizontal</option>
-                                                <option value="ModeloVertical">Modelo Vertical</option>
-                                                <option value="ModeloLinear">Modelo Linear</option>
-                                            </select>
-                                            <div class="arrow arrow-select-modelos">
-                                                <i class='bx bxs-down-arrow'></i>
+                                <form id="reiprimirReceita" method="post" action="{% url 'imprimir-tabela-novamente' %}">
+                                    {% csrf_token %}
+                                    <script>
+                                        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                                    </script>
+                                    <input id="id_receita" value="{{Valores.info.IdReceita}}" name="id_receita" type="text">
+
+                                    <div class="selectModelosRotulos">
+
+                                            <div class="div-pai-select-form4">
+                                                <select class="inputForm2 select-btn4" id="selectOptionModeloTabela" name="modelo_tabela">
+                                                    <option value="ModeloHorizontal">Modelo Horizontal</option>
+                                                    <option value="ModeloVertical">Modelo Vertical</option>
+                                                    <option value="ModeloLinear">Modelo Linear</option>
+                                                </select>
+                                                <div class="arrow arrow-select-modelos">
+                                                    <i class='bx bxs-down-arrow'></i>
+                                                </div>
                                             </div>
+                                        
+                                    </div>
+                                    <!-- <a href="/imprimirNovamente/>"></a> -->
+                                        <div class="btn-submit-receita">
+                                            <button id="btnGerarReceita" type="submit" class="btn-verde btn-gerar-pdf">Gerar Pdf <img width="25px" src="{% static 'img/fi-rr-file.png' %}"> </button>
+                                            <a href="{% url 'receitas' %}">
+                                                <button type="button" class="btn-voltar2">
+                                                    <img src="{% static 'img/fi-sr-arrow-small-right.png' %}">
+                                                    Voltar
+                                                </button>
+                                            </a>
                                         </div>
-                                    </form>
-                                </div>
-
-                                <div class="btn-submit-receita">
-                                    <button id="btnGerarReceita" type="submit" class="btn-verde btn-gerar-pdf">Gerar Pdf <img width="25px" src="{% static 'img/fi-rr-file.png' %}"> </button>
-                                    <a href="{% url 'receitas' %}">
-                                        <button type="button" class="btn-voltar2">
-                                            <img src="{% static 'img/fi-sr-arrow-small-right.png' %}">
-                                            Voltar
-                                        </button>
-                                    </a>
-                                </div>
-
+                                    <!-- </a> -->
+                                </form>
                                 <div class="tabela-nutricional">
                                     <h2>INFORMAÇÃO NUTRICIONAL</h2>
                                     <hr>
@@ -195,13 +197,7 @@
                                         </div>
                                         {% for ingrediente in Valores.listaIngredientes %} 
                                             <div class="sectionListaIngredientes">
-                                                <p>
-                                                    {% if ingrediente.NomeIngrediente > 15 %}
-                                                        {{ingrediente.NomeIngrediente|slice:"15"}} ...
-                                                    {% else %}
-                                                        {{ingrediente.NomeIngrediente}}
-                                                    {% endif %}    
-                                                </p>
+                                                <p>{{ingrediente.NomeIngrediente}}</p>
                                                 <i class='bx bxs-bowl-hot'></i>
                                             </div>
                                         {% endfor %}
@@ -212,13 +208,7 @@
                                         </div> 
                                         {% for alergenico in Valores.listaAlergenicos %}
                                             <div class="sectionListaIngredientes">
-                                                <p>
-                                                    {% if alergenico.NomeAlergenico > 15 %}
-                                                        {{alergenico.NomeAlergenico| slice:"15"}} ...
-                                                    {%else%}
-                                                        {{alergenico.NomeAlergenico}}   
-                                                    {%endif%}    
-                                                </p>
+                                                <p>{{alergenico.NomeAlergenico}}</p>
                                                 <i class='bx bxs-error'></i>
                                             </div>
                                         {% endfor %}
@@ -231,9 +221,7 @@
             </div>  
         </div>
     </div>
+    <script src="{% static 'js/reimprimirReceita.js' %}"></script>
     <script src="{% static 'js/arredondaCamposTabela.js' %}"></script>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
-    <script src="{% static 'js/receita.js' %}"></script>
 </body>
 </html>

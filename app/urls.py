@@ -8,6 +8,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('receitas/', views.receitas, name='receitas'),
     path('receitas/visualizarReceita/<int:receita_id>',views.visualizar_receita, name='ver_receita_page' ),
+    path('receitas/visualizarReceita/imprimirNovamente/', views.imprimirTabelaNovamente, name='imprimir-tabela-novamente'),
     path('receitas/excluirReceita/<int:Receita_id>', views.excluirReceita, name='excluir-receita'),
 
     path('criandoreceita/', views.criandoReceita, name='criando-receita'),

@@ -2175,14 +2175,14 @@ textarea:focus{
     display: flex;
     align-items: center;
     height: 60px;
-    background: #DEDEDE;
+    /* background: #DEDEDE; */
     border:none;
     border-radius: 10px;
     height: 40px;
     padding-left: 16px;
     outline: none;
     appearance: none;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
     
 }
 .sectionListaIngredientes{
@@ -2215,3 +2215,7 @@ textarea:focus{
  
     margin-left: 20vh;
 }}
+
+#id_receita{
+    display: none;
+}
