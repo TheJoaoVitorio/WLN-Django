@@ -647,7 +647,7 @@ img.email{
 }
 .title-table{
     left: 60%;
-    position: fixed;
+    position: sticky;
     padding-bottom: 4px;
     font-weight: 600;
 }
@@ -1862,7 +1862,7 @@ textarea:focus{
 .dashboard-menu-table table{
     display: flex;
     justify-content: space-around;
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .dashboard-menu-table{
@@ -1900,15 +1900,16 @@ textarea:focus{
 @media (max-width:867px){
 
     .title-table {
+
         left: 63%;
-        position: fixed;
+        position: sticky;
         padding-bottom: 4px;
         font-weight: 600;
     }
     .dashboard-menu-table table{
         display: flex;
         justify-content: space-around;
-        margin-top: 50px;
+        margin-top: 2z0px;
     }
     .content{
         height: auto;
@@ -1919,8 +1920,8 @@ textarea:focus{
         margin-bottom: 90px;
     }
     .dashboard-menu-table{
-        width: 300px;
-        height: 300px;
+        width: 340px;
+        height: 305px;
     }
 
     .-container-telaUser{
@@ -2113,16 +2114,11 @@ textarea:focus{
 
     .dashboard-menu-table table{
         display: flex;
+        margin-bottom: 30px;
         justify-content: space-around;
-        margin-top: 2px;
+        margin-top: 10px;
     }
-    
-    .title-table{
-        display: contents;
-        padding-bottom: 4px;
-        font-weight: 600;
-    }
-    
+
     #tresbtn{
         margin-inline: 8px;
         width: 40px;
