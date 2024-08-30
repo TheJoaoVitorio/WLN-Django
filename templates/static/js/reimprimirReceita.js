@@ -24,8 +24,7 @@ reiprimirReceitaForm.addEventListener('submit', async function(event) {
         reimpressao.document.close();
 
         
-        reimpressao.onload = function() {
-            // alert('oi')
+        reimpressao.onload = async function() {
             reimpressao.resizeTo(screen.width, screen.height);
             reimpressao.print();
         };
