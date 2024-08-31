@@ -45,6 +45,10 @@ def gerenciarConta(request):
         new_password = request.POST.get('new_password1')
         confirmed_new_password = request.POST.get('new_password2')
 
+        if new_password and confirmed_new_password == old_password:
+            messages.add_message(request,constants.ERROR,'A Senha nova não pode ser igual a antiga!')
+            return redirect ('/app/gerenciarconta/')
+
         if old_password and new_password and confirmed_new_password:
             if request.user.is_authenticated:
                 user = User.objects.get(username = request.user.username)
@@ -55,6 +59,10 @@ def gerenciarConta(request):
                 else:
                     if new_password != confirmed_new_password:
                         messages.add_message(request,constants.ERROR,'Nova senha e confirmar não conferem!')
+                        return redirect ('/app/gerenciarconta/')
+                    
+                    if len(new_password) and len(confirmed_new_password) < 8:
+                        messages.add_message(request, constants.ERROR, 'Insira uma senha maior que 8 caracteres!')
                         return redirect ('/app/gerenciarconta/')
                     
                     else:
