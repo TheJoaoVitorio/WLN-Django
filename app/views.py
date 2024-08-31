@@ -18,6 +18,8 @@ from .models import Alergenico
 from .models import Receita
 from .models import IngredientesReceita
 from .models import AlergenicoReceita
+from usuarios.models import Perfil
+
 
 from decimal import Decimal
 from django.shortcuts import get_object_or_404
@@ -33,7 +35,16 @@ def home(request):
         baseIngredientes = Ingrediente.objects.filter(id_user=None)
         receitas = Receita.objects.all().filter(user=request.user.id)
         ultimasReceitas = Receita.objects.all().filter(user=request.user.id).order_by('-created_at')[:5]
-        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes, 'BaseIngredientes':baseIngredientes,'UltimasReceitas':ultimasReceitas , 'Receitas':receitas})
+
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+        return render (request,'principal.html', {'MeusIngredientes' : meusIngredientes,
+                                                   'BaseIngredientes': baseIngredientes,
+                                                   'UltimasReceitas' : ultimasReceitas , 
+                                                   'Receitas'        : receitas, 
+                                                   'perfil'          : usuarioPerfil})
     
 
 @login_required(login_url='/usuarios/login')
@@ -52,8 +63,13 @@ def verIngredientesSistema(request):
                 BaseIngredientes = paginator.get_page(1)
             except EmptyPage:
                 BaseIngredientes = paginator.page(paginator.num_pages)
-            
-        return render (request,'baseIngredientes.html',{'baseIngredientes':BaseIngredientes})
+        
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+
+        return render (request,'baseIngredientes.html',{'baseIngredientes':BaseIngredientes , 'perfil':usuarioPerfil})
 
 
 @login_required(login_url='/usuarios/login/')
@@ -74,7 +90,12 @@ def receitas(request):
             except EmptyPage:
                 minhasReceitas = paginator.page(paginator.num_pages)
 
-        return render (request, 'receitas.html', {'Receitas':minhasReceitas})
+            try:
+                usuarioPerfil = Perfil.objects.get(user=request.user)
+            except Perfil.DoesNotExist:
+                usuarioPerfil = None
+
+        return render (request, 'receitas.html', {'Receitas':minhasReceitas , 'perfil':usuarioPerfil})
 
 
 @login_required(login_url='/usuarios/login')
@@ -95,7 +116,12 @@ def excluirReceita(request,Receita_id):
 @login_required(login_url='/usuarios/login/')
 def criandoReceita(request):
     if request.method == "GET":
-        return render (request, 'criando-receita.html')
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+
+        return render (request, 'criando-receita.html' , {'perfil':usuarioPerfil})
 
 
 @login_required(login_url='/usuarios/login/')
@@ -381,7 +407,12 @@ def userIngredientes(request):
             except EmptyPage:
                 meusIngredientes = paginator.page(paginator.num_pages)
 
-        return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes})
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+
+        return render (request, 'ingredientes.html' , {'MeusIngredientes' : meusIngredientes, 'perfil':usuarioPerfil})
 
 
 @login_required(login_url='/usuarios/login/')
@@ -429,7 +460,12 @@ def criarIngrediente(request):
             return redirect('/app/meusingredientes/')
         
     else:
-        return render (request,'criando-ingredientes.html')
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+            
+        return render (request,'criando-ingredientes.html', {'perfil':usuarioPerfil})
 
 
 @login_required(login_url='/usuarios/login/')
@@ -592,7 +628,10 @@ def visualizar_receita(request, receita_id):
                 'listaIngredientes': listaIngredientes,
                 'listaAlergenicos' : listaAlergenicos
             }
-
+            try:
+                usuarioPerfil = Perfil.objects.get(user=request.user)
+            except Perfil.DoesNotExist:
+                usuarioPerfil = None
 
         except Receita.DoesNotExist:
             messages.add_message(request, constants.ERROR, f"Receita não existe! ")
@@ -601,7 +640,7 @@ def visualizar_receita(request, receita_id):
             messages.add_message(request, constants.ERROR, f"Erro inesperado: {error} ")
             return redirect('/app/receitas')
         
-        return render(request, 'tabelaPreView.html', {'Valores': conteudo}) 
+        return render(request, 'tabelaPreView.html', {'Valores': conteudo , 'perfil':usuarioPerfil}) 
 
 @login_required(login_url='/usuarios/login/')
 def imprimirTabelaNovamente(request):
@@ -765,7 +804,13 @@ def getAlergenicos(request):
 
 @login_required(login_url='/usuarios/login/')
 def minhaConta(request):
-    return render(request,'user.html')
+    if request.method == 'GET':
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+
+    return render(request, 'user.html', {'perfil': usuarioPerfil})
 
 
 @login_required(login_url='/usuarios/login/')
@@ -791,7 +836,12 @@ def contateNos(request):
             return ('/app/gerenciarconta/')
     
     else:
-        return render (request, 'contate-nos.html')
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+
+        return render (request, 'contate-nos.html', {'perfil':usuarioPerfil})
     
     
 def criarAlergenico(request):

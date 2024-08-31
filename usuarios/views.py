@@ -10,7 +10,32 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse
 
+from .models import Perfil
+
 # Create your views here.
+@login_required(login_url='/usuarios/login')
+def inserirFotoPerfil(request):
+    if request.method == 'POST':
+        foto = request.FILES.get('foto-perfil')
+
+        if foto:
+            try:
+                # Tenta obter o perfil existente do usuário
+                perfil, created = Perfil.objects.get_or_create(user=request.user)
+                
+                # Atualiza a foto se um perfil já existir
+                perfil.fotoPerfil = foto
+                perfil.save()
+
+                messages.add_message(request, constants.SUCCESS, "Foto adicionada ou atualizada com sucesso!")
+                return redirect('/app/minhaconta/')
+            
+            except Exception as error:
+                messages.add_message(request, constants.ERROR, f"Erro inesperado: {error}")
+                return redirect('/app/minhaconta/')
+        else:
+            messages.add_message(request, constants.WARNING, "Nenhuma foto foi selecionada!")
+            return redirect('/app/minhaconta/')
 
 
 @login_required(login_url='/usuarios/login/')
@@ -44,7 +69,12 @@ def gerenciarConta(request):
             return redirect('/app/gerenciarconta/')
         
     else:
-        return render (request, 'info_usuarios.html')
+        try:
+            usuarioPerfil = Perfil.objects.get(user=request.user)
+        except Perfil.DoesNotExist:
+            usuarioPerfil = None
+            
+        return render (request, 'info_usuarios.html', {'perfil':usuarioPerfil})
 
 def cadastroLogin(request):
     if request.method == 'POST':

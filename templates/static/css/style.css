@@ -141,9 +141,6 @@
 .logo img{
     width:50px;
 }
-.user-navbar{
-    opacity: 50%;
-}
 .nav-items{
     align-items: center;
     gap:20px;
@@ -1717,6 +1714,7 @@ textarea:focus{
 .caixa1{
     max-width: 80%;
     width: 500px;
+    position: relative;
 
     padding: 30px;
     display: flex;
@@ -1732,6 +1730,7 @@ textarea:focus{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 .caixa-info h1{
     font-weight: 500;
@@ -2104,6 +2103,7 @@ textarea:focus{
     /**/
 
     /* Conta */
+    
     .container-telaUser{
         margin-bottom: 40px;
     }
@@ -2214,4 +2214,33 @@ textarea:focus{
 
 #id_receita{
     display: none;
+}
+
+.logoUser{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.logoUser{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    position: relative;
+}
+.addFoto{
+    position: absolute;
+    top: 0;
+    right: 30;
+    color: gray;
+    cursor: pointer;
+}
+.caixa-info input[type="file"]{
+    display: none;
+}
+
+.user-navbar img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }

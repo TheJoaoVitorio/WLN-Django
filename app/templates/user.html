@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'img/short-icon.png'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>WLNutrion - Minha Conta</title>
 </head>
 <body>
@@ -21,9 +22,21 @@
                 </a>
             </div>
             <div class="logo user-navbar">
-                <a href="{% url 'minha-conta' %}">
-                    <img src="{% static 'img/user.png'%}">
-                </a>
+                {% if perfil %}
+                    {% if perfil.fotoPerfil %}
+                        <a href="{% url 'minha-conta' %}">
+                            <img width="50px" src="{{ perfil.fotoPerfil.url }}" alt="Foto de Perfil">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'minha-conta' %}">
+                            <img src="{% static 'img/user.png'%}">
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'minha-conta' %}">
+                        <img src="{% static 'img/user.png'%}">
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>  
@@ -70,8 +83,23 @@
                         <div class="caixa1">
                             <div class="caixa-info">
                                 <div class="logoUser">
-                                    <img width="80px" src="{% static 'img/user.png'%}">
+                                    {% if perfil %}
+                                        {% if perfil.fotoPerfil %}
+                                            <img width="82px" src="{{ perfil.fotoPerfil.url }}" alt="Foto de Perfil">
+                                        {% else %}
+                                            <img width="82px" src="{% static 'img/user.png' %}" alt="Foto Padrão">
+                                        {% endif %}
+                                    {% else %}
+                                        <img width="82px" src="{% static 'img/user.png' %}" alt="Foto Padrão">
+                                    {% endif %}
                                 </div>
+                                <form id="upload-foto-form" action="{% url 'inserir-foto' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input name="foto-perfil" class="addFoto" type="file" id="fileUpload" accept=".png, .jpeg, .jpg">
+                                    <label for="fileUpload">
+                                        <i class="fa-solid fa-pen addFoto"></i>
+                                    </label>
+                                </form>
                                 <div class="nameUser">
                                     <h1> {{request.user}} </h1>
                                 </div>
@@ -108,5 +136,6 @@
     </div>
 
     <script src="{% static 'js/popUP.js'%}"></script>
+    <script src="{% static 'js/enviaFotoPerfil.js'%}"></script>
 </body>
 </html>

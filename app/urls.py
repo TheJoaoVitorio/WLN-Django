@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from usuarios.views import gerenciarConta
+from usuarios.views import gerenciarConta,inserirFotoPerfil
 from django.urls import reverse
 
 
@@ -31,6 +31,7 @@ urlpatterns = [
     
     path('baseIngredientes/', views.verIngredientesSistema, name='ver-ingredientes-sitema'),
 
+    path('minhaconta/inserirFoto/', inserirFotoPerfil, name='inserir-foto'),
     path('contatenos/', views.contateNos, name='contate-nos'),
     path('minhaconta/', views.minhaConta, name='minha-conta'),
     path('gerenciarconta/', gerenciarConta, name='gerenciar-conta'), #import do app usuarios

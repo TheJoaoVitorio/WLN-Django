@@ -30,9 +30,21 @@
                 </a>
             </div>
             <div class="logo user-navbar">
-                <a href="{% url 'minha-conta' %}">
-                    <img src="{% static 'img/user.png'%}">
-                </a>
+                {% if perfil %}
+                    {% if perfil.fotoPerfil %}
+                        <a href="{% url 'minha-conta' %}">
+                            <img width="50px" src="{{ perfil.fotoPerfil.url }}" alt="Foto de Perfil">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'minha-conta' %}">
+                            <img src="{% static 'img/user.png'%}">
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'minha-conta' %}">
+                        <img src="{% static 'img/user.png'%}">
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>  
