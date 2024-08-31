@@ -643,7 +643,7 @@ img.email{
     width: 400px;
 }
 .title-table{
-    left: 60%;
+    left: 33%;
     position: sticky;
     padding-bottom: 4px;
     font-weight: 600;
@@ -1900,7 +1900,7 @@ textarea:focus{
 
     .title-table {
 
-        left: 63%;
+        left: 33%;
         position: sticky;
         padding-bottom: 4px;
         font-weight: 600;
