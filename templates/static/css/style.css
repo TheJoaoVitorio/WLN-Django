@@ -2263,5 +2263,5 @@ textarea:focus{
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color:  #838383;
+	background-color: #fd7e14 ; /* cinza - #838383 */
 }
