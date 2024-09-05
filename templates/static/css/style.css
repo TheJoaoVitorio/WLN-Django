@@ -834,6 +834,7 @@ img.email{
 }
     /* Select Options */
     .inputForm2{
+        position: relative;
         width: 200px;
         height: 50px;
         background: #DEDEDE;
@@ -907,7 +908,10 @@ img.email{
     }
     /**/
     
+    
+
     /*Medida Receita*/
+    
     
     .arrow{
         font-size:14px;
@@ -1173,7 +1177,7 @@ img.email{
         font-size:14px;
         position: absolute;
         top: 15px;
-        right: 85px;
+        right: 110px;
         color:#474747;
     }
     .select-btn4{
@@ -2010,6 +2014,13 @@ textarea:focus{
     .inputForm2{
         width: 300px;
     }
+    .arrow-select-modelos {
+        font-size: 14px;
+        position: absolute;
+        top: 15px;
+        right: 50px;
+        color: #474747;
+    }
 }
 
 @media screen and (max-width:790px) and (orientation:landscape) {
@@ -2265,3 +2276,12 @@ textarea:focus{
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #fd7e14 ; /* cinza - #838383 */
 }
+@media (max-width: 600px) {
+    .truncate {
+        display: inline-block;
+        max-width: 200px; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}   

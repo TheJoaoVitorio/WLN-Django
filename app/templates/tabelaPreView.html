@@ -81,7 +81,9 @@
                 <div class="container-content">
                     <div class="content-title">
                         <h1 id="TituloCriandoReceita">Informações da receita</h1>
-                        <h3>{{ Valores.info.NomeReceita }}</h3>
+                        <h3 class="{% if Valores.info.NomeReceita|length > 40 %}truncate{% endif %}">
+                            {{ Valores.info.NomeReceita }}
+                        </h3>
                     </div>
 
                     <div class="content-minhas-receitas">
@@ -102,9 +104,11 @@
                                                     <option value="ModeloVertical">Modelo Vertical</option>
                                                     <option value="ModeloLinear">Modelo Linear</option>
                                                 </select>
-                                                <div class="arrow arrow-select-modelos">
+                                               
+                                                <div class="arrow-select-modelos">
                                                     <i class='bx bxs-down-arrow'></i>
                                                 </div>
+                                                
                                             </div>
                                         
                                     </div>
